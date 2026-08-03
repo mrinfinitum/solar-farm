@@ -1,0 +1,30 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { test } from "node:test";
+import { calculateCapitalStack, canMarkPpaExecuted, canOverrideStageGate, determineProjectHealth, evaluateStageGates, isProjectOperator, PROJECT_STAGES } from "../lib/projects/domain.ts";
+
+const migration = readFileSync(new URL("../supabase/migrations/202608030005_project_development_command_center.sql", import.meta.url), "utf8");
+const api = readFileSync(new URL("../app/api/projects/[id]/records/[module]/route.ts", import.meta.url), "utf8");
+const stageApi = readFileSync(new URL("../app/api/projects/[id]/stage/route.ts", import.meta.url), "utf8");
+const documentApi = readFileSync(new URL("../app/api/documents/route.ts", import.meta.url), "utf8");
+
+test("anonymous project mutations are blocked", () => assert.match(stageApi, /getApiActor\(\["owner", "admin", "developer"\]\)/));
+test("organization isolation is explicit on every Sprint 4 table", () => { assert.match(migration, /organization_id uuid not null default public\.current_organization_id\(\)/); assert.match(migration, /organization_id=public\.current_organization_id\(\)/); assert.match(migration, /revoke all on public\.%I from anon/); });
+test("viewer cannot edit", () => assert.equal(isProjectOperator("viewer"), false));
+test("developer can update project operations", () => assert.equal(isProjectOperator("developer"), true));
+test("stage advancement checks required gates", () => assert.deepEqual(evaluateStageGates([{ required: true, satisfied: true, label: "Evidence" }]), { canAdvance: true, failed: [] }));
+test("failed stage gates block advancement", () => assert.equal(evaluateStageGates([{ required: true, satisfied: false, label: "Missing" }]).canAdvance, false));
+test("owner or admin override requires reason and decision", () => { assert.equal(canOverrideStageGate("admin", "Documented exception", "decision-id"), true); assert.equal(canOverrideStageGate("admin", "", "decision-id"), false); assert.equal(canOverrideStageGate("developer", "Documented exception", "decision-id"), false); assert.match(migration, /supporting_decision is not null/); });
+test("critical blockers deterministically block project health", () => assert.equal(determineProjectHealth({ unresolvedCriticalBlockers: 1, unresolvedHighBlockers: 0, overdueCriticalMilestones: 0 }).health, "blocked"));
+test("manual health override preserves prior value and reason", () => { assert.match(migration, /project_health_history/); assert.match(migration, /prior_health/); assert.match(migration, /override_reason/); assert.match(migration, /health_overridden/); });
+test("interconnection status history is append-only", () => { assert.match(migration, /record_interconnection_status_change/); assert.match(migration, /table_name not in \('project_stage_history','project_health_history','interconnection_status_history','ppa_status_history'\)/); });
+test("PPA versions are unique and preserved", () => assert.match(migration, /unique \(organization_id, project_id, version_number\)/));
+test("unsigned PPA cannot be executed", () => { assert.equal(canMarkPpaExecuted({ status: "executed", executedConfirmation: true }), false); assert.equal(canMarkPpaExecuted({ status: "executed", executedConfirmation: true, signedDocumentId: "doc" }), true); assert.match(api, /Executed PPA requires explicit confirmation and a signed document/); });
+test("capital gap calculation is correct", () => { const result = calculateCapitalStack(1_000_000, [{ amount: 600_000, status: "committed", capitalType: "construction_debt" }, { amount: 100_000, status: "researching", capitalType: "grant" }]); assert.equal(result.capitalGap, 400_000); assert.equal(result.uncommittedCapital, 100_000); assert.equal(result.debtPercentage, 60); });
+test("fully financed requires committed capital covering current cost", () => { assert.equal(calculateCapitalStack(100, [{ amount: 99, status: "committed", capitalType: "sponsor_equity" }]).fullyFinanced, false); assert.equal(calculateCapitalStack(100, [{ amount: 100, status: "closed", capitalType: "sponsor_equity" }]).fullyFinanced, true); });
+test("EPC comparisons retain vendor proposal versions and rationale", () => { assert.match(migration, /create table public\.epc_proposals/); assert.match(migration, /vendor_id, version_number/); assert.match(migration, /recommendation_rationale/); });
+test("project documents remain private and tenant prefixed", () => { assert.match(documentApi, /site-finder-documents/); assert.match(documentApi, /profile\.organizationId/); assert.doesNotMatch(documentApi, /getPublicUrl/); });
+test("incentive deadlines create alerts", () => { assert.match(migration, /incentive_deadline/); assert.match(migration, /deadline<=current_date\+interval '30 days'/); });
+test("material events are logged", () => { assert.match(migration, /activity_log/); assert.match(migration, /stage_advanced/); assert.match(migration, /health_overridden/); });
+test("project stage history cannot be updated or deleted by users", () => { assert.match(migration, /project_stage_history/); assert.doesNotMatch(migration, /project_stage_history_tenant_update/); assert.equal(PROJECT_STAGES.includes("operating"), true); });
+test("archived projects are excluded from default portfolio access", () => { const dataSource = readFileSync(new URL("../lib/projects/data.ts", import.meta.url), "utf8"); assert.match(dataSource, /\.is\("archived_at", null\)/); });

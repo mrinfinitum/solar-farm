@@ -12,7 +12,8 @@
     "test:property": "node --experimental-strip-types --test tests/property-acquisition.test.mts",
     "test:enrichment": "node --experimental-strip-types --test tests/property-enrichment.test.mts",
     "test:marketing": "node --experimental-strip-types --test tests/marketing-readiness.test.mts",
-    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run test:marketing && npm run verify:browser-secrets"
+    "test:project": "node --experimental-strip-types --test tests/project-command-center.test.mts",
+    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run test:marketing && npm run test:project && npm run verify:browser-secrets"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
@@ -21,12 +22,13 @@
     "lucide-react": "^1.28.0",
     "maplibre-gl": "^6.1.0",
     "motion": "^12.43.0",
-    "next": "^16.2.12",
+    "next": "^16.3.0",
     "papaparse": "^5.5.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-hook-form": "^7.84.0",
     "recharts": "^3.10.1",
+    "sharp": "^0.35.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -36,7 +38,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.12",
+    "eslint-config-next": "^16.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
