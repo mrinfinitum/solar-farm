@@ -6,7 +6,7 @@ import { Loader2, Save } from "lucide-react";
 
 import type { PropertyRecord } from "@/types/property";
 
-const statuses = ["new","desktop_screening","owner_outreach","site_control","utility_screening","detailed_diligence","candidate_project","rejected"];
+const statuses = ["new","desktop_screening","owner_outreach","site_control","utility_screening","detailed_diligence","candidate_project","promoted_to_project","rejected"];
 
 export function PropertyEditForm({ property }: { property: PropertyRecord }) {
   const [loading, setLoading] = useState(false); const [message, setMessage] = useState(""); const router = useRouter();
@@ -14,7 +14,7 @@ export function PropertyEditForm({ property }: { property: PropertyRecord }) {
     setLoading(true); setMessage("");
     const value = (name: string) => String(formData.get(name) || "").trim();
     const number = (name: string) => value(name) ? Number(value(name)) : null;
-    const payload = { project_name: value("project_name") || null, current_status: value("current_status"), owner_name: value("owner_name") || null, owner_mailing_address: value("owner_mailing_address") || null, total_acres: number("total_acres"), estimated_usable_acres: number("estimated_usable_acres"), acreage_total: number("total_acres"), acreage_usable_estimate: number("estimated_usable_acres"), asking_price: number("asking_price"), assigned_to: value("assigned_to") || null, internal_summary: value("internal_summary") || null, last_verified_at: value("verified") === "yes" ? new Date().toISOString() : null };
+    const payload = { name: value("project_name") || null, project_name: value("project_name") || null, current_status: value("current_status"), owner_name: value("owner_name") || null, owner_mailing_address: value("owner_mailing_address") || null, total_acres: number("total_acres"), estimated_usable_acres: number("estimated_usable_acres"), acreage_total: number("total_acres"), acreage_usable_estimate: number("estimated_usable_acres"), asking_price: number("asking_price"), assigned_to: value("assigned_to") || null, utility_name: value("utility_name") || null, utility_territory_status: value("utility_territory_status") || "unknown", site_control_status: value("site_control_status") || "not_started", latitude: number("latitude"), longitude: number("longitude"), notes_summary: value("internal_summary") || null, internal_summary: value("internal_summary") || null, last_verified_at: value("verified") === "yes" ? new Date().toISOString() : null };
     const response = await fetch(`/api/properties/${property.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
     const result = await response.json(); setLoading(false);
     if (!response.ok) return setMessage(result.error || "Property could not be updated.");
@@ -29,6 +29,11 @@ export function PropertyEditForm({ property }: { property: PropertyRecord }) {
     <label><span>Total acres</span><input className="finder-field" name="total_acres" type="number" defaultValue={property.total_acres ?? property.acreage_total ?? ""} /></label>
     <label><span>Estimated usable acres</span><input className="finder-field" name="estimated_usable_acres" type="number" defaultValue={property.estimated_usable_acres ?? property.acreage_usable_estimate ?? ""} /></label>
     <label><span>Asking price</span><input className="finder-field" name="asking_price" type="number" defaultValue={property.asking_price ?? ""} /></label>
+    <label><span>Utility</span><input className="finder-field" name="utility_name" defaultValue={property.utility_name || ""} /></label>
+    <label><span>Utility territory status</span><input className="finder-field" name="utility_territory_status" defaultValue={property.utility_territory_status || "unknown"} /></label>
+    <label><span>Site control status</span><input className="finder-field" name="site_control_status" defaultValue={property.site_control_status || "not_started"} /></label>
+    <label><span>Latitude</span><input className="finder-field" name="latitude" type="number" step="any" defaultValue={property.latitude ?? ""} /></label>
+    <label><span>Longitude</span><input className="finder-field" name="longitude" type="number" step="any" defaultValue={property.longitude ?? ""} /></label>
     <label><span>Verification</span><select className="finder-field" name="verified" defaultValue={property.last_verified_at ? "yes" : "no"}><option value="no">Unverified</option><option value="yes">Verified now</option></select></label>
     <label className="wide"><span>Internal summary</span><textarea className="finder-textarea" name="internal_summary" defaultValue={property.internal_summary || ""} /></label>
   </div>{message && <p className="assessment-message" role="status">{message}</p>}<div className="finder-form-actions"><button className="finder-button finder-button--primary" disabled={loading}>{loading ? <Loader2 className="spin" size={14} /> : <Save size={14} />}Save changes</button></div></form>;

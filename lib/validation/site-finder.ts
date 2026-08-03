@@ -6,7 +6,7 @@ const optionalPercent = z.preprocess((value) => value === "" || value == null ? 
 const optionalBoolean = z.preprocess((value) => value === "" || value == null ? null : value === true || value === "true" || value === "yes" || value === "1", z.boolean().nullable());
 
 export const propertyInputSchema = z.object({
-  property_code: z.string().trim().min(3).max(40), project_name: z.string().trim().max(160).nullable().optional(), status: z.string().trim().default("new"), pipeline_stage: z.string().trim().default("discovery"),
+  property_code: z.string().trim().min(3).max(40), name: z.string().trim().max(160).nullable().optional(), project_name: z.string().trim().max(160).nullable().optional(), status: z.string().trim().default("new"), pipeline_stage: z.string().trim().default("discovery"),
   source_type: z.string().trim().max(80).nullable().optional(), source_name: z.string().trim().max(160).nullable().optional(), source_url: z.url().nullable().optional().or(z.literal("")), source_listing_id: z.string().trim().max(160).nullable().optional(), source_collected_at: z.string().nullable().optional(),
   address_line_1: z.string().trim().min(3).max(200), address_line_2: z.string().trim().max(200).nullable().optional(), city: z.string().trim().min(2).max(100), county: z.string().trim().min(2).max(100), state: z.string().trim().default("Oklahoma"), postal_code: z.string().trim().max(12).default(""),
   latitude: z.preprocess((value) => value === "" || value == null ? null : Number(value), z.number().min(-90).max(90).nullable()), longitude: z.preprocess((value) => value === "" || value == null ? null : Number(value), z.number().min(-180).max(180).nullable()), parcel_number: z.string().trim().max(120).nullable().optional(),
@@ -19,7 +19,8 @@ export const propertyInputSchema = z.object({
   market: z.object({ estimated_local_offtaker_strength: z.string().nullable().optional(), conceptual_capacity_mw_dc: optionalNumber, estimated_annual_generation_kwh: optionalNumber, estimated_development_risk: z.string().nullable().optional() }).optional(),
   owner_mailing_address: z.string().trim().max(500).nullable().optional(), total_acres: optionalNumber, estimated_usable_acres: optionalNumber,
   listing_url: z.url().nullable().optional().or(z.literal("")), utility_id: z.string().trim().max(160).nullable().optional(),
-  current_status: z.enum(["new","desktop_screening","owner_outreach","site_control","utility_screening","detailed_diligence","candidate_project","rejected","archived"]).default("new"),
+  current_status: z.enum(["new","desktop_screening","owner_outreach","site_control","utility_screening","detailed_diligence","candidate_project","promoted_to_project","rejected","archived"]).default("new"),
+  utility_name: z.string().trim().max(160).nullable().optional(), utility_territory_status: z.string().trim().max(80).optional(), site_control_status: z.string().trim().max(80).optional(), notes_summary: z.string().trim().max(5000).nullable().optional(),
   source: z.string().trim().max(120).nullable().optional(), source_recorded_at: z.string().nullable().optional(), last_verified_at: z.string().nullable().optional(),
 });
 
@@ -40,9 +41,13 @@ export const preliminaryAssessmentSchema = z.object({
   components: z.array(z.object({
     category: preliminaryCategory,
     rawScore: z.number().min(0).max(100).nullable(),
-    sourceQuality: z.enum(["verified","estimated","unknown"]),
+    sourceQuality: z.enum(["verified","estimated","user_reported","public_source","unknown"]),
     critical: z.boolean(),
     explanation: z.string().trim().min(3).max(1000),
+    sourceName: z.string().trim().max(240).nullable().optional(),
+    sourceUrl: z.url().nullable().optional().or(z.literal("")),
+    sourceDate: z.string().nullable().optional(),
+    missingInformation: z.string().trim().max(1000).nullable().optional(),
   })).length(PRELIMINARY_CATEGORIES.length),
   fatalRisks: z.array(fatalRisk).default([]),
   notes: z.string().trim().max(5000).nullable().optional(),

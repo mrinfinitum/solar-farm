@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getApiActor } from "@/lib/auth/api";
-import { EDITOR_ROLES } from "@/lib/auth/roles";
+import { PROPERTY_OPERATOR_ROLES } from "@/lib/auth/roles";
 import { calculatePropertyScore } from "@/lib/scoring/calculate";
 import { propertyInputSchema } from "@/lib/validation/site-finder";
 
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const actor = await getApiActor(EDITOR_ROLES);
+  const actor = await getApiActor(PROPERTY_OPERATOR_ROLES);
   if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   const parsed = propertyInputSchema.safeParse(await request.json());
   if (!parsed.success) return NextResponse.json({ error: "Validation failed", issues: parsed.error.flatten().fieldErrors }, { status: 422 });
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
   const pricePerAcre = askingPrice && acreage ? Math.round((askingPrice / acreage) * 100) / 100 : null;
   const canonical = {
     ...property,
+    name: property.project_name || property.address_line_1,
     total_acres: acreage,
     acreage_total: acreage,
     estimated_usable_acres: property.estimated_usable_acres ?? property.acreage_usable_estimate,
@@ -39,6 +40,8 @@ export async function POST(request: Request) {
     source_url: property.listing_url || property.source_url || null,
     source: property.source || property.source_type || "manual",
     source_type: property.source || property.source_type || "manual",
+    utility_name: utility?.electric_utility || property.utility_id || null,
+    notes_summary: property.internal_summary || null,
     source_recorded_at: property.source_recorded_at || new Date().toISOString(),
     price_per_acre: pricePerAcre,
     created_by: actor.user.id,
@@ -57,7 +60,7 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  const actor = await getApiActor(EDITOR_ROLES);
+  const actor = await getApiActor(PROPERTY_OPERATOR_ROLES);
   if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   const body = await request.json() as { action?: string; ids?: string[] };
   if (body.action !== "archive" || !Array.isArray(body.ids) || body.ids.length === 0 || body.ids.length > 100) {

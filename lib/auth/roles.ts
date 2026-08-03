@@ -6,6 +6,7 @@ export type MembershipStatus = (typeof MEMBERSHIP_STATUSES)[number];
 
 export const ADMIN_ROLES: readonly UserRole[] = ["owner", "admin"];
 export const EDITOR_ROLES: readonly UserRole[] = ["owner", "admin", "developer", "analyst"];
+export const PROPERTY_OPERATOR_ROLES: readonly UserRole[] = ["owner", "admin", "developer"];
 
 export function isUserRole(value: unknown): value is UserRole {
   return typeof value === "string" && USER_ROLES.includes(value as UserRole);

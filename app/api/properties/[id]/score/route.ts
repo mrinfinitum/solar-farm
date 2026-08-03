@@ -42,12 +42,15 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     overall_risk: result.overallRisk,
     confidence: result.confidence,
     verified_field_count: result.verifiedFieldCount,
+    estimated_field_count: result.estimatedFieldCount,
     missing_critical_field_count: result.missingCriticalFieldCount,
     raw_inputs: parsed.data,
     weighted_outputs: result.components,
     explanatory_notes: parsed.data.notes || null,
     override_score: parsed.data.overrideScore ?? null,
     override_reason: result.overrideReason,
+    overridden_by: parsed.data.overrideScore == null ? null : actor.user.id,
+    overridden_at: parsed.data.overrideScore == null ? null : new Date().toISOString(),
     scored_by: actor.user.id,
   }).select("id").single();
   if (runError || !run) return NextResponse.json({ error: runError?.message || "Score run could not be saved" }, { status: 400 });
@@ -61,12 +64,24 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     source_quality: component.sourceQuality,
     is_critical_missing: component.criticalMissing,
     explanation: component.explanation,
+    source_name: component.sourceName,
+    source_url: component.sourceUrl,
+    source_date: component.sourceDate,
+    missing_information: component.missingInformation,
+    entered_by: actor.user.id,
+    verified_by: component.sourceQuality === "verified" ? actor.user.id : null,
+    verified_at: component.sourceQuality === "verified" ? new Date().toISOString() : null,
+    notes: component.stale ? "Source date is more than 366 days before this assessment." : null,
   }));
   const riskRows = result.fatalRisks.map((riskType) => ({
     property_id: id,
     score_run_id: run.id,
     risk_type: riskType,
     severity: "fatal",
+    status: "open",
+    resolution_status: "unresolved",
+    description: `Fatal risk recorded during ${result.modelVersion} assessment.`,
+    created_by: actor.user.id,
     explanation: `Fatal risk recorded during ${result.modelVersion} assessment.`,
   }));
   await actor.supabase.from("property_risk_flags").update({ active: false, resolved_at: new Date().toISOString(), resolved_by: actor.user.id }).eq("property_id", id).eq("active", true);

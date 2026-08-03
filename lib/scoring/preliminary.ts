@@ -11,7 +11,7 @@ export const PRELIMINARY_CATEGORIES = [
 ] as const;
 
 export type PreliminaryCategory = (typeof PRELIMINARY_CATEGORIES)[number][0];
-export type SourceQuality = "verified" | "estimated" | "unknown";
+export type SourceQuality = "verified" | "estimated" | "user_reported" | "public_source" | "unknown";
 export type FatalRiskType =
   | "no_viable_interconnection"
   | "insufficient_site_control"
@@ -29,6 +29,10 @@ export interface PreliminaryComponentInput {
   sourceQuality: SourceQuality;
   critical: boolean;
   explanation: string;
+  sourceName?: string | null;
+  sourceUrl?: string | null;
+  sourceDate?: string | null;
+  missingInformation?: string | null;
 }
 
 export interface PreliminaryScoreInput {
@@ -36,6 +40,7 @@ export interface PreliminaryScoreInput {
   fatalRisks?: FatalRiskType[];
   overrideScore?: number | null;
   overrideReason?: string | null;
+  asOfDate?: string;
 }
 
 export function gradeForScore(score: number) {
@@ -51,6 +56,7 @@ export function calculatePreliminaryScore(input: PreliminaryScoreInput) {
     throw new Error("A manual score override requires a reason of at least 10 characters.");
   }
 
+  const asOfTime = new Date(input.asOfDate || new Date().toISOString()).getTime();
   const byCategory = new Map(input.components.map((component) => [component.category, component]));
   const components = PRELIMINARY_CATEGORIES.map(([category, label, weight]) => {
     const supplied = byCategory.get(category);
@@ -64,18 +70,24 @@ export function calculatePreliminaryScore(input: PreliminaryScoreInput) {
       sourceQuality: supplied?.sourceQuality ?? "unknown",
       criticalMissing: Boolean(supplied?.critical && supplied.rawScore == null),
       explanation: supplied?.explanation?.trim() || "No assessment entered.",
+      sourceName: supplied?.sourceName?.trim() || null,
+      sourceUrl: supplied?.sourceUrl?.trim() || null,
+      sourceDate: supplied?.sourceDate || null,
+      missingInformation: supplied?.missingInformation?.trim() || null,
+      stale: Boolean(supplied?.sourceDate && Number.isFinite(asOfTime) && asOfTime - new Date(supplied.sourceDate).getTime() > 366 * 24 * 60 * 60 * 1000),
     };
   });
 
   const numericScore = Math.round(components.reduce((sum, component) => sum + component.weightedScore, 0) * 100) / 100;
   const displayedScore = input.overrideScore ?? numericScore;
-  const verifiedFieldCount = components.filter((component) => component.sourceQuality === "verified").length;
+  const verifiedFieldCount = components.filter((component) => component.sourceQuality === "verified" && !component.stale).length;
   const estimatedFieldCount = components.filter((component) => component.sourceQuality === "estimated").length;
+  const sourcedFieldCount = components.filter((component) => component.sourceQuality !== "unknown" && !component.stale).length;
   const missingCriticalFieldCount = components.filter((component) => component.criticalMissing).length;
   const fatalRisks = [...new Set(input.fatalRisks ?? [])];
   const confidence = verifiedFieldCount >= 5 && missingCriticalFieldCount === 0
     ? "high"
-    : verifiedFieldCount + estimatedFieldCount >= 4 && missingCriticalFieldCount <= 1
+    : sourcedFieldCount >= 4 && missingCriticalFieldCount <= 1
       ? "moderate"
       : "low";
   const overallRisk = fatalRisks.length > 0
@@ -101,6 +113,7 @@ export function calculatePreliminaryScore(input: PreliminaryScoreInput) {
     overallRisk,
     confidence,
     verifiedFieldCount,
+    estimatedFieldCount,
     missingCriticalFieldCount,
     recommendation,
     fatalRisks,
