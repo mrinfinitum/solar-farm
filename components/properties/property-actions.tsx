@@ -1,0 +1,5 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FolderKanban, Loader2 } from "lucide-react";
+export function PropertyActions({id,canConvert}:{id:string;canConvert:boolean}){const[loading,setLoading]=useState(false);const[message,setMessage]=useState("");const router=useRouter();async function convert(){if(!confirm("Convert this candidate property into a formal project? The source property will remain linked and auditable."))return;setLoading(true);const response=await fetch(`/api/properties/${id}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"convert-to-project"})});const result=await response.json();setLoading(false);if(!response.ok){setMessage(result.error||"Conversion failed.");return}router.push("/dashboard/projects");router.refresh()}return <div>{canConvert&&<button onClick={convert} disabled={loading} className="finder-button finder-button--primary">{loading?<Loader2 className="spin" size={14}/>:<FolderKanban size={14}/>}Convert to project</button>}{message&&<span className="risk-flag">{message}</span>}</div>}

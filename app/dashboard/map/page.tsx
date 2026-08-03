@@ -1,0 +1,3 @@
+import { PropertyMap } from "@/components/maps/property-map";
+import { getDashboardData } from "@/lib/site-finder-data";
+export default async function MapPage(){const data=await getDashboardData();return <><div className="finder-page-head"><div><p className="finder-eyebrow">Spatial screening</p><h1>Property and off-taker map</h1><p>Map only stored coordinates. Infrastructure and environmental overlays stay disabled until authorized data sources are configured.</p></div></div><section className="finder-card finder-map"><PropertyMap properties={data.properties} offtakers={data.offtakers as {id:string;company_name:string;latitude:number|null;longitude:number|null}[]} styleUrl={process.env.NEXT_PUBLIC_MAP_STYLE_URL}/></section></>}
