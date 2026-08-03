@@ -37,17 +37,9 @@ The `--include-seed` flag runs `supabase/seed.sql` after the migrations. Alterna
 
 The migration creates the private `site-finder-documents` bucket, its 15 MB/type restrictions, RLS policies, profile trigger, scoring configuration, target profile, audit triggers, and all application tables.
 
-## First administrator
+## First owner and additional users
 
-Create the first user manually in **Authentication → Users → Add user**, then run this in the SQL Editor:
-
-```sql
-update public.profiles
-set role = 'admin', full_name = 'Administrator', organization = 'Cornerstone Solar'
-where email = 'YOUR_ADMIN_EMAIL';
-```
-
-Additional users are also created manually in Supabase and default to `viewer`. An administrator can promote them to `analyst` or `admin` after verifying identity and need.
+Bootstrap exactly one initial owner, then invite all additional users through the secured **Dashboard → Users** interface. The audited bootstrap SQL, role matrix, invitation flow, and operational controls are documented in [docs/SECURITY_AND_OPERATIONS.md](docs/SECURITY_AND_OPERATIONS.md). Do not use the legacy `profiles.role` column for authorization.
 
 ## Environment
 
@@ -67,6 +59,8 @@ Missing map/email values produce safe configured-state messages. Missing Supabas
 ```bash
 npm run lint
 npm run build
+npm test
+npm audit --omit=dev
 ```
 
 ## Vercel deployment
@@ -77,4 +71,4 @@ npm run build
 4. Set the Supabase Auth Site URL to the deployed origin and add `https://YOUR_DOMAIN/auth/callback` to allowed redirect URLs.
 5. Deploy and verify `/`, `/login`, password reset, `/dashboard`, signed document downloads, CSV dry-run, and `/submit-property`.
 
-See [docs/DATABASE_SETUP.md](docs/DATABASE_SETUP.md) and [docs/SITE_FINDER_ARCHITECTURE.md](docs/SITE_FINDER_ARCHITECTURE.md) for the full handoff.
+See [docs/SECURITY_AND_OPERATIONS.md](docs/SECURITY_AND_OPERATIONS.md), [docs/DATABASE_SETUP.md](docs/DATABASE_SETUP.md), and [docs/SITE_FINDER_ARCHITECTURE.md](docs/SITE_FINDER_ARCHITECTURE.md) for the full handoff.

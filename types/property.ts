@@ -1,4 +1,4 @@
-export type UserRole = "admin" | "analyst" | "viewer";
+export type { UserRole } from "@/lib/auth/roles";
 export type PropertyStatus = "new" | "screening" | "researching" | "contacted" | "site-control-discussion" | "due-diligence" | "utility-review" | "shortlisted" | "rejected" | "converted-to-project" | "archived";
 export type PipelineStage = "discovery" | "desktop-screening" | "owner-outreach" | "preliminary-diligence" | "site-control" | "utility-diligence" | "engineering" | "project-development";
 export type EvidenceLevel = "unverified" | "source-reported" | "desktop-estimated" | "third-party-verified" | "agency-utility-confirmed";

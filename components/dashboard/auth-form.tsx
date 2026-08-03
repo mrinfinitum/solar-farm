@@ -14,7 +14,7 @@ export function AuthForm({ next = "/dashboard", configured }: { next?: string; c
     }
     const password = String(formData.get("password") || ""); const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) { setMessage("Unable to sign in. Check your email and password."); setLoading(false); return; }
-    window.location.assign(next.startsWith("/") ? next : "/dashboard");
+    window.location.assign(next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard");
   }
   return (
     <form action={submit} className="auth-form">

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:security": "node --experimental-strip-types --test tests/security.test.mts",
+    "verify:browser-secrets": "node scripts/verify-browser-secrets.mjs",
+    "test": "npm run test:security && npm run verify:browser-secrets"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

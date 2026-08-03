@@ -1,16 +1,12 @@
 import { ArrowRight } from "lucide-react";
 
-import { CommercialModelStrip } from "@/components/project-model/commercial-model-strip";
-import { DevelopmentPath } from "@/components/project-model/development-path";
-import { ProjectOverviewCard } from "@/components/project-model/project-overview-card";
-import { RepresentativeMap } from "@/components/project-model/representative-map";
+import { ProjectIntelligenceConsole } from "@/components/project-model/project-intelligence-console";
 import { Reveal } from "@/components/ui/reveal";
 import { projectModel } from "@/lib/project-model-data";
 
 export function ProjectModelSection() {
   return (
     <section id="project" className="project-model-section">
-      <div className="project-model-grid" aria-hidden="true" />
       <div className="container project-model-container">
         <Reveal className="project-model-intro">
           <div>
@@ -18,31 +14,30 @@ export function ProjectModelSection() {
             <h2>{projectModel.intro.title}</h2>
             <p className="project-model-description">{projectModel.intro.description}</p>
           </div>
-          <aside className="project-model-purpose">
-            <div><span>Model purpose</span><i>Illustrative model</i></div>
-            <p>{projectModel.intro.purpose}</p>
+          <aside className="project-model-note">
+            <strong>{projectModel.intro.noteTitle}</strong>
+            <p>{projectModel.intro.note}</p>
           </aside>
         </Reveal>
 
-        <div className="project-model-dashboard">
-          <ProjectOverviewCard metrics={projectModel.metrics} details={projectModel.details} flow={projectModel.flow} />
-          <div className="project-model-side">
-            <RepresentativeMap chips={projectModel.geographyChips} />
-            <DevelopmentPath phases={projectModel.phases} />
-          </div>
-        </div>
+        <ProjectIntelligenceConsole
+          metrics={projectModel.metrics}
+          roles={projectModel.roles}
+          flow={projectModel.flow}
+          workflow={projectModel.workflow}
+          currentStage={projectModel.currentStage}
+        />
 
-        <CommercialModelStrip roles={projectModel.roles} />
-
-        <Reveal className="pm-cta">
+        <Reveal className="project-model-cta">
           <div>
-            <p className="eyebrow">Apply the model</p>
-            <h3>Evaluate how this structure could fit a real facility.</h3>
-            <p>The next step is to compare facility energy demand, site conditions, utility feasibility, and commercial terms.</p>
+            <h3>Evaluate a commercial energy opportunity.</h3>
+            <p>Share your facility location and energy profile to begin an indicative project assessment.</p>
           </div>
-          <div className="pm-cta-actions">
-            <a className="button button--primary" href="#development">Explore the Cornerstone Project <ArrowRight aria-hidden="true" /></a>
-            <a className="button button--secondary" href="#contact">Discuss an Energy Agreement</a>
+          <div>
+            <a className="button button--primary" href="#contact">
+              Start a project discussion <ArrowRight aria-hidden="true" />
+            </a>
+            <a className="button button--secondary" href="/submit-property">Submit land</a>
           </div>
         </Reveal>
       </div>
