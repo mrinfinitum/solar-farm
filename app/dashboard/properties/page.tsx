@@ -15,6 +15,7 @@ export default async function PropertiesPage({ searchParams }: { searchParams: P
     getAssignableProfiles(),
   ]);
   const canEdit = ["owner","admin","developer"].includes(profile.role);
+  const canScreen = ["owner","admin","developer","analyst"].includes(profile.role);
   return <>
     <div className="finder-page-head"><div><p className="finder-eyebrow">Property acquisition</p><h1>Property pipeline</h1><p>Source, screen, score, assign, and advance land opportunities with an auditable evidence trail.</p></div>{canEdit && <Link className="finder-button finder-button--primary" href="/dashboard/properties/new"><Plus size={15}/>New property</Link>}</div>
     <div className="finder-toolbar property-filter-toolbar"><form>
@@ -30,6 +31,6 @@ export default async function PropertiesPage({ searchParams }: { searchParams: P
       <select className="finder-select" name="sort" defaultValue={params.sort || "updated_at:desc"}><option value="updated_at:desc">Recently updated</option><option value="score:desc">Highest score</option><option value="risk:desc">Highest risk</option><option value="total_acres:desc">Largest acreage</option><option value="asking_price:asc">Lowest price</option><option value="price_per_acre:asc">Lowest $/acre</option></select>
       <button className="finder-button">Apply</button>
     </form></div>
-    {data.properties.length ? <><PropertyList properties={data.properties} canEdit={canEdit} assignees={assignees}/><div className="finder-pagination"><span>Showing {(page - 1) * 25 + 1}–{Math.min(page * 25, data.count)} of {data.count}</span><div>{page > 1 && <Link className="finder-button" href={`?page=${page - 1}`}>Previous</Link>} {page * 25 < data.count && <Link className="finder-button" href={`?page=${page + 1}`}>Next</Link>}</div></div></> : <div className="finder-empty"><strong>No matching properties</strong><p>Adjust the filters or create a manual property record. No listing or parcel data is inferred automatically.</p></div>}
+    {data.properties.length ? <><PropertyList properties={data.properties} canEdit={canEdit} canScreen={canScreen} assignees={assignees}/><div className="finder-pagination"><span>Showing {(page - 1) * 25 + 1}–{Math.min(page * 25, data.count)} of {data.count}</span><div>{page > 1 && <Link className="finder-button" href={`?page=${page - 1}`}>Previous</Link>} {page * 25 < data.count && <Link className="finder-button" href={`?page=${page + 1}`}>Next</Link>}</div></div></> : <div className="finder-empty"><strong>No matching properties</strong><p>Adjust the filters or create a manual property record. No listing or parcel data is inferred automatically.</p></div>}
   </>;
 }

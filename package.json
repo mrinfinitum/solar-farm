@@ -10,7 +10,8 @@
     "test:security": "node --experimental-strip-types --test tests/security.test.mts",
     "verify:browser-secrets": "node scripts/verify-browser-secrets.mjs",
     "test:property": "node --experimental-strip-types --test tests/property-acquisition.test.mts",
-    "test": "npm run test:security && npm run test:property && npm run verify:browser-secrets"
+    "test:enrichment": "node --experimental-strip-types --test tests/property-enrichment.test.mts",
+    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run verify:browser-secrets"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

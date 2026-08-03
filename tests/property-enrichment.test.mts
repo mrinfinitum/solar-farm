@@ -1,0 +1,31 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import test from "node:test";
+
+const read = (path: string) => readFileSync(new URL(path, import.meta.url), "utf8");
+const migration = read("../supabase/migrations/202608030003_property_enrichment_gis.sql");
+const service = read("../lib/enrichment/service.ts");
+const registry = read("../lib/enrichment/registry.ts");
+const geocoder = read("../lib/enrichment/providers/census-geocoder.ts");
+const scoring = read("../lib/enrichment/scoring.ts");
+const screeningRoute = read("../app/api/properties/[id]/screening/route.ts");
+const batchRoute = read("../app/api/properties/screening-batch/route.ts");
+
+test("all enrichment tables have tenant RLS and no anonymous grants", () => {
+  for (const table of ["data_providers","property_enrichment_runs","property_enrichment_steps","property_enrichment_results","property_field_proposals","property_geometries","property_environmental_findings","property_terrain_findings","property_access_findings","property_utility_findings","property_grid_assets","property_commercial_context","property_screening_reports","provider_usage_logs"]) assert.match(migration, new RegExp(`'${table}'`));
+  assert.match(migration, /revoke all on public\.%I from anon/);
+  assert.match(migration, /organization_id = public\.current_organization_id\(\)/);
+});
+
+test("active duplicate runs are prevented atomically", () => { assert.match(migration, /property_enrichment_one_active_run/); assert.match(migration, /active_screening_exists/); });
+test("manual and verified facts are proposed rather than overwritten", () => { assert.match(service, /createFieldProposals/); assert.match(service, /differs_from_verified/); assert.match(service, /differs_from_manual/); assert.doesNotMatch(service, /from\("properties"\)\.update\([^)]*latitude/s); });
+test("proposal decisions are operator-only and audited", () => { assert.match(migration, /property_field_proposals_operator_update/); assert.match(migration, /array\['owner','admin','developer'\]/); assert.match(migration, /proposal_accepted/); assert.match(migration, /proposal_rejected/); assert.match(screeningRoute, /PROPERTY_OPERATOR_ROLES/); });
+test("configured providers fail independently", () => { assert.match(service, /catch \(error\)/); assert.match(service, /Provider request failed/); assert.match(service, /processNextScreeningStep/); assert.match(registry, /UnavailableProvider/); });
+test("no-key fallback leaves unsupported categories unavailable", () => { assert.match(registry, /parcel-provider/); assert.match(registry, /flood-provider/); assert.match(registry, /utility-territory-provider/); assert.match(read("../lib/enrichment/providers/unavailable.ts"), /state: "unavailable"/); });
+test("Census geocoding handles no match and ambiguous candidates conservatively", () => { assert.match(geocoder, /No Census address-range match/); assert.match(geocoder, /Multiple address candidates/); assert.match(geocoder, /No candidate was selected automatically/); });
+test("cache reuse and forced refresh are explicit", () => { assert.match(service, /gt\("expires_at"/); assert.match(service, /reused_from_result_id/); assert.match(service, /request\.forcedRefresh/); assert.match(screeningRoute, /forceRefresh/); });
+test("utility proximity cannot create a high interconnection score", () => { assert.match(scoring, /grid_and_interconnection/); assert.match(scoring, /utility_confirmed/); assert.match(scoring, /Math\.min\(component\.rawScore \?\? 0, 35\)/); });
+test("environmental and grid outputs retain preliminary warnings", () => { assert.match(read("../lib/enrichment/types.ts"), /does not establish interconnection capacity/); assert.match(read("../lib/enrichment/types.ts"), /does not establish available hosting capacity/); assert.match(migration, /preliminary boolean not null default true/); });
+test("batch screening is bounded and incremental", () => { assert.match(batchRoute, /SCREENING_BATCH_MAX/); assert.match(batchRoute, /\.max\(maximum\)/); assert.match(batchRoute, /create_property_enrichment_run/); assert.doesNotMatch(batchRoute, /processNextScreeningStep/); });
+test("reports remain tenant-scoped, non-public, and printable", () => { const report = read("../app/api/screening-reports/[runId]/route.ts"); assert.match(report, /getApiActor/); assert.match(report, /window\.print/); assert.match(report, /no-store/); assert.match(report, /preliminary/i); });
+test("provider metadata and screening lifecycle are auditable", () => { assert.match(migration, /provider_name text not null/); assert.match(migration, /provider_version text not null/); assert.match(migration, /property_enrichment_runs.*provider_usage_logs/s); assert.match(migration, /create trigger %I after insert or update or delete/); assert.match(migration, /execute function public\.log_change\(\)/); });

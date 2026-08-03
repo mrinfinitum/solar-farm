@@ -74,3 +74,5 @@ npm audit --omit=dev
 See [docs/SECURITY_AND_OPERATIONS.md](docs/SECURITY_AND_OPERATIONS.md), [docs/DATABASE_SETUP.md](docs/DATABASE_SETUP.md), and [docs/SITE_FINDER_ARCHITECTURE.md](docs/SITE_FINDER_ARCHITECTURE.md) for the full handoff.
 
 Property acquisition, preliminary scoring, provider boundaries, permissions, and the Sprint 2 migration are documented in [docs/PROPERTY_ACQUISITION.md](docs/PROPERTY_ACQUISITION.md).
+
+Sprint 3 provider adapters, caching, proposal review, RLS, screening reports, batch limits, scoring guardrails, and no-key fallback behavior are documented in [docs/PROPERTY_ENRICHMENT.md](docs/PROPERTY_ENRICHMENT.md).
