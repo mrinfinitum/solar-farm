@@ -2495,6 +2495,154 @@ a {
 .land-file-field span { display: flex; align-items: center; gap: 8px; }
 .land-form input[type="file"] { padding: 10px 12px; }
 .land-form input:disabled { cursor: not-allowed; opacity: .5; }
+
+/* Mobile composition for the solar-to-business connection. */
+@keyframes energy-travel-mobile {
+  from { top: 0; opacity: 0; }
+  14% { opacity: 1; }
+  86% { opacity: 1; }
+  to { top: calc(100% - 8px); opacity: 0; }
+}
+
+@media (max-width: 680px) {
+  .energy-flow-layout {
+    gap: 34px;
+    padding-block: 64px 48px;
+  }
+
+  .energy-flow-copy .eyebrow {
+    margin-bottom: 18px;
+  }
+
+  .energy-flow-copy h2 {
+    max-width: 350px;
+    margin-top: 0;
+    font-size: clamp(48px, 14vw, 58px);
+    letter-spacing: -.065em;
+    line-height: .9;
+  }
+
+  .energy-flow-copy > p:last-child {
+    max-width: 340px;
+    margin-top: 24px;
+    color: rgba(228, 241, 230, .76);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .energy-flow-graphic--models {
+    display: grid;
+    width: min(100%, 350px);
+    min-height: 554px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 180px 40px 114px 40px 180px;
+    justify-self: center;
+    overflow: visible;
+  }
+
+  .energy-flow-graphic--models::before {
+    inset: 154px auto 154px 50%;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgba(188, 255, 114, .42) 20%, rgba(188, 255, 114, .42) 80%, transparent);
+  }
+
+  .energy-model {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .energy-model--solar {
+    grid-row: 1;
+  }
+
+  .energy-model--business {
+    grid-row: 5;
+  }
+
+  .energy-model__art {
+    inset: -14px 34px 38px;
+  }
+
+  .energy-model--solar .energy-model__art,
+  .energy-model--business .energy-model__art,
+  .energy-model--solar:hover .energy-model__art,
+  .energy-model--business:hover .energy-model__art {
+    transform: none;
+  }
+
+  .energy-model > span {
+    bottom: 0;
+    gap: 4px;
+  }
+
+  .energy-model > span small {
+    font-size: 9px;
+    letter-spacing: .14em;
+  }
+
+  .energy-model > span strong {
+    font-size: 18px;
+  }
+
+  .energy-current {
+    width: 2px;
+    height: 100%;
+    justify-self: center;
+    background: rgba(187, 244, 117, .28);
+  }
+
+  .energy-current i {
+    top: 0;
+    left: -3px;
+    animation-name: energy-travel-mobile;
+  }
+
+  .energy-flow-graphic--models .energy-core {
+    grid-row: 3;
+    width: 106px;
+    height: 106px;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .energy-flow-graphic--models .energy-core > svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .energy-flow-graphic--models .energy-core small {
+    font-size: 7px;
+  }
+
+  .energy-flow-graphic--models .energy-core strong {
+    font-size: 12px;
+  }
+
+  .energy-flow-marquee {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .energy-flow-copy h2 {
+    font-size: 46px;
+  }
+
+  .energy-flow-graphic--models {
+    width: 100%;
+  }
+
+  .energy-model__art {
+    inset-inline: 24px;
+  }
+}
+
+@media (max-width: 680px) and (prefers-reduced-motion: reduce) {
+  .energy-current i {
+    animation: none;
+  }
+}
 .land-form label { font-size: 11px; }
 .land-message, .land-upload-note { font-size: 10px; }
 
@@ -6874,3 +7022,96 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 .land-file-field span { display: flex; align-items: center; gap: 8px; }
 .land-form input[type="file"] { padding: 10px 12px; }
 .land-form input:disabled { cursor: not-allowed; opacity: .5; }
+
+/* Keep the connection illustration linear and centered on narrow screens. */
+@media (max-width: 680px) {
+  .energy-flow-graphic--models {
+    display: grid;
+    width: min(100%, 350px);
+    min-height: 554px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 180px 40px 114px 40px 180px;
+    justify-self: center;
+    overflow: visible;
+  }
+
+  .energy-flow-graphic--models::before {
+    inset: 154px auto 154px 50%;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgba(181, 245, 100, .7) 12%, rgba(181, 245, 100, .7) 88%, transparent);
+    transform: none;
+  }
+
+  .energy-flow-graphic--models > .energy-model {
+    grid-column: 1;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .energy-flow-graphic--models > .energy-model--solar { grid-row: 1; }
+  .energy-flow-graphic--models > .energy-model--business { grid-row: 5; }
+
+  .energy-flow-graphic--models .energy-model__art {
+    inset: -14px 34px 38px;
+  }
+
+  .energy-flow-graphic--models .energy-model--solar .energy-model__art,
+  .energy-flow-graphic--models .energy-model--business .energy-model__art,
+  .energy-flow-graphic--models .energy-model--solar:hover .energy-model__art,
+  .energy-flow-graphic--models .energy-model--business:hover .energy-model__art {
+    transform: none;
+  }
+
+  .energy-flow-graphic--models .energy-model > span {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .energy-flow-graphic--models .energy-model > span small { font-size: 9px; }
+  .energy-flow-graphic--models .energy-model > span strong { font-size: 18px; }
+
+  .energy-flow-graphic--models > .energy-current {
+    grid-column: 1;
+    align-self: stretch;
+    justify-self: center;
+    width: 2px;
+    height: 100%;
+    background: rgba(181, 245, 100, .28);
+  }
+
+  .energy-flow-graphic--models > .energy-current--left { grid-row: 2; }
+  .energy-flow-graphic--models > .energy-current--right { grid-row: 4; }
+
+  .energy-flow-graphic--models > .energy-current i {
+    top: -4px;
+    left: 50%;
+    animation: energy-travel-mobile 2.6s linear infinite;
+  }
+
+  .energy-flow-graphic--models > .energy-core {
+    grid-column: 1;
+    grid-row: 3;
+    width: 106px;
+    height: 106px;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .energy-flow-graphic--models > .energy-core > svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .energy-flow-graphic--models > .energy-core small { font-size: 7px; }
+  .energy-flow-graphic--models > .energy-core strong { font-size: 12px; }
+  .energy-flow-marquee { display: none; }
+}
+
+@media (max-width: 380px) {
+  .energy-flow-graphic--models { width: 100%; }
+  .energy-flow-graphic--models .energy-model__art { inset-inline: 24px; }
+}
