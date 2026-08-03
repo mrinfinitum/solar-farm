@@ -72,3 +72,5 @@ npm audit --omit=dev
 5. Deploy and verify `/`, `/login`, password reset, `/dashboard`, signed document downloads, CSV dry-run, and `/submit-property`.
 
 See [docs/SECURITY_AND_OPERATIONS.md](docs/SECURITY_AND_OPERATIONS.md), [docs/DATABASE_SETUP.md](docs/DATABASE_SETUP.md), and [docs/SITE_FINDER_ARCHITECTURE.md](docs/SITE_FINDER_ARCHITECTURE.md) for the full handoff.
+
+Property acquisition, preliminary scoring, provider boundaries, permissions, and the Sprint 2 migration are documented in [docs/PROPERTY_ACQUISITION.md](docs/PROPERTY_ACQUISITION.md).
