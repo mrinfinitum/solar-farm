@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
   Bell, Building2, ChevronDown, ChevronLeft, ContactRound, FileText, FolderKanban,
-  Import, LayoutDashboard, LogOut, Map, Menu, Plus, Search, Settings, Users, X,
+  HandCoins, Import, LayoutDashboard, LogOut, Map, Menu, Plus, Search, Settings, Users, X,
 } from "lucide-react";
 import { ProjectMark } from "@/components/ui/project-mark";
 import { logoutAction } from "@/app/auth/actions";
@@ -26,7 +26,7 @@ export function DashboardShell({ profile, children }: { profile: SessionProfile;
   const [collapsed, setCollapsed] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const items = ADMIN_ROLES.includes(profile.role)
-    ? [...navigation, ["Users", "/dashboard/users", Users] as const]
+    ? [...navigation, ["Capital", "/dashboard/capital", HandCoins] as const, ["Users", "/dashboard/users", Users] as const]
     : navigation;
 
   return <div className={`finder-app ${collapsed ? "finder-app--collapsed" : ""}`}>

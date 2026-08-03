@@ -1,0 +1,1 @@
+import { CapitalWorkspace } from "@/components/finance/capital-workspace";import { requireRole } from "@/lib/auth/session";export default async function CapitalPartnersPage(){await requireRole(["owner","admin"]);return <CapitalWorkspace view="partners"/>}

@@ -11,5 +11,5 @@ const tabs = [
 
 export function ProjectSubnav({ projectId }: { projectId: string }) {
   const pathname = usePathname();
-  return <nav className="project-subnav" aria-label="Project workspace">{tabs.map(([label,slug])=><Link className={pathname.endsWith(`/${slug}`)?"is-active":""} key={slug} href={`/dashboard/projects/${projectId}/${slug}`}>{label}</Link>)}</nav>;
+  return <nav className="project-subnav" aria-label="Project workspace">{tabs.map(([label,slug])=><Link className={pathname.endsWith(`/${slug}`)||pathname.includes(`/${slug}/`)?"is-active":""} key={slug} href={`/dashboard/projects/${projectId}/${slug}`}>{label}</Link>)}</nav>;
 }

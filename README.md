@@ -81,3 +81,5 @@ Property acquisition, preliminary scoring, provider boundaries, permissions, and
 Sprint 3 provider adapters, caching, proposal review, RLS, screening reports, batch limits, scoring guardrails, and no-key fallback behavior are documented in [docs/PROPERTY_ENRICHMENT.md](docs/PROPERTY_ENRICHMENT.md).
 
 Sprint 4 project stages, health rules, secured stage gates, interconnection, engineering/EPC, off-taker/PPA, permitting, finance, incentives, construction/operations foundations, and exact limitations are documented in [docs/PROJECT_DEVELOPMENT_COMMAND_CENTER.md](docs/PROJECT_DEVELOPMENT_COMMAND_CENTER.md).
+
+Sprint 5 deterministic financial modeling, version approvals and staleness, scenario/sensitivity analysis, funding readiness, restricted capital-partner CRM, private data-room packaging, RLS, and methodology are documented in [docs/FINANCIAL_MODELING_AND_FUNDING.md](docs/FINANCIAL_MODELING_AND_FUNDING.md).

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "test:security": "node --experimental-strip-types --test tests/security.test.mts",
@@ -13,7 +13,8 @@
     "test:enrichment": "node --experimental-strip-types --test tests/property-enrichment.test.mts",
     "test:marketing": "node --experimental-strip-types --test tests/marketing-readiness.test.mts",
     "test:project": "node --experimental-strip-types --test tests/project-command-center.test.mts",
-    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run test:marketing && npm run test:project && npm run verify:browser-secrets"
+    "test:finance": "node --experimental-strip-types --test tests/financial-readiness.test.mts",
+    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run test:marketing && npm run test:project && npm run test:finance && npm run verify:browser-secrets"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

@@ -1,0 +1,31 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { test } from "node:test";
+import { buildProjection, calculateFundingReadiness, canApproveFinancialModel, canEditFinancialModel, canManageCapitalData, DEFAULT_FINANCE_INPUTS, irr, npv, paybackYear, runSensitivity } from "../lib/finance/engine.ts";
+
+const migration=readFileSync(new URL("../supabase/migrations/202608030006_financial_modeling_capital_readiness.sql",import.meta.url),"utf8");
+const modelApi=readFileSync(new URL("../app/api/projects/[id]/finance/models/route.ts",import.meta.url),"utf8");
+const approvalApi=readFileSync(new URL("../app/api/projects/[id]/finance/models/[modelId]/approve/route.ts",import.meta.url),"utf8");
+const partnerApi=readFileSync(new URL("../app/api/capital/partners/route.ts",import.meta.url),"utf8");
+const packageApi=readFileSync(new URL("../app/api/projects/[id]/funding-package/route.ts",import.meta.url),"utf8");
+
+test("production and PPA escalation are deterministic",()=>{const output=buildProjection(DEFAULT_FINANCE_INPUTS);assert.equal(output.years.length,20);assert.ok(output.years[1].generationKwh<output.years[0].generationKwh);assert.ok(output.years[1].ppaRatePerKwh>output.years[0].ppaRatePerKwh)});
+test("annual revenue equals delivered production times rate",()=>{const output=buildProjection({...DEFAULT_FINANCE_INPUTS,termYears:1});assert.equal(output.years[0].revenue,Math.round(output.years[0].generationKwh*output.years[0].ppaRatePerKwh*100)/100)});
+test("opex escalates and replacement capex lands in selected year",()=>{const output=buildProjection({...DEFAULT_FINANCE_INPUTS,replacementCapex:[{year:2,amount:12345}]});assert.ok(output.years[1].opex>output.years[0].opex);assert.equal(output.years[1].replacementCapex,12345)});
+test("debt amortizes without negative ending balances",()=>{const output=buildProjection(DEFAULT_FINANCE_INPUTS);assert.ok(output.years.every(year=>year.endingDebtBalance>=0));assert.equal(output.years[DEFAULT_FINANCE_INPUTS.debtTermYears-1].endingDebtBalance,0)});
+test("DSCR is omitted when there is no debt service",()=>{const output=buildProjection({...DEFAULT_FINANCE_INPUTS,debtAmount:0,debtTermYears:0,interestOnlyYears:0});assert.equal(output.minimumDscr,null);assert.ok(output.years.every(year=>year.dscr===null))});
+test("NPV discounts future cash flow",()=>assert.ok(Math.abs(npv([-100,110],10))<0.000001));
+test("IRR returns ten percent for a simple one-period investment",()=>assert.ok(Math.abs((irr([-100,110])||0)-10)<0.001));
+test("IRR reports unavailable for cash flow with no sign change",()=>assert.equal(irr([0,10,20]),null));
+test("simple and discounted payback are explicit",()=>{assert.equal(paybackYear([-100,60,60]),2);assert.equal(paybackYear([-100,60,60],20),null)});
+test("break-even PPA produces a bounded server-calculated result",()=>{const output=buildProjection(DEFAULT_FINANCE_INPUTS);assert.ok(output.breakEvenPpaRate!==null&&output.breakEvenPpaRate>0&&output.breakEvenPpaRate<2)});
+test("unverified incentives are excluded and warned",()=>{const output=buildProjection({...DEFAULT_FINANCE_INPUTS,incentives:[{year:1,amount:999999,confidence:"unverified"}]});assert.equal(output.years[0].incentiveProceeds,0);assert.ok(output.warnings.some(warning=>warning.code==="UNVERIFIED_INCENTIVE"))});
+test("sensitivity matrices are server bounded",()=>assert.throws(()=>runSensitivity(DEFAULT_FINANCE_INPUTS,"projectCost",Array(12).fill(0),"ppaRatePerKwh",Array(11).fill(0)),/121/));
+test("funding readiness fatal flags override a high score",()=>{const result=calculateFundingReadiness({approvedModel:true,modelStale:false,productionApproved:true,budgetApproved:true,siteControlValid:true,interconnectionEvidence:true,fatalFlags:["expired site control"],completedRequirements:10,totalRequirements:10});assert.equal(result.score,100);assert.equal(result.status,"blocked")});
+test("analysts can calculate but cannot approve models",()=>{assert.equal(canEditFinancialModel("analyst"),true);assert.equal(canApproveFinancialModel("analyst"),false)});
+test("capital partner data is owner and admin only",()=>{assert.equal(canManageCapitalData("owner"),true);assert.equal(canManageCapitalData("admin"),true);assert.equal(canManageCapitalData("developer"),false);assert.match(partnerApi,/getApiActor\(\["owner", "admin"\]\)/)});
+test("model creation is authenticated and role checked",()=>assert.match(modelApi,/getApiActor\(\["owner", "admin", "developer", "analyst"\]\)/));
+test("approval requires owner or administrator and rejects stale models",()=>{assert.match(approvalApi,/getApiActor\(\["owner", "admin"\]\)/);assert.match(approvalApi,/Stale model versions cannot be approved/);assert.match(migration,/Blocking model warnings must be resolved/)});
+test("material source changes invalidate approved models",()=>{for(const table of ["production_models","epc_proposals","ppa_scenarios","interconnection_cost_estimates","project_incentives","debt_terms"])assert.match(migration,new RegExp(`on public\\.${table}`));assert.match(migration,/is_stale=true/)});
+test("funding package requires an approved non-stale model and approved documents",()=>{assert.match(packageApi,/not\("approved_at", "is", null\)/);assert.match(packageApi,/eq\("is_stale", false\)/);assert.match(packageApi,/eq\("approved_for_package", true\)/);assert.match(packageApi,/private, no-store/)});
+test("Sprint 5 tables enforce organization RLS and deny anonymous access",()=>{assert.match(migration,/enable row level security/);assert.match(migration,/organization_id=public\.current_organization_id\(\)/);assert.match(migration,/revoke all on public\.%I from anon/);assert.doesNotMatch(partnerApi,/createAdminClient|SUPABASE_SERVICE_ROLE_KEY/)});
