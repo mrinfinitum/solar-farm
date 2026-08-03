@@ -18,15 +18,44 @@ const desktopNavigation = [
 ];
 
 export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean }) {
-  const [scrolled, setScrolled] = useState(false);
+  const [headerState, setHeaderState] = useState<"top" | "resting" | "sticky">("top");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#top");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
+    let lastY = Math.max(0, window.scrollY);
+    let frame = 0;
+    let initializing = true;
+
+    const updateHeader = () => {
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - lastY;
+
+      if (initializing) {
+        setHeaderState(currentY <= 24 ? "top" : "resting");
+        initializing = false;
+        lastY = currentY;
+      } else if (currentY <= 24) {
+        setHeaderState("top");
+        lastY = currentY;
+      } else if (Math.abs(delta) >= 4) {
+        setHeaderState(delta < 0 ? "sticky" : "resting");
+        lastY = currentY;
+      }
+
+      frame = 0;
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateHeader);
+    };
+
+    frame = window.requestAnimationFrame(updateHeader);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -57,8 +86,16 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
     return () => observer.disconnect();
   }, []);
 
+  const sticky = headerState === "sticky" || menuOpen;
+
   return (
-    <header className={cn("site-header", scrolled && "site-header--scrolled")}>
+    <header
+      className={cn(
+        "site-header",
+        sticky && "site-header--sticky site-header--scrolled",
+        headerState === "resting" && !menuOpen && "site-header--resting",
+      )}
+    >
       <div className="nav-shell">
         <a className="brand-link" href="#top" aria-label="NSoul home">
           <ProjectMark />

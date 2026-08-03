@@ -212,7 +212,7 @@ a {
 
 /* Navigation */
 .site-header {
-  position: fixed;
+  position: absolute;
   z-index: 100;
   top: 0;
   right: 0;
@@ -221,6 +221,20 @@ a {
   border-bottom: 1px solid transparent;
   background: linear-gradient(180deg, rgba(7, 17, 11, 0.68), transparent);
   transition: background 250ms ease, border-color 250ms ease, backdrop-filter 250ms ease, padding 250ms ease;
+}
+
+.site-header--sticky {
+  position: fixed;
+  animation: site-header-reveal 240ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.site-header--resting {
+  position: absolute;
+}
+
+@keyframes site-header-reveal {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
 
 .site-header--scrolled {

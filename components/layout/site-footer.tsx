@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, LogIn, MapPin } from "lucide-react";
 
 import { navigation, project, disclaimer } from "@/lib/project-data";
 import { ProjectMark } from "@/components/ui/project-mark";
@@ -26,6 +26,7 @@ export function SiteFooter({ termSheetAvailable }: { termSheetAvailable: boolean
             <p className="footer-label">Connect</p>
             <a href="#development">Development</a>
             <a href="#contact">Contact <ArrowUpRight aria-hidden="true" size={13} /></a>
+            <a href="/login">Studio login <LogIn aria-hidden="true" size={13} /></a>
             <TermSheetLink available={termSheetAvailable} className="footer-download" />
           </div>
           <div>
