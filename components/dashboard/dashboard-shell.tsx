@@ -31,7 +31,7 @@ export function DashboardShell({ profile, children }: { profile: SessionProfile;
 
   return <div className={`finder-app ${collapsed ? "finder-app--collapsed" : ""}`}>
     <aside className={`finder-sidebar ${mobileOpen ? "is-open" : ""}`}>
-      <div className="finder-logo"><ProjectMark /><div><strong>NSOUL</strong><span>Solar development OS</span></div><button onClick={() => setMobileOpen(false)} aria-label="Close navigation"><X /></button></div>
+      <div className="finder-logo"><ProjectMark /><div><strong>NSOUL</strong><span>Development Studio</span></div><button onClick={() => setMobileOpen(false)} aria-label="Close navigation"><X /></button></div>
       <nav aria-label="Dashboard navigation">{items.map(([label, href, Icon]) => { const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href)); return <Link key={href} href={href} title={collapsed ? label : undefined} onClick={() => setMobileOpen(false)} className={active ? "is-active" : ""}><Icon size={18} /><span>{label}</span></Link>; })}</nav>
       <div className="finder-sidebar-foot"><span>Organization</span><strong>{profile.organization}</strong><small>{profile.role} workspace</small></div>
       <button className="finder-collapse" onClick={() => setCollapsed((value) => !value)} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed}><ChevronLeft /></button>

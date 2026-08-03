@@ -18,7 +18,7 @@ const desktopNavigation = [
 ];
 
 export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean }) {
-  const [headerState, setHeaderState] = useState<"top" | "resting" | "sticky">("top");
+  const [headerState, setHeaderState] = useState<"top" | "hidden" | "sticky">("top");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#top");
 
@@ -32,14 +32,14 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
       const delta = currentY - lastY;
 
       if (initializing) {
-        setHeaderState(currentY <= 24 ? "top" : "resting");
+        setHeaderState(currentY <= 24 ? "top" : "hidden");
         initializing = false;
         lastY = currentY;
       } else if (currentY <= 24) {
         setHeaderState("top");
         lastY = currentY;
       } else if (Math.abs(delta) >= 4) {
-        setHeaderState(delta < 0 ? "sticky" : "resting");
+        setHeaderState(delta < 0 ? "sticky" : "hidden");
         lastY = currentY;
       }
 
@@ -93,7 +93,7 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
       className={cn(
         "site-header",
         sticky && "site-header--sticky site-header--scrolled",
-        headerState === "resting" && !menuOpen && "site-header--resting",
+        headerState === "hidden" && !menuOpen && "site-header--hidden",
       )}
     >
       <div className="nav-shell">

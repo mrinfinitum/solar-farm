@@ -220,21 +220,19 @@ a {
   padding: 12px 0;
   border-bottom: 1px solid transparent;
   background: linear-gradient(180deg, rgba(7, 17, 11, 0.68), transparent);
-  transition: background 250ms ease, border-color 250ms ease, backdrop-filter 250ms ease, padding 250ms ease;
+  transform: translateY(0);
+  transition: background 250ms ease, border-color 250ms ease, backdrop-filter 250ms ease, padding 250ms ease, transform 220ms ease;
 }
 
 .site-header--sticky {
   position: fixed;
-  animation: site-header-reveal 240ms cubic-bezier(.22, 1, .36, 1) both;
+  transform: translateY(0);
 }
 
-.site-header--resting {
-  position: absolute;
-}
-
-@keyframes site-header-reveal {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
+.site-header--hidden {
+  position: fixed;
+  pointer-events: none;
+  transform: translateY(calc(-100% - 16px));
 }
 
 .site-header--scrolled {
