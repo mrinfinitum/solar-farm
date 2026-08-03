@@ -2310,6 +2310,233 @@ a {
   .footer-main { grid-template-columns: 1fr; gap: 52px; }
 }
 
+/* Conversion, trust, project intelligence, and public intake */
+.nav-term-sheet {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.nav-term-sheet:hover { border-color: var(--border-bright); color: var(--text); }
+
+.cornerstone-project-section {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(155, 232, 188, .08), transparent 27%),
+    var(--bg);
+}
+
+.cornerstone-project-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .58fr);
+  gap: 72px;
+  align-items: end;
+  margin-bottom: 54px;
+}
+
+.cornerstone-project-heading h2 {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(46px, 6vw, 82px);
+  font-weight: 480;
+  letter-spacing: -.06em;
+  line-height: .94;
+}
+
+.cornerstone-project-heading > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.cornerstone-intelligence {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+  overflow: hidden;
+  border: 1px solid rgba(231, 255, 214, .13);
+  border-radius: 28px;
+  background: #0a1913;
+  color: #f3f7f1;
+  box-shadow: 0 32px 90px rgba(2, 12, 7, .22);
+}
+
+.cornerstone-map-panel,
+.cornerstone-facts-panel,
+.cornerstone-status-panel { min-width: 0; }
+
+.cornerstone-map-panel {
+  grid-row: span 2;
+  padding: 30px;
+  border-right: 1px solid rgba(255, 255, 255, .09);
+  background:
+    linear-gradient(rgba(155, 232, 188, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 232, 188, .045) 1px, transparent 1px),
+    #0a1913;
+  background-size: 44px 44px;
+}
+
+.cornerstone-panel-label,
+.cornerstone-status-heading > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8ed8ad;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.cornerstone-panel-label svg { width: 15px; }
+.cornerstone-map { position: relative; min-height: 465px; }
+.cornerstone-map svg { position: absolute; inset: 22px 0 0; width: 100%; height: calc(100% - 34px); }
+.cornerstone-oklahoma { fill: rgba(133, 176, 115, .08); stroke: #536a60; stroke-width: 2; }
+.cornerstone-southeast { fill: rgba(166, 222, 69, .16); stroke: #7da24e; stroke-width: 2; }
+.cornerstone-corridor { fill: none; stroke: #8ee6b4; stroke-width: 2; stroke-dasharray: 7 10; opacity: .7; }
+.cornerstone-load { fill: #8ee6b4; }
+.cornerstone-site-ring { fill: rgba(166, 222, 69, .08); stroke: #a6de45; stroke-width: 2; }
+.cornerstone-site { fill: #a6de45; }
+
+.cornerstone-map-label {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 999px;
+  background: rgba(7, 17, 11, .82);
+  color: #d8e3dc;
+  font: 8px/1 var(--font-geist-mono), monospace;
+  white-space: nowrap;
+}
+
+.cornerstone-map-label svg { width: 12px; height: 12px; color: #a6de45; }
+.cornerstone-map-label--state { top: 30%; left: 31%; }
+.cornerstone-map-label--county { right: 2%; bottom: 15%; }
+.cornerstone-map-label--corridor { right: 28%; bottom: 36%; }
+.cornerstone-map-label--site { right: 0; bottom: 3%; }
+.cornerstone-map-panel > p { margin: 0; color: #74887d; font-size: 10px; }
+
+.cornerstone-facts-panel { padding: 30px 34px; border-bottom: 1px solid rgba(255, 255, 255, .09); }
+.cornerstone-facts-panel dl { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0 0; }
+.cornerstone-facts-panel dl > div { min-height: 86px; padding: 15px 16px 15px 0; border-top: 1px solid rgba(255, 255, 255, .08); }
+.cornerstone-facts-panel dl > div:nth-child(even) { padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, .08); }
+.cornerstone-facts-panel dt { color: #758a7e; font: 8px/1.4 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
+.cornerstone-facts-panel dd { margin: 9px 0 0; color: #edf4ee; font-size: 13px; font-weight: 550; line-height: 1.45; }
+
+.cornerstone-status-panel { padding: 30px 34px 34px; }
+.cornerstone-status-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.cornerstone-status-heading .eyebrow { margin-bottom: 7px; }
+.cornerstone-status-heading h3 { margin: 0; font-size: 24px; letter-spacing: -.04em; }
+.cornerstone-status-heading > span { color: #6f8377; font-size: 7px; }
+.cornerstone-status-panel ol { display: grid; margin: 25px 0 0; padding: 0; list-style: none; }
+.cornerstone-status-panel li { display: grid; grid-template-columns: 78px 1fr; gap: 14px; align-items: center; min-height: 51px; border-top: 1px solid rgba(255, 255, 255, .075); }
+.cornerstone-status-panel li > span:last-child { color: #b9c7bf; font-size: 11px; line-height: 1.4; }
+.cornerstone-status-panel .status-badge { justify-self: start; }
+
+.cornerstone-project-actions { display: flex; align-items: center; justify-content: space-between; gap: 36px; margin-top: 24px; }
+.cornerstone-project-actions > p { max-width: 700px; margin: 0; color: var(--dim); font-size: 11px; line-height: 1.55; }
+.cornerstone-project-actions > div { display: flex; flex: 0 0 auto; gap: 9px; }
+
+.trust-strip { padding: 28px 0 92px; background: var(--bg); }
+.trust-strip-shell { display: grid; grid-template-columns: .58fr 1.42fr; gap: 56px; align-items: center; padding: 30px 34px; border: 1px solid var(--border); border-radius: 22px; background: var(--surface); }
+.trust-strip .eyebrow { margin-bottom: 8px; }
+.trust-strip h2 { margin: 0; font-size: 25px; letter-spacing: -.035em; }
+.trust-strip ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 28px; margin: 0; padding: 0; list-style: none; }
+.trust-strip li { display: flex; align-items: flex-start; gap: 8px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.trust-strip li svg { width: 16px; flex: 0 0 auto; color: var(--green); }
+
+.faq-section { background: var(--surface); }
+.faq-layout { display: grid; grid-template-columns: .62fr 1.38fr; gap: 90px; }
+.faq-layout > div:first-child { position: sticky; top: 130px; align-self: start; }
+.faq-layout h2 { max-width: 470px; margin: 0; font-size: clamp(42px, 5vw, 68px); font-weight: 480; letter-spacing: -.055em; line-height: 1; }
+.faq-layout > div:first-child > p:last-child { max-width: 400px; margin: 24px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.faq-list { border-top: 1px solid var(--border); }
+.faq-list details { border-bottom: 1px solid var(--border); }
+.faq-list summary { display: flex; min-height: 86px; align-items: center; justify-content: space-between; gap: 20px; cursor: pointer; color: var(--text); font-size: 18px; font-weight: 580; list-style: none; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary svg { width: 19px; flex: 0 0 auto; color: var(--green); transition: transform 180ms ease; }
+.faq-list details[open] summary svg { transform: rotate(45deg); }
+.faq-list details > p { max-width: 760px; margin: -4px 48px 28px 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+.contact-form-group { min-width: 0; margin: 0 0 24px; padding: 0; border: 0; }
+.contact-form-group legend { display: flex; width: 100%; align-items: center; gap: 10px; margin-bottom: 15px; padding: 0; color: var(--text); font-size: 12px; font-weight: 650; }
+.contact-form-group legend span { color: var(--cyan); font: 8px var(--font-geist-mono), monospace; letter-spacing: .08em; }
+.form-privacy { margin: 14px 0 0; color: var(--dim); font-size: 9px; line-height: 1.5; text-align: center; }
+.form-privacy a { text-decoration: underline; text-underline-offset: 3px; }
+
+.legal-shell { min-height: 100vh; background: var(--bg); color: var(--text); }
+.legal-header { display: flex; min-height: 92px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+.legal-header > div { display: flex; align-items: center; gap: 16px; }
+.legal-header > div > a { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
+.legal-page { padding-top: 94px; padding-bottom: 120px; }
+.legal-page > header { max-width: 820px; }
+.legal-page h1 { margin: 0; font-size: clamp(52px, 7vw, 92px); font-weight: 480; letter-spacing: -.065em; line-height: .95; }
+.legal-page > header > p:last-child { margin: 22px 0 0; color: var(--muted); }
+.legal-page > aside { max-width: 860px; margin: 48px 0; padding: 18px 20px; border: 1px solid rgba(241, 185, 92, .25); border-radius: 14px; background: rgba(241, 185, 92, .06); color: var(--muted); font-size: 13px; line-height: 1.5; }
+.legal-page article { max-width: 860px; }
+.legal-page article section { padding: 28px 0; border-top: 1px solid var(--border); }
+.legal-page article h2 { margin: 0 0 12px; font-size: 24px; letter-spacing: -.035em; }
+.legal-page article p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+.legal-page article a { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+
+.land-form-group { min-width: 0; margin: 0; padding: 22px; border: 1px solid #294034; border-radius: 16px; }
+.land-form-group legend { padding: 0 8px; color: #eef7ee; font-size: 13px; font-weight: 650; }
+.land-file-field span { display: flex; align-items: center; gap: 8px; }
+.land-form input[type="file"] { padding: 10px 12px; }
+.land-form input:disabled { cursor: not-allowed; opacity: .5; }
+.land-form label { font-size: 11px; }
+.land-message, .land-upload-note { font-size: 10px; }
+
+@media (max-width: 1080px) {
+  .nav-term-sheet { display: none; }
+  .cornerstone-project-heading { grid-template-columns: 1fr; gap: 26px; }
+  .cornerstone-intelligence { grid-template-columns: 1fr; }
+  .cornerstone-map-panel { grid-row: auto; border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .09); }
+  .cornerstone-map { min-height: 410px; }
+  .trust-strip-shell, .faq-layout { grid-template-columns: 1fr; }
+  .faq-layout { gap: 42px; }
+  .faq-layout > div:first-child { position: static; }
+}
+
+@media (max-width: 720px) {
+  .cornerstone-project-section { padding-block: 84px; }
+  .cornerstone-project-heading h2 { font-size: clamp(43px, 13vw, 64px); }
+  .cornerstone-project-heading > p { font-size: 15px; }
+  .cornerstone-map-panel, .cornerstone-facts-panel, .cornerstone-status-panel { padding: 22px; }
+  .cornerstone-map { min-height: 310px; }
+  .cornerstone-map-label--state { left: 24%; }
+  .cornerstone-map-label--corridor { right: 20%; }
+  .cornerstone-facts-panel dl { grid-template-columns: 1fr; }
+  .cornerstone-facts-panel dl > div:nth-child(even) { padding-left: 0; border-left: 0; }
+  .cornerstone-status-heading { align-items: flex-start; flex-direction: column; }
+  .cornerstone-status-panel li { grid-template-columns: 70px 1fr; }
+  .cornerstone-project-actions { align-items: stretch; flex-direction: column; }
+  .cornerstone-project-actions > div { align-items: stretch; flex-direction: column; }
+  .cornerstone-project-actions .button { width: 100%; }
+  .trust-strip { padding-bottom: 64px; }
+  .trust-strip-shell { gap: 28px; padding: 24px; }
+  .trust-strip ul { grid-template-columns: 1fr; }
+  .faq-section { padding-block: 84px; }
+  .faq-list summary { min-height: 76px; font-size: 16px; }
+  .faq-list details > p { margin-right: 0; }
+  .contact-form-group .form-grid { grid-template-columns: 1fr; }
+  .legal-header { min-height: 78px; }
+  .legal-header > div > a { font-size: 0; }
+  .legal-header > div > a svg { width: 20px; }
+  .legal-page { padding-top: 70px; }
+}
+
 /* Sprint 3 property intelligence */
 .finder-app { --finder-muted:var(--fd-muted); --finder-line:var(--fd-line); --finder-text:var(--fd-text); --finder-panel:var(--fd-panel); --finder-panel-soft:#0b1722; }
 .quick-screening { display:grid; grid-template-columns:minmax(260px,.75fr) 1.6fr; gap:40px; padding:34px; margin-bottom:28px; }
@@ -6638,3 +6865,12 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
     font-size: 21px;
   }
 }
+
+/* Final public-intake typography overrides follow legacy studio styles. */
+.land-form-group { min-width: 0; margin: 0; padding: 22px; border: 1px solid #294034; border-radius: 16px; }
+.land-form-group legend { padding: 0 8px; color: #eef7ee; font-size: 13px; font-weight: 650; }
+.land-form label { font-size: 11px; }
+.land-message, .land-upload-note { font-size: 10px; }
+.land-file-field span { display: flex; align-items: center; gap: 8px; }
+.land-form input[type="file"] { padding: 10px 12px; }
+.land-form input:disabled { cursor: not-allowed; opacity: .5; }

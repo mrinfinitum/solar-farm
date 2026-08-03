@@ -51,8 +51,11 @@ See `.env.example`:
 - `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_MAP_STYLE_URL` — optional MapLibre-compatible style URL
 - `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` — optional public contact delivery
+- `LEGAL_CONTACT_EMAIL` — legal and privacy contact displayed on the draft policy pages
 
 Missing map/email values produce safe configured-state messages. Missing Supabase values disable private authentication and storage operations without breaking the public build.
+
+The public term sheet is generated with `scripts/generate-term-sheet.py` and served directly from `/documents/cornerstone-solar-indicative-term-sheet.pdf`. It is deliberately labeled indicative and non-binding.
 
 ## Validation
 

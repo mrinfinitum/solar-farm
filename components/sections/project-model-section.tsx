@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 import { RegionalProjectFeature } from "@/components/project-model/regional-project-feature";
 import { Reveal } from "@/components/ui/reveal";
+import { TrackedLink } from "@/components/ui/tracked-link";
 
 export function ProjectModelSection() {
   return (
@@ -28,9 +29,9 @@ export function ProjectModelSection() {
             <p>Share your facility location and energy profile to begin an indicative commercial review.</p>
           </div>
           <div>
-            <a className="button button--primary" href="#contact">
+            <TrackedLink className="button button--primary" href="#contact" event="project_cta_click" eventContext="representative-model">
               Start a discussion <ArrowRight aria-hidden="true" />
-            </a>
+            </TrackedLink>
             <a className="button button--secondary" href="/submit-property">Submit land</a>
           </div>
         </Reveal>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowDown, ArrowUpRight, CalendarClock } from "lucide-react";
+import { TrackedLink } from "@/components/ui/tracked-link";
 
 export function HeroSection() {
   return (
@@ -17,13 +18,13 @@ export function HeroSection() {
             We develop and operate regional solar infrastructure that gives commercial and industrial facilities access to predictable, discounted electricity—with no upfront equipment investment.
           </p>
           <div className="hero-actions">
-            <a className="hero-primary-cta" href="#project">
+            <TrackedLink className="hero-primary-cta" href="#project" event="hero_primary_cta">
               Explore the project
               <span><ArrowDown aria-hidden="true" size={17} /></span>
-            </a>
-            <a className="hero-text-link" href="#contact">
+            </TrackedLink>
+            <TrackedLink className="hero-text-link" href="#contact" event="hero_secondary_cta">
               Discuss your energy needs <ArrowUpRight aria-hidden="true" size={15} />
-            </a>
+            </TrackedLink>
           </div>
           <div className="hero-proof">
             <p>1.5 MW project <span /> 2.25M kWh/year <span /> Targeted 2027 operation</p>

@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { ProjectMark } from "@/components/ui/project-mark";
 import { TermSheetLink } from "@/components/ui/term-sheet-link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { trackEvent } from "@/lib/analytics";
 
 const desktopNavigation = [
   { label: "Overview", href: "#top" },
@@ -118,10 +119,12 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
 
         <div className="nav-actions">
           <ThemeToggle />
+          <TermSheetLink available={termSheetAvailable} className="nav-term-sheet" label="Term sheet" context="header" />
           <a
             className="nav-contact"
             href="#contact"
             aria-label="Discuss your energy needs"
+            onClick={() => trackEvent("nav_contact_click", { context: "header" })}
           >
             <span>Contact</span>
             <i><ArrowUpRight aria-hidden="true" size={17} /></i>
@@ -147,7 +150,7 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
             </a>
           ))}
         </nav>
-        <TermSheetLink available={termSheetAvailable} className="button button--secondary mobile-download" />
+        <TermSheetLink available={termSheetAvailable} className="button button--secondary mobile-download" context="mobile-menu" />
       </div>
     </header>
   );

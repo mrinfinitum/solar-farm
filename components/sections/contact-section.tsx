@@ -28,9 +28,9 @@ export function ContactSection({ termSheetAvailable }: { termSheetAvailable: boo
             <FileText aria-hidden="true" />
             <div>
               <strong>Indicative PPA term sheet</strong>
-              <p>{termSheetAvailable ? "Download the preliminary commercial framework." : "Indicative term sheet not yet available."}</p>
+              <p>{termSheetAvailable ? "PDF · approximately 8 KB · Indicative and non-binding" : "Indicative term sheet not yet available."}</p>
             </div>
-            <TermSheetLink available={termSheetAvailable} className="button button--secondary" compact />
+            <TermSheetLink available={termSheetAvailable} className="button button--secondary" compact context="contact" />
           </div>
           <Link className="land-submit-cta" href="/submit-property">
             <MapPinned aria-hidden="true" />

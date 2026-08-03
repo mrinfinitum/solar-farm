@@ -25,9 +25,9 @@ export const propertyInputSchema = z.object({
 });
 
 export const publicSubmissionSchema = z.object({
-  name: z.string().trim().min(2).max(120), email: z.email().max(200), phone: z.string().trim().max(40).nullable().optional(), submitter_type: z.enum(["owner","broker","other"]), property_address: z.string().trim().min(5).max(240), county: z.string().trim().min(2).max(100), approximate_acreage: optionalNumber, asking_price: optionalNumber,
-  current_use: z.string().trim().max(200).nullable().optional(), land_condition: z.string().trim().max(200).nullable().optional(), road_access: z.string().trim().max(300).nullable().optional(), utility_information: z.string().trim().max(1000).nullable().optional(), seller_financing_interest: optionalBoolean, lease_option_interest: optionalBoolean,
-  listing_url: z.url().nullable().optional().or(z.literal("")), message: z.string().trim().max(5000).nullable().optional(), consent: z.literal(true), website: z.string().max(0),
+  name: z.string().trim().min(2).max(120), email: z.email().max(200), phone: z.string().trim().max(40).nullable().optional(), submitter_type: z.enum(["owner","broker"]), property_address: z.string().trim().min(5).max(240), county: z.string().trim().min(2).max(100), approximate_acreage: optionalNumber, asking_price: optionalNumber,
+  current_use: z.string().trim().max(200).nullable().optional(), tillable_status: z.string().trim().max(120).nullable().optional(), cleared_percentage: optionalPercent, wooded_percentage: optionalPercent, road_access: z.string().trim().max(300).nullable().optional(), utility_information: z.string().trim().max(1000).nullable().optional(), seller_financing_interest: optionalBoolean, lease_interest: optionalBoolean, option_interest: optionalBoolean,
+  listing_url: z.url().nullable().optional().or(z.literal("")), parcel_number: z.string().trim().max(120).nullable().optional(), message: z.string().trim().max(5000).nullable().optional(), source: z.string().trim().max(120).default("submit-property"), utm_source: z.string().trim().max(120).nullable().optional(), utm_medium: z.string().trim().max(120).nullable().optional(), utm_campaign: z.string().trim().max(120).nullable().optional(), consent: z.literal(true), website: z.string().max(0),
 });
 
 const preliminaryCategory = z.enum(PRELIMINARY_CATEGORIES.map(([key]) => key));

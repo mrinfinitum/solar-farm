@@ -1,5 +1,8 @@
+"use client";
+
 import { FileDown } from "lucide-react";
 
+import { trackEvent } from "@/lib/analytics";
 import { TERM_SHEET_PATH } from "@/lib/project-data";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +11,7 @@ type TermSheetLinkProps = {
   className?: string;
   compact?: boolean;
   label?: string;
+  context?: string;
 };
 
 export function TermSheetLink({
@@ -15,6 +19,7 @@ export function TermSheetLink({
   className,
   compact = false,
   label = "Download Term Sheet",
+  context = "site",
 }: TermSheetLinkProps) {
   const content = (
     <>
@@ -42,7 +47,8 @@ export function TermSheetLink({
       aria-label="Download Indicative Term Sheet"
       className={className}
       href={TERM_SHEET_PATH}
-      download
+      download="NSoul-1-Cornerstone-Lane-Indicative-PPA-Term-Sheet.pdf"
+      onClick={() => trackEvent("term_sheet_download", { context })}
     >
       {content}
     </a>

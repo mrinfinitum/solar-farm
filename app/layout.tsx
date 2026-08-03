@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site-config";
+import { AnalyticsPageView } from "@/components/ui/analytics-page-view";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +28,7 @@ const themeScript = `
 `;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nsoul.example"),
+  metadataBase: new URL(SITE_URL),
   title: "NSoul | Commercial Energy for Southeast Oklahoma",
   description:
     "Explore the proposed 1 Cornerstone Lane Solar Farm, a 1.5 MW commercial solar project designed to provide qualified regional organizations with predictable energy pricing and zero upfront equipment investment.",
@@ -70,7 +72,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full"><AnalyticsPageView />{children}</body>
     </html>
   );
 }
