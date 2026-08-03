@@ -1,41 +1,35 @@
 import { ArrowRight } from "lucide-react";
 
-import { ProjectIntelligenceConsole } from "@/components/project-model/project-intelligence-console";
+import { RegionalProjectFeature } from "@/components/project-model/regional-project-feature";
 import { Reveal } from "@/components/ui/reveal";
-import { projectModel } from "@/lib/project-model-data";
 
 export function ProjectModelSection() {
   return (
     <section id="project" className="project-model-section">
       <div className="container project-model-container">
         <Reveal className="project-model-intro">
-          <div>
-            <p className="eyebrow">{projectModel.intro.eyebrow}</p>
-            <h2>{projectModel.intro.title}</h2>
-            <p className="project-model-description">{projectModel.intro.description}</p>
-          </div>
-          <aside className="project-model-note">
-            <strong>{projectModel.intro.noteTitle}</strong>
-            <p>{projectModel.intro.note}</p>
-          </aside>
+          <p className="eyebrow">Representative project</p>
+          <h2>Regional solar, structured simply.</h2>
+          <p className="project-model-description">
+            NSoul develops, owns, and operates the solar asset. A qualified regional organization purchases the generated
+            electricity through a long-term commercial agreement.
+          </p>
+          <p className="project-model-disclosure">
+            Illustrative project structure. Final capacity, pricing, delivery, and timing remain subject to engineering,
+            utility review, financing, and agreements.
+          </p>
         </Reveal>
 
-        <ProjectIntelligenceConsole
-          metrics={projectModel.metrics}
-          roles={projectModel.roles}
-          flow={projectModel.flow}
-          workflow={projectModel.workflow}
-          currentStage={projectModel.currentStage}
-        />
+        <RegionalProjectFeature />
 
         <Reveal className="project-model-cta">
           <div>
-            <h3>Evaluate a commercial energy opportunity.</h3>
-            <p>Share your facility location and energy profile to begin an indicative project assessment.</p>
+            <h3>Evaluate whether regional solar fits your energy needs.</h3>
+            <p>Share your facility location and energy profile to begin an indicative commercial review.</p>
           </div>
           <div>
             <a className="button button--primary" href="#contact">
-              Start a project discussion <ArrowRight aria-hidden="true" />
+              Start a discussion <ArrowRight aria-hidden="true" />
             </a>
             <a className="button button--secondary" href="/submit-property">Submit land</a>
           </div>
