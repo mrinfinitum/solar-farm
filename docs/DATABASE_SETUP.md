@@ -13,6 +13,8 @@ Migration order:
 
 1. `202608020001_site_finder_schema.sql` — tables, indexes, constraints, triggers, private bucket, default scoring and target settings.
 2. `202608020002_site_finder_rls.sql` — RLS and storage policies.
+3. `202608020003_identity_and_tenant_security.sql` — organizations, membership roles/statuses, tenant isolation, explicit RLS policies, and invitation activation.
+4. Apply all later migrations in filename order for the property, project, conversion, and finance modules.
 
 The `--include-seed` flag applies `supabase/seed.sql` after the migrations. The seed creates only the supplied 1 Cornerstone Lane reference property/project/milestones. Unknown acreage, price, parcel, coordinates, capacity, flood, zoning, engineering, PPA, finance, and grant values remain null or unverified.
 
@@ -22,12 +24,14 @@ The `--include-seed` flag applies `supabase/seed.sql` after the migrations. The 
 - Disable public registration.
 - Create users manually.
 - Configure the Site URL and `/auth/callback` redirect.
-- Set the first profile to `admin` with the SQL shown in the README.
+- Bootstrap the first active owner with `npm run bootstrap:first-owner -- --user-id AUTH_USER_UUID` as documented in `docs/SECURITY_AND_OPERATIONS.md`.
 
 ## Role behavior
 
-- `admin`: full CRUD, users/settings, imports, conversion, permanent deletion.
-- `analyst`: property/contact/research/document/task mutation; no user management or permanent project deletion.
+- `owner`: all organization and membership controls, including owner-role management.
+- `admin`: non-owner user administration and privileged application operations.
+- `developer`: property and project development operations.
+- `analyst`: analytical and record-editing workflows without membership administration.
 - `viewer`: read-only.
 
 UI controls are convenience only. Policies enforce these permissions in PostgreSQL and private Storage.

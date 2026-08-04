@@ -37,45 +37,36 @@ The Next.js proxy refreshes cookie-based SSR sessions. The dashboard layout perf
 
 ## Initial owner bootstrap
 
-The first owner is the one necessary exception to application-driven invitation. Create that Auth user from the Supabase dashboard, then run the following as a privileged database administrator after replacing the email:
+The first owner is the one necessary exception to application-driven invitation. The login authorization flow requires all of the following:
 
-```sql
-do $$
-declare
-  bootstrap_user_id uuid;
-  nsoul_organization_id uuid;
-  bootstrap_membership_id uuid;
-begin
-  select id into strict bootstrap_user_id
-  from auth.users
-  where lower(email) = lower('OWNER@NSOUL.COM');
+- the user exists in `auth.users` and is confirmed and not banned;
+- a matching `public.profiles` row exists;
+- the `public.organizations` row with slug `nsoul` exists and is readable through membership;
+- exactly one `public.organization_members` row links the user to that organization;
+- that membership has a recognized role and `status = 'active'`.
 
-  select id into strict nsoul_organization_id
-  from public.organizations
-  where slug = 'nsoul';
+`profiles.role` and `profiles.organization` are legacy compatibility fields and are not authorization inputs. There is no profile status column, separate invitation-acceptance flag, or secondary suspended flag. Invitation, activation, suspension, and deactivation are represented by `organization_members.status`.
 
-  insert into public.organization_members (
-    organization_id, user_id, role, status, invited_by
-  ) values (
-    nsoul_organization_id, bootstrap_user_id, 'owner', 'active', bootstrap_user_id
-  )
-  on conflict (user_id) do update
-    set role = 'owner', status = 'active', updated_at = now()
-  returning id into bootstrap_membership_id;
+For a fresh environment:
 
-  insert into public.activity_log (
-    organization_id, actor_id, entity_type, entity_id, action, after_data
-  ) values (
-    nsoul_organization_id,
-    bootstrap_user_id,
-    'organization_member',
-    bootstrap_membership_id,
-    'initial_owner_bootstrap',
-    jsonb_build_object('role', 'owner', 'status', 'active')
-  );
-end
-$$;
+1. Apply every migration in filename order.
+2. Create and confirm the initial Auth user in the Supabase dashboard.
+3. Set the server-only Supabase values in `.env.local` or a secure operations environment.
+4. Run the idempotent bootstrap with the Auth UUID:
+
+```bash
+npm run bootstrap:first-owner -- --user-id AUTH_USER_UUID
 ```
+
+The command uses the service-role key only in a Node operations script. It creates a missing profile, creates or normalizes the `nsoul` organization, creates or repairs the single owner membership, and writes one `initial_owner_bootstrap` activity record. Re-running it does not duplicate the organization, profile, membership, or explicit bootstrap audit event. It refuses to move a user who already belongs to a different organization.
+
+Verify without changing data:
+
+```bash
+npm run verify:first-owner -- --user-id AUTH_USER_UUID
+```
+
+The JSON report includes Auth existence and account state, profile existence, organization existence, membership existence, organization match, role, status, and `loginReady`. A non-ready result exits with status 2. The script never prints the service-role key or imports it into application/browser code.
 
 Verify the owner can sign in, visit `/dashboard/users`, and see their active owner membership. The application prevents deactivating or demoting the final active owner.
 

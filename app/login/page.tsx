@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AuthForm } from "@/components/dashboard/auth-form";
 import { ProjectMark } from "@/components/ui/project-mark";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { getSessionProfile } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
@@ -13,6 +14,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   if (profile) redirect(query.next?.startsWith("/") && !query.next.startsWith("//") ? query.next : "/dashboard");
   return <main className="auth-page">
     <Link className="auth-brand" href="/" aria-label="Return to NSoul home"><ProjectMark/><strong>NSOUL</strong><span>STUDIO</span></Link>
+    <div className="auth-theme-control"><span>Appearance</span><ThemeToggle /></div>
     <div className="auth-layout">
       <section className="auth-intro" aria-labelledby="studio-heading">
         <p className="finder-eyebrow">Solar development intelligence</p>
