@@ -7585,7 +7585,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 }
 
 .vision-pillars {
-  padding-block: clamp(100px, 12vw, 180px);
+  padding-block: clamp(84px, 8vw, 128px);
   border-top: 1px solid var(--line);
   background: color-mix(in srgb, var(--vision-soft) 70%, var(--bg));
 }
@@ -7593,13 +7593,13 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 .vision-pillars__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: clamp(68px, 8vw, 116px);
+  margin-top: clamp(48px, 5vw, 76px);
   border-top: 1px solid var(--line);
 }
 
 .vision-pillars__grid article {
-  min-height: 360px;
-  padding: 36px clamp(20px, 3vw, 50px) 42px 0;
+  min-height: 276px;
+  padding: 28px clamp(20px, 3vw, 50px) 32px 0;
 }
 
 .vision-pillars__grid article + article {
@@ -7616,7 +7616,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 }
 
 .vision-pillars__grid h3 {
-  margin: clamp(100px, 10vw, 150px) 0 16px;
+  margin: clamp(58px, 6vw, 90px) 0 14px;
   color: var(--vision-ink);
   font-size: clamp(32px, 3vw, 52px);
   font-weight: 500;
@@ -7633,7 +7633,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 
 .vision-intent-note {
   max-width: 900px;
-  margin: 52px 0 0 auto;
+  margin: 32px 0 0 auto;
   padding-left: 24px;
   border-left: 2px solid var(--accent);
   color: var(--muted);
