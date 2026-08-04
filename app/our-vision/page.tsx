@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Building2, Cable, CircleDollarSign, Gauge, Handshake, MapPin, PanelsTopLeft, RefreshCw, ShieldCheck, SunMedium, UsersRound } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Cable, CircleDollarSign, Gauge, Handshake, MapPin, RefreshCw, ShieldCheck, SunMedium } from "lucide-react";
 
 import { FounderStatement } from "@/components/vision/founder-statement";
 import { VisionCommitment } from "@/components/vision/vision-commitment";
@@ -56,43 +57,24 @@ export default function OurVisionPage() {
         <VisionHero />
 
         <section className="vision-why section" aria-labelledby="why-title">
-          <div className="container vision-editorial-grid">
-            <div className="vision-why__statement">
-              <div className="vision-sol-soul" aria-label="From the power of the sun to lasting value for people">
-                <div className="vision-sol-soul__toolbar">
-                  <span><i aria-hidden="true" /> The NSoul idea</span>
-                  <small>Energy transformed into impact</small>
-                </div>
-                <div className="vision-sol-soul__flow">
-                  <div className="vision-sol-soul__anchor vision-sol-soul__anchor--sol">
-                    <span className="vision-sol-soul__icon"><SunMedium aria-hidden="true" /></span>
-                    <small>Source</small>
-                    <strong>SOL</strong>
-                    <p>The sun</p>
-                  </div>
-                  <ol className="vision-sol-soul__bridge">
-                    <li><PanelsTopLeft aria-hidden="true" /><span>Generate</span></li>
-                    <li><Building2 aria-hidden="true" /><span>Build value</span></li>
-                    <li><RefreshCw aria-hidden="true" /><span>Reinvest</span></li>
-                  </ol>
-                  <div className="vision-sol-soul__anchor vision-sol-soul__anchor--soul">
-                    <span className="vision-sol-soul__icon"><UsersRound aria-hidden="true" /></span>
-                    <small>Purpose</small>
-                    <strong>SOUL</strong>
-                    <p>People and community</p>
-                  </div>
-                </div>
-                <div className="vision-sol-soul__footer">
-                  <span>Harness sunlight</span><ArrowRight aria-hidden="true" />
-                  <span>Own productive assets</span><ArrowRight aria-hidden="true" />
-                  <span>Transform lives</span>
-                </div>
+          <div className="container vision-why__stack">
+            <figure className="vision-why__horizon">
+              <Image
+                src="/brand/nsoul-solar-horizon-dreamscape.jpg"
+                alt="Solar panels extending toward a luminous, peaceful horizon at dawn"
+                width={1983}
+                height={793}
+                sizes="(max-width: 720px) calc(100vw - 30px), (max-width: 1100px) calc(100vw - 48px), 1360px"
+              />
+              <figcaption><span aria-hidden="true" /> Renewable by nature, enduring by design</figcaption>
+            </figure>
+            <div className="vision-why__content">
+              <p className="eyebrow">Why NSoul exists</p>
+              <h2 id="why-title">Energy should create more than power.</h2>
+              <div className="vision-long-copy">
+                <p>The sun offers a vast, renewable source of energy. Our work is to harness it responsibly, shape it into productive infrastructure, and carry its value beyond the meter.</p>
+                <p>By owning and operating assets for the long term, NSoul can serve businesses, reinvest in future projects, and build the capacity to help people and communities thrive.</p>
               </div>
-              <div><p className="eyebrow">Why NSoul exists</p><h2 id="why-title">Energy should create more than power.</h2></div>
-            </div>
-            <div className="vision-long-copy">
-              <p>We are not building NSoul simply to install solar panels. We are building a long-term energy company designed to own productive assets, serve commercial customers, reinvest responsibly, and create lasting benefit beyond the meter.</p>
-              <p>Responsible ownership can turn an energy project into durable local infrastructure. Rather than treating projects as short-term transactions, NSoul intends to retain and operate assets over time, creating recurring value that can support future development and, as the business grows, clearly defined community work.</p>
             </div>
           </div>
         </section>
