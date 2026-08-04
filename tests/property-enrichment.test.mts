@@ -10,6 +10,8 @@ const geocoder = read("../lib/enrichment/providers/census-geocoder.ts");
 const scoring = read("../lib/enrichment/scoring.ts");
 const screeningRoute = read("../app/api/properties/[id]/screening/route.ts");
 const batchRoute = read("../app/api/properties/screening-batch/route.ts");
+const screeningWorkspace = read("../components/properties/screening-workspace.tsx");
+const globalStyles = read("../app/globals.css");
 
 test("all enrichment tables have tenant RLS and no anonymous grants", () => {
   for (const table of ["data_providers","property_enrichment_runs","property_enrichment_steps","property_enrichment_results","property_field_proposals","property_geometries","property_environmental_findings","property_terrain_findings","property_access_findings","property_utility_findings","property_grid_assets","property_commercial_context","property_screening_reports","provider_usage_logs"]) assert.match(migration, new RegExp(`'${table}'`));
@@ -29,3 +31,11 @@ test("environmental and grid outputs retain preliminary warnings", () => { asser
 test("batch screening is bounded and incremental", () => { assert.match(batchRoute, /SCREENING_BATCH_MAX/); assert.match(batchRoute, /\.max\(maximum\)/); assert.match(batchRoute, /create_property_enrichment_run/); assert.doesNotMatch(batchRoute, /processNextScreeningStep/); });
 test("reports remain tenant-scoped, non-public, and printable", () => { const report = read("../app/api/screening-reports/[runId]/route.ts"); assert.match(report, /getApiActor/); assert.match(report, /window\.print/); assert.match(report, /no-store/); assert.match(report, /preliminary/i); });
 test("provider metadata and screening lifecycle are auditable", () => { assert.match(migration, /provider_name text not null/); assert.match(migration, /provider_version text not null/); assert.match(migration, /property_enrichment_runs.*provider_usage_logs/s); assert.match(migration, /create trigger %I after insert or update or delete/); assert.match(migration, /execute function public\.log_change\(\)/); });
+test("screening cards inherit Studio themes and surface provider results", () => {
+  assert.match(globalStyles, /--finder-panel-soft:var\(--fd-panel2\)/);
+  assert.doesNotMatch(globalStyles, /--finder-panel-soft:#0b1722/);
+  assert.match(screeningWorkspace, /property_enrichment_results/);
+  assert.match(screeningWorkspace, /normalized_result/);
+  assert.match(screeningWorkspace, /Integration unavailable/);
+  assert.match(screeningWorkspace, /Resume screening/);
+});
