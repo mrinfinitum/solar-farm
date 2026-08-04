@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Cable, CircleDollarSign, Gauge, Handshake, MapPin, RefreshCw, ShieldCheck, SunMedium } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, Cable, CircleDollarSign, Gauge, Handshake, MapPin, PanelsTopLeft, RefreshCw, ShieldCheck, SunMedium, UsersRound } from "lucide-react";
 
 import { FounderStatement } from "@/components/vision/founder-statement";
 import { VisionCommitment } from "@/components/vision/vision-commitment";
@@ -59,14 +58,35 @@ export default function OurVisionPage() {
         <section className="vision-why section" aria-labelledby="why-title">
           <div className="container vision-editorial-grid">
             <div className="vision-why__statement">
-              <div className="vision-why__graphic">
-                <Image
-                  src="/brand/nsoul-energy-community-soft.png"
-                  alt="Soft illustrated solar panel, commercial building, and tree connected by clean energy"
-                  width={1536}
-                  height={1024}
-                  sizes="(max-width: 900px) calc(100vw - 44px), 58vw"
-                />
+              <div className="vision-sol-soul" aria-label="From the power of the sun to lasting value for people">
+                <div className="vision-sol-soul__toolbar">
+                  <span><i aria-hidden="true" /> The NSoul idea</span>
+                  <small>Energy transformed into impact</small>
+                </div>
+                <div className="vision-sol-soul__flow">
+                  <div className="vision-sol-soul__anchor vision-sol-soul__anchor--sol">
+                    <span className="vision-sol-soul__icon"><SunMedium aria-hidden="true" /></span>
+                    <small>Source</small>
+                    <strong>SOL</strong>
+                    <p>The sun</p>
+                  </div>
+                  <ol className="vision-sol-soul__bridge">
+                    <li><PanelsTopLeft aria-hidden="true" /><span>Generate</span></li>
+                    <li><Building2 aria-hidden="true" /><span>Build value</span></li>
+                    <li><RefreshCw aria-hidden="true" /><span>Reinvest</span></li>
+                  </ol>
+                  <div className="vision-sol-soul__anchor vision-sol-soul__anchor--soul">
+                    <span className="vision-sol-soul__icon"><UsersRound aria-hidden="true" /></span>
+                    <small>Purpose</small>
+                    <strong>SOUL</strong>
+                    <p>People and community</p>
+                  </div>
+                </div>
+                <div className="vision-sol-soul__footer">
+                  <span>Harness sunlight</span><ArrowRight aria-hidden="true" />
+                  <span>Own productive assets</span><ArrowRight aria-hidden="true" />
+                  <span>Transform lives</span>
+                </div>
               </div>
               <div><p className="eyebrow">Why NSoul exists</p><h2 id="why-title">Energy should create more than power.</h2></div>
             </div>

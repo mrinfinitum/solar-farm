@@ -86,8 +86,9 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   assert.match(page, /8 stages · Continuous ownership cycle/);
   assert.match(page, /[Aa]s operating success permits/);
   assert.match(page, /development-stage/);
-  assert.match(page, /nsoul-energy-community-soft\.png/);
-  assert.equal(existsSync(new URL("../public/brand/nsoul-energy-community-soft.png", import.meta.url)), true);
+  assert.match(page, /The NSoul idea/);
+  assert.match(page, />SOL</);
+  assert.match(page, />SOUL</);
   assert.match(page, /VisionScrollReset/);
   assert.match(scrollReset, /window\.scrollTo\(0, 0\)/);
   assert.doesNotMatch(founderStatement, /wealthy|making money/i);

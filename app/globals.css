@@ -7408,22 +7408,204 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   gap: clamp(44px, 5vw, 76px);
 }
 
-.vision-why__graphic {
+.vision-sol-soul {
   position: relative;
-  overflow: visible;
-  border: 0;
-  background: transparent;
+  overflow: hidden;
+  border: 1px solid rgba(181, 245, 100, .18);
+  border-radius: 28px;
+  background-color: #081c13;
+  background-image:
+    radial-gradient(circle at 14% 45%, rgba(181, 245, 100, .16), transparent 27%),
+    radial-gradient(circle at 86% 48%, rgba(100, 210, 150, .11), transparent 25%),
+    linear-gradient(rgba(181, 245, 100, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181, 245, 100, .045) 1px, transparent 1px);
+  background-size: auto, auto, 44px 44px, 44px 44px;
+  box-shadow: 0 32px 76px rgba(10, 40, 26, .16);
+  color: #f4f6ed;
 }
 
-.vision-why__graphic::after {
-  content: none;
+.vision-sol-soul__toolbar {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(244, 246, 237, .09);
+  color: rgba(244, 246, 237, .55);
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
 }
 
-.vision-why__graphic img {
+.vision-sol-soul__toolbar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #f4f6ed;
+  font-weight: 650;
+}
+
+.vision-sol-soul__toolbar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b5f564;
+  box-shadow: 0 0 0 5px rgba(181, 245, 100, .1), 0 0 18px rgba(181, 245, 100, .5);
+}
+
+.vision-sol-soul__flow {
+  display: grid;
+  min-height: 350px;
+  grid-template-columns: minmax(118px, .8fr) minmax(240px, 1.5fr) minmax(140px, .9fr);
+  align-items: center;
+  gap: 24px;
+  padding: clamp(34px, 5vw, 66px) clamp(24px, 4vw, 48px);
+}
+
+.vision-sol-soul__anchor {
+  position: relative;
+  z-index: 1;
+}
+
+.vision-sol-soul__icon {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 24px;
+  place-items: center;
+  border: 1px solid rgba(181, 245, 100, .45);
+  border-radius: 22px;
+  background: rgba(181, 245, 100, .07);
+  color: #b5f564;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, background-color .35s ease;
+}
+
+.vision-sol-soul__icon svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 1.55;
+}
+
+.vision-sol-soul__anchor small {
   display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 26px 30px rgba(26, 70, 43, .1));
+  color: rgba(244, 246, 237, .42);
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.vision-sol-soul__anchor strong {
+  display: block;
+  margin-top: 7px;
+  color: #f4f6ed;
+  font-size: clamp(38px, 4vw, 60px);
+  font-weight: 510;
+  letter-spacing: -.06em;
+  line-height: .9;
+}
+
+.vision-sol-soul__anchor--soul strong {
+  color: #b5f564;
+}
+
+.vision-sol-soul__anchor p {
+  margin: 12px 0 0;
+  color: rgba(244, 246, 237, .56);
+  font-size: 12px;
+}
+
+.vision-sol-soul__bridge {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vision-sol-soul__bridge::before {
+  position: absolute;
+  top: 25px;
+  right: -18px;
+  left: -18px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(181, 245, 100, .18), #b5f564, rgba(181, 245, 100, .22));
+  content: "";
+}
+
+.vision-sol-soul__bridge li {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  color: #b5f564;
+}
+
+.vision-sol-soul__bridge svg {
+  width: 50px;
+  height: 50px;
+  padding: 14px;
+  border: 1px solid rgba(181, 245, 100, .24);
+  border-radius: 50%;
+  background: #0b2117;
+  stroke-width: 1.6;
+}
+
+.vision-sol-soul__bridge span {
+  color: rgba(244, 246, 237, .48);
+  font-family: var(--font-mono), monospace;
+  font-size: 8px;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.vision-sol-soul__footer {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 14px 22px;
+  border-top: 1px solid rgba(244, 246, 237, .09);
+  color: rgba(244, 246, 237, .62);
+  font-family: var(--font-mono), monospace;
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.vision-sol-soul__footer svg {
+  width: 13px;
+  color: #b5f564;
+}
+
+@media (hover: hover) {
+  .vision-sol-soul:hover .vision-sol-soul__icon {
+    background: rgba(181, 245, 100, .12);
+    box-shadow: 0 0 0 7px rgba(181, 245, 100, .06), 0 0 30px rgba(181, 245, 100, .24);
+    transform: translateY(-3px) scale(1.06);
+  }
+
+  .vision-sol-soul:hover .vision-sol-soul__bridge svg {
+    animation: vision-sol-pulse 1.8s ease-in-out infinite alternate;
+  }
+
+  .vision-sol-soul:hover .vision-sol-soul__bridge li:nth-child(2) svg { animation-delay: .15s; }
+  .vision-sol-soul:hover .vision-sol-soul__bridge li:nth-child(3) svg { animation-delay: .3s; }
+}
+
+@keyframes vision-sol-pulse {
+  to {
+    border-color: rgba(181, 245, 100, .62);
+    box-shadow: 0 0 22px rgba(181, 245, 100, .2);
+    transform: translateY(-2px);
+  }
 }
 
 .vision-why h2,
@@ -7607,6 +7789,14 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   }
 
   .regional-project-node:hover .regional-project-icon::before {
+    animation: none;
+  }
+
+  .vision-sol-soul:hover .vision-sol-soul__icon {
+    transform: none;
+  }
+
+  .vision-sol-soul:hover .vision-sol-soul__bridge svg {
     animation: none;
   }
 }
@@ -8080,6 +8270,19 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   .vision-hero__actions { align-items: flex-start; flex-direction: column; gap: 22px; }
   .vision-hero__actions .button { width: 100%; }
   .vision-hero__caption { right: 22px; bottom: 28px; left: 22px; justify-content: center; font-size: 9px; }
+
+  .vision-sol-soul__toolbar { padding-inline: 18px; }
+  .vision-sol-soul__toolbar > small { display: none; }
+  .vision-sol-soul__flow {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 32px 24px;
+  }
+  .vision-sol-soul__anchor--soul { text-align: right; }
+  .vision-sol-soul__anchor--soul .vision-sol-soul__icon { margin-left: auto; }
+  .vision-sol-soul__bridge::before { right: 8%; left: 8%; }
+  .vision-sol-soul__footer { flex-wrap: wrap; gap: 9px 12px; justify-content: flex-start; }
 
   .vision-why h2,
   .vision-section-head h2,
