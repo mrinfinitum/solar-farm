@@ -70,7 +70,7 @@ export default function OurVisionPage() {
             </figure>
             <div className="vision-why__content">
               <p className="eyebrow">Why NSoul exists</p>
-              <h2 id="why-title">Energy should create more than power.</h2>
+              <h2 id="why-title">Energy should create <em>more than power.</em></h2>
               <div className="vision-long-copy">
                 <p>The sun offers a vast, renewable source of energy. Our work is to harness it responsibly, shape it into productive infrastructure, and carry its value beyond the meter.</p>
                 <p>By owning and operating assets for the long term, NSoul can serve businesses, reinvest in future projects, and build the capacity to help people and communities thrive.</p>
