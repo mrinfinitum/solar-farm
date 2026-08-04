@@ -1,64 +1,61 @@
-import { ArrowRight, Building2, MapPin, Zap } from "lucide-react";
+import { ArrowRight, Building2, MapPin } from "lucide-react";
 
 import { Reveal } from "@/components/ui/reveal";
-import { StatusBadge } from "@/components/ui/status-badge";
 import { TermSheetLink } from "@/components/ui/term-sheet-link";
 import { TrackedLink } from "@/components/ui/tracked-link";
 
 const projectFacts = [
-  ["Project location", "Idabel, Oklahoma"],
-  ["County", "McCurtain County"],
-  ["Proposed capacity", "1.5 MW DC"],
-  ["Estimated Year 1 generation", "Approximately 2,250,000 kWh"],
-  ["Commercial structure", "Indicative long-term PPA"],
-  ["Target operation", "Q2/Q3 2027, subject to utility and final approvals"],
-  ["Current stage", "Development"],
+  ["Service area", "Oklahoma Region"],
+  ["Project profile", "Commercial-scale solar"],
+  ["Capacity", "Sized for site and demand"],
+  ["Energy production", "Modeled for each project"],
+  ["Commercial structure", "Long-term energy agreement"],
+  ["Delivery timing", "Subject to utility and final approvals"],
+  ["Ownership model", "Develop · Own · Operate"],
 ] as const;
 
-const statuses = [
-  ["complete", "Complete", "USDA REAP geographic eligibility verification"],
-  ["pending", "Pending", "PSO utility circuit-capacity response"],
-  ["pending", "Pending", "Preliminary aerial layout"],
-  ["pending", "Pending", "Commercial production estimate"],
-  ["pending", "Pending", "Itemized construction estimate"],
-  ["active", "Active", "Commercial off-taker outreach"],
-  ["future", "Future", "PPA execution, financing, permitting, and construction"],
+const developmentStages = [
+  "Site and customer qualification",
+  "Utility and interconnection review",
+  "Engineering and production modeling",
+  "Commercial energy agreement",
+  "Financing and permitting",
+  "Construction and commissioning",
+  "Long-term ownership and operations",
 ] as const;
 
 export function CornerstoneProjectSection({ termSheetAvailable }: { termSheetAvailable: boolean }) {
   return (
-    <section id="cornerstone-project" className="section cornerstone-project-section">
+    <section id="regional-development" className="section cornerstone-project-section">
       <div className="container">
         <Reveal className="cornerstone-project-heading">
           <div>
-            <p className="eyebrow">Active development project</p>
-            <h2>1 Cornerstone Lane Solar Farm</h2>
+            <p className="eyebrow">Development platform</p>
+            <h2>Regional solar development.</h2>
           </div>
-          <p>A proposed 1.5 MW DC ground-mounted solar development in Idabel, Oklahoma, currently advancing through utility review, preliminary engineering, and commercial off-taker outreach.</p>
+          <p>NSoul evaluates and advances commercial-scale solar opportunities across the Oklahoma Region through disciplined site review, utility coordination, engineering, financing, and energy-buyer alignment.</p>
         </Reveal>
 
         <div className="cornerstone-intelligence">
           <Reveal className="cornerstone-map-panel">
-            <div className="cornerstone-panel-label"><MapPin aria-hidden="true" />Illustrative regional location</div>
-            <div className="cornerstone-map" role="img" aria-label="Illustrative map of Oklahoma highlighting southeast Oklahoma, McCurtain County, Idabel, and a regional commercial corridor. This is not live infrastructure data.">
+            <div className="cornerstone-panel-label"><MapPin aria-hidden="true" />Illustrative Oklahoma service area</div>
+            <div className="cornerstone-map" role="img" aria-label="Geographically accurate outline of Oklahoma with an illustrative regional commercial-energy corridor. This is not live infrastructure data.">
               <svg viewBox="0 0 680 390" aria-hidden="true">
-                <path className="cornerstone-oklahoma" d="M52 110h229V87h250l10 54 66 20 26 61-18 46 28 54-61 31-65-13-66 23-76-34-60 17-52-36-76 8-27-72H52Z" />
-                <path className="cornerstone-southeast" d="m451 295 66-20 52 23 42-14 32 38-61 31-65-13-66 23Z" />
-                <path className="cornerstone-corridor" d="M212 202c82 3 151 24 213 69 42 31 83 48 143 51" />
-                <circle className="cornerstone-load" cx="425" cy="271" r="7" />
-                <circle className="cornerstone-site-ring" cx="576" cy="329" r="23" />
-                <circle className="cornerstone-site" cx="576" cy="329" r="8" />
+                {/* U.S. Census Bureau TIGERweb state boundary, January 1, 2025 vintage. */}
+                <path className="cornerstone-oklahoma" d="M548.5 47.2 L35 47.2 L35 90.9 L248.6 90.9 L248.7 260.4 L254.1 259.2 L270.4 276.4 L277.1 276.7 L279.3 272.9 L291 276.8 L293.6 269.4 L297.1 273.7 L301.2 274.2 L300.3 275.8 L305.1 279.9 L306.3 290.7 L316.5 292.1 L320.7 290.1 L329.2 296.4 L333.2 295.6 L337.1 298.5 L348.3 295.4 L356.4 304 L361.5 302 L365 295.7 L378.8 299.5 L383.2 296 L384.6 298.2 L382.5 303.1 L384.7 309 L394.9 310.3 L393.3 319.7 L402.8 321.9 L414.4 310.2 L420.2 313.5 L420.8 318.2 L429.3 317.7 L429.2 323.2 L431.8 325.3 L435.9 325 L438.6 319.5 L438.5 322.1 L440.2 319.2 L444 321.3 L447.2 316.8 L450.3 322.8 L447.6 325.3 L448.4 330.4 L452.6 334.1 L456 332 L455.6 326.5 L458.7 325.4 L455.9 322.4 L460.6 322.9 L463.5 313.2 L464.1 315.1 L468.1 313.1 L471.2 321.8 L476.8 320.9 L479.1 324.8 L483.6 323.5 L485.9 316.7 L491.5 318.6 L488.6 322.9 L495.5 324.8 L497.7 329.3 L503.2 329 L508.7 336.9 L512.4 329.6 L520.1 330.8 L522.7 323.7 L532.1 323.3 L533.1 320.5 L536.8 321.9 L538.7 319.5 L545.4 323.9 L546.5 321.7 L550.6 322.6 L551 318.6 L559.5 317.8 L562.2 314.4 L565.1 315.8 L565.8 319.9 L568.2 318.4 L573 321.1 L583.9 320.5 L589.1 312.7 L595.6 315.1 L595.9 317.8 L598.8 316.3 L598.1 319.8 L599.8 316.7 L601.2 321.4 L606.6 321.5 L613.9 331.7 L617.2 332.8 L617.3 329.6 L618.5 332.8 L621.4 330.4 L619.5 332.5 L623.5 333.5 L623.3 336.4 L623.4 334.3 L625.7 335.4 L624.7 336.7 L629.9 335.5 L629.1 339.2 L631.4 337.2 L633.3 338.8 L633.8 336.9 L635.8 338.6 L633.7 340.5 L636.7 339.1 L635.1 341.9 L638.4 340.8 L638.4 343 L641.1 341.1 L645 187.6 L631.7 90.9 L631.7 47.3 Z" />
+                <path className="cornerstone-corridor" d="M170 185c94-24 184-5 264 48 48 32 92 43 146 47" />
+                <circle className="cornerstone-load" cx="353" cy="204" r="7" />
+                <circle className="cornerstone-load" cx="522" cy="266" r="7" />
               </svg>
               <span className="cornerstone-map-label cornerstone-map-label--state">Oklahoma</span>
-              <span className="cornerstone-map-label cornerstone-map-label--county">McCurtain County</span>
-              <span className="cornerstone-map-label cornerstone-map-label--corridor"><Building2 aria-hidden="true" />Regional commercial corridor</span>
-              <span className="cornerstone-map-label cornerstone-map-label--site"><Zap aria-hidden="true" />Idabel project site</span>
+              <span className="cornerstone-map-label cornerstone-map-label--corridor"><Building2 aria-hidden="true" />Regional commercial demand</span>
+              <span className="cornerstone-map-label cornerstone-map-label--region"><MapPin aria-hidden="true" />Oklahoma Region</span>
             </div>
             <p>No live utility geometry or infrastructure data is shown.</p>
           </Reveal>
 
           <Reveal className="cornerstone-facts-panel" delay={0.05}>
-            <div className="cornerstone-panel-label">Project snapshot</div>
+            <div className="cornerstone-panel-label">Representative project profile</div>
             <dl>
               {projectFacts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
             </dl>
@@ -66,14 +63,14 @@ export function CornerstoneProjectSection({ termSheetAvailable }: { termSheetAva
 
           <Reveal className="cornerstone-status-panel" delay={0.1}>
             <div className="cornerstone-status-heading">
-              <div><p className="eyebrow">Current status</p><h3>Development activity</h3></div>
-              <span>Updated August 2026</span>
+              <div><p className="eyebrow">Development framework</p><h3>From site to operation</h3></div>
+              <span>Representative sequence</span>
             </div>
             <ol>
-              {statuses.map(([status, label, title]) => (
-                <li key={title}>
-                  <StatusBadge status={status}>{label}</StatusBadge>
-                  <span>{title}</span>
+              {developmentStages.map((stage, index) => (
+                <li key={stage}>
+                  <span className="cornerstone-stage-index">{String(index + 1).padStart(2, "0")}</span>
+                  <span>{stage}</span>
                 </li>
               ))}
             </ol>
@@ -81,12 +78,12 @@ export function CornerstoneProjectSection({ termSheetAvailable }: { termSheetAva
         </div>
 
         <Reveal className="cornerstone-project-actions">
-          <p>Project information is preliminary and subject to utility review, engineering, commercial agreement, financing, permitting, and final approvals.</p>
+          <p>This representative profile is illustrative. Every project remains subject to site-specific utility review, engineering, commercial agreement, financing, permitting, and final approvals.</p>
           <div>
-            <TrackedLink className="button button--primary" href="#contact" event="project_cta_click" eventContext="cornerstone">
+            <TrackedLink className="button button--primary" href="#contact" event="project_cta_click" eventContext="regional-development">
               Discuss an Energy Agreement <ArrowRight aria-hidden="true" />
             </TrackedLink>
-            <TermSheetLink available={termSheetAvailable} className="button button--secondary" label="Download Indicative Term Sheet" context="cornerstone" />
+            <TermSheetLink available={termSheetAvailable} className="button button--secondary" label="Download Indicative Term Sheet" context="regional-development" />
           </div>
         </Reveal>
       </div>

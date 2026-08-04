@@ -29,9 +29,9 @@ const themeScript = `
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "NSoul | Commercial Energy for Southeast Oklahoma",
+  title: "NSoul | Commercial Energy for the Oklahoma Region",
   description:
-    "Explore the proposed 1 Cornerstone Lane Solar Farm, a 1.5 MW commercial solar project designed to provide qualified regional organizations with predictable energy pricing and zero upfront equipment investment.",
+    "NSoul develops and operates regional solar infrastructure designed to provide qualified organizations with predictable energy pricing and zero upfront equipment investment.",
   applicationName: "NSoul",
   icons: { icon: "/brand/nsoul-mark.svg" },
   alternates: { canonical: "/" },
@@ -42,12 +42,12 @@ export const metadata: Metadata = {
     siteName: "NSoul",
     title: "Commercial energy that costs less from day one.",
     description:
-      "A proposed 1.5 MW commercial solar project for qualified organizations in Southeast Oklahoma.",
+      "Regional commercial solar development for qualified organizations across the Oklahoma Region.",
     images: [{ url: "/brand/nsoul-hero-solar-field.png", width: 1536, height: 1024, alt: "Illustrative NSoul commercial solar field" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NSoul | Southeast Oklahoma",
+    title: "NSoul | Oklahoma Region",
     description: "Predictable commercial energy. Zero upfront equipment investment.",
     images: ["/brand/nsoul-hero-solar-field.png"],
   },

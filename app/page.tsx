@@ -24,27 +24,17 @@ export default function Home() {
         "@id": "#organization",
         name: "NSoul",
         legalName: "NSoul LLC",
-        description: "Developer of the proposed 1 Cornerstone Lane Solar Farm in Idabel, Oklahoma.",
+        description: "Commercial solar developer and independent power producer serving the Oklahoma Region.",
         url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.nsoul.co",
-      },
-      {
-        "@type": "Project",
-        "@id": "#energy-project",
-        name: "1 Cornerstone Lane Solar Farm",
-        description: "A proposed 1.5 MW DC ground-mounted photovoltaic project in McCurtain County, Oklahoma.",
-        location: {
-          "@type": "Place",
-          name: "Idabel, Oklahoma",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "1 Cornerstone Lane",
-            addressLocality: "Idabel",
-            addressRegion: "OK",
-            postalCode: "74745",
-            addressCountry: "US",
+        areaServed: { "@type": "AdministrativeArea", name: "Oklahoma Region" },
+        makesOffer: {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Commercial solar energy development",
+            description: "Development, ownership, and operation of regional commercial solar infrastructure.",
           },
         },
-        memberOf: { "@id": "#organization" },
       },
     ],
   };

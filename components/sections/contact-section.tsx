@@ -11,7 +11,7 @@ export function ContactSection({ termSheetAvailable }: { termSheetAvailable: boo
         <div className="contact-copy">
           <p className="eyebrow">Commercial energy partnerships</p>
           <h2>Put your energy spend to work.</h2>
-          <p>Explore whether the 1 Cornerstone Lane Solar Farm could support your facility’s long-term energy strategy.</p>
+          <p>Explore whether an NSoul commercial energy agreement could support your facility’s long-term energy strategy.</p>
 
           <div className="contact-proof-list">
             <span><Check aria-hidden="true" size={17} /> No upfront equipment capital</span>
@@ -21,7 +21,7 @@ export function ContactSection({ termSheetAvailable }: { termSheetAvailable: boo
 
           <div className="contact-meta">
             <div><Clock3 aria-hidden="true" /><span><small>Next step</small>Introductory energy call</span></div>
-            <div><ArrowUpRight aria-hidden="true" /><span><small>Project region</small>Southeast Oklahoma</span></div>
+            <div><ArrowUpRight aria-hidden="true" /><span><small>Project region</small>Oklahoma Region</span></div>
           </div>
 
           <div className="term-sheet-card">

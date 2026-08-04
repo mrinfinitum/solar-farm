@@ -109,10 +109,7 @@ export default function OurVisionPage() {
                 })}
               </ol>
             </div>
-            <div className="vision-model__principle">
-              <span>Operating principle</span>
-              <p>Purpose does not replace sound economics. <em>It depends on them.</em></p>
-            </div>
+            <p className="vision-model__principle">Purpose does not replace sound economics. <em>It depends on them.</em></p>
           </div>
         </section>
 

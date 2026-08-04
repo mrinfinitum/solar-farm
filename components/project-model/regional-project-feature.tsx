@@ -23,7 +23,7 @@ const projectNodes = [
 const projectFacts = [
   { value: "1–5 MW DC", label: "Representative capacity" },
   { value: "20 years", label: "Illustrative agreement term" },
-  { value: "Southeast Oklahoma", label: "Target region" },
+  { value: "Oklahoma Region", label: "Target region" },
 ] as const;
 
 const commercialRoles = [

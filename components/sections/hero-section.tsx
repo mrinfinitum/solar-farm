@@ -9,7 +9,7 @@ export function HeroSection() {
         <div className="container hero-copy hero-copy--centered">
           <p className="eyebrow hero-eyebrow">
             <span aria-hidden="true">✦</span>
-            Commercial energy · Southeast Oklahoma
+            Commercial energy · Oklahoma Region
           </p>
           <h1>
             Commercial energy that costs less <em>from day one.</em>
@@ -19,7 +19,7 @@ export function HeroSection() {
           </p>
           <div className="hero-actions">
             <TrackedLink className="hero-primary-cta" href="#project" event="hero_primary_cta">
-              Explore the project
+              Explore the model
               <span><ArrowDown aria-hidden="true" size={17} /></span>
             </TrackedLink>
             <TrackedLink className="hero-text-link" href="#contact" event="hero_secondary_cta">
@@ -27,7 +27,7 @@ export function HeroSection() {
             </TrackedLink>
           </div>
           <div className="hero-proof">
-            <p>1.5 MW project <span /> 2.25M kWh/year <span /> Targeted 2027 operation</p>
+            <p>Regional development <span /> Long-term agreements <span /> No upfront equipment capital</p>
             <small><CalendarClock aria-hidden="true" size={14} /> Subject to utility interconnection and final approvals</small>
           </div>
         </div>

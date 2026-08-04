@@ -54,6 +54,21 @@ test("public routes and canonical metadata exist", () => {
   assert.doesNotMatch(read("app/layout.tsx"), /\.example/);
 });
 
+test("homepage marketing stays regional rather than exposing project specifics", () => {
+  const publicHomepage = [
+    read("app/page.tsx"),
+    read("app/layout.tsx"),
+    read("components/sections/hero-section.tsx"),
+    read("components/sections/cornerstone-project-section.tsx"),
+    read("components/sections/contact-section.tsx"),
+    read("components/sections/faq-section.tsx"),
+  ].join("\n");
+
+  assert.match(publicHomepage, /Oklahoma Region/);
+  assert.match(publicHomepage, /U\.S\. Census Bureau TIGERweb state boundary/);
+  assert.doesNotMatch(publicHomepage, /1 Cornerstone Lane|Idabel project site|McCurtain County|Southeast Oklahoma|Q2\/Q3 2027|2\.25M kWh/i);
+});
+
 test("Our Vision is discoverable, qualified, and shareable", () => {
   const page = read("app/our-vision/page.tsx");
   const header = read("components/layout/site-header.tsx");

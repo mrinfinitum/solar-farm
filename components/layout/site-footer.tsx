@@ -1,7 +1,7 @@
 import { ArrowUpRight, LogIn, MapPin } from "lucide-react";
 import Link from "next/link";
 
-import { navigation, project, disclaimer } from "@/lib/project-data";
+import { navigation, disclaimer } from "@/lib/project-data";
 import { ProjectMark } from "@/components/ui/project-mark";
 import { TermSheetLink } from "@/components/ui/term-sheet-link";
 
@@ -14,8 +14,8 @@ export function SiteFooter({ termSheetAvailable }: { termSheetAvailable: boolean
             <ProjectMark />
             <span><strong>NSOUL</strong></span>
           </Link>
-          <p>{project.name}</p>
-          <span><MapPin aria-hidden="true" size={15} /> {project.city}</span>
+          <p>Commercial solar development</p>
+          <span><MapPin aria-hidden="true" size={15} /> Oklahoma Region</span>
         </div>
 
         <div className="footer-links">
