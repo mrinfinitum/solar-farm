@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Cable, CircleDollarSign, Gauge, Handshake, MapPin, RefreshCw, ShieldCheck, SunMedium } from "lucide-react";
 
 import { FounderStatement } from "@/components/vision/founder-statement";
 import { VisionCommitment } from "@/components/vision/vision-commitment";
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
 };
 
 const modelSteps = [
-  "Control or acquire suitable land",
-  "Develop financeable solar projects",
-  "Secure interconnection and engineering",
-  "Contract with energy buyers",
-  "Finance and build the asset",
-  "Retain ownership",
-  "Operate for recurring revenue",
-  "Reinvest in projects and future impact",
+  { phase: "Origination", title: "Control or acquire suitable land", icon: MapPin },
+  { phase: "Development", title: "Develop financeable solar projects", icon: SunMedium },
+  { phase: "Grid", title: "Secure interconnection and engineering", icon: Cable },
+  { phase: "Commercial", title: "Contract with energy buyers", icon: Handshake },
+  { phase: "Capital", title: "Finance and build the asset", icon: CircleDollarSign },
+  { phase: "Ownership", title: "Retain ownership", icon: ShieldCheck },
+  { phase: "Operations", title: "Operate for recurring revenue", icon: Gauge },
+  { phase: "Impact", title: "Reinvest in projects and future impact", icon: RefreshCw },
 ] as const;
 
 const milestones = [
@@ -85,10 +85,34 @@ export default function OurVisionPage() {
               <div><p className="eyebrow">Our business model</p><h2 id="model-title">A mission supported by a durable business model.</h2></div>
               <p>NSoul is being structured as a commercial solar developer and independent power producer: develop carefully, own for the long term, and operate with discipline.</p>
             </div>
-            <ol className="vision-model__steps">
-              {modelSteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong><ArrowRight aria-hidden="true" size={17} /></li>)}
-            </ol>
-            <p className="vision-model__principle">Purpose does not replace sound economics. <em>It depends on them.</em></p>
+            <div className="vision-model__workflow">
+              <div className="vision-model__toolbar">
+                <span><i aria-hidden="true" /> NSoul operating model</span>
+                <small>8 stages · Continuous ownership cycle</small>
+              </div>
+              <ol className="vision-model__steps">
+                {modelSteps.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
+                    <li key={step.title}>
+                      <div className="vision-model__card-meta">
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <i><Icon aria-hidden="true" size={18} /></i>
+                      </div>
+                      <div className="vision-model__card-copy">
+                        <small>{step.phase}</small>
+                        <strong>{step.title}</strong>
+                      </div>
+                      <ArrowRight className="vision-model__card-arrow" aria-hidden="true" size={16} />
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+            <div className="vision-model__principle">
+              <span>Operating principle</span>
+              <p>Purpose does not replace sound economics. <em>It depends on them.</em></p>
+            </div>
           </div>
         </section>
 

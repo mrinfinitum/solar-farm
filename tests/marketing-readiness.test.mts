@@ -67,6 +67,8 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   assert.match(page, /alternates: \{ canonical: "\/our-vision" \}/);
   assert.match(page, /openGraph:/);
   assert.match(page, /NSoul is being structured/);
+  assert.match(page, /NSoul operating model/);
+  assert.match(page, /8 stages · Continuous ownership cycle/);
   assert.match(page, /[Aa]s operating success permits/);
   assert.match(page, /development-stage/);
   assert.match(page, /nsoul-energy-community-ecosystem\.png/);
