@@ -16,6 +16,9 @@ export interface ScreeningRequest {
   county: string | null;
   state: string | null;
   forcedRefresh: boolean;
+  geometry: Record<string, unknown> | null;
+  geometryUpdatedAt: string | null;
+  acreage: number | null;
 }
 
 export interface FieldProposal {
@@ -46,9 +49,13 @@ export interface ScreeningProvider {
   version: string;
   capability: ScreeningCapability;
   credentialRequired: boolean;
+  cacheTtlSeconds: number;
+  description: string;
+  setupInstructions: string;
   configured(): boolean;
   cacheKey(request: ScreeningRequest): string;
   execute(request: ScreeningRequest): Promise<ProviderResult>;
+  healthCheck?(): Promise<{ status: "operational" | "degraded" | "unavailable" | "rate_limited"; message: string }>;
 }
 
 export const PRELIMINARY_SCREENING_DISCLAIMER = "Automated preliminary screening requires verification and does not establish interconnection capacity, utility approval, title, zoning, legal access, environmental clearance, exact buildable acreage, construction feasibility, or project financeability.";

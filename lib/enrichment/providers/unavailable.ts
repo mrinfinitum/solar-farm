@@ -3,6 +3,9 @@ import type { ProviderResult, ScreeningCapability, ScreeningProvider, ScreeningR
 export class UnavailableProvider implements ScreeningProvider {
   constructor(public key: string, public name: string, public capability: ScreeningCapability, public credentialRequired = true) {}
   version = "stub-v1";
+  cacheTtlSeconds = 0;
+  description = "Manual workflow only until an approved provider is configured.";
+  setupInstructions = "Select and contract with an approved provider, then configure its server-only adapter.";
   configured() { return false; }
   cacheKey(request: ScreeningRequest) { return `${this.key}:${request.propertyId}`; }
   async execute(): Promise<ProviderResult> {

@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { Loader2, Save } from "lucide-react";
 
 import type { PropertyRecord } from "@/types/property";
+import { CoordinatePicker } from "@/components/maps/coordinate-picker";
 
 const statuses = ["new","desktop_screening","owner_outreach","site_control","utility_screening","detailed_diligence","candidate_project","promoted_to_project","rejected"];
 
-export function PropertyEditForm({ property }: { property: PropertyRecord }) {
+export function PropertyEditForm({ property, mapStyleUrl }: { property: PropertyRecord; mapStyleUrl?: string }) {
+  mapStyleUrl ||= process.env.NEXT_PUBLIC_MAP_STYLE_URL;
   const [loading, setLoading] = useState(false); const [message, setMessage] = useState(""); const router = useRouter();
   async function submit(formData: FormData) {
     setLoading(true); setMessage("");
@@ -32,8 +34,7 @@ export function PropertyEditForm({ property }: { property: PropertyRecord }) {
     <label><span>Utility</span><input className="finder-field" name="utility_name" defaultValue={property.utility_name || ""} /></label>
     <label><span>Utility territory status</span><input className="finder-field" name="utility_territory_status" defaultValue={property.utility_territory_status || "unknown"} /></label>
     <label><span>Site control status</span><input className="finder-field" name="site_control_status" defaultValue={property.site_control_status || "not_started"} /></label>
-    <label><span>Latitude</span><input className="finder-field" name="latitude" type="number" step="any" defaultValue={property.latitude ?? ""} /></label>
-    <label><span>Longitude</span><input className="finder-field" name="longitude" type="number" step="any" defaultValue={property.longitude ?? ""} /></label>
+    <div className="wide"><CoordinatePicker latitude={property.latitude == null ? null : Number(property.latitude)} longitude={property.longitude == null ? null : Number(property.longitude)} styleUrl={mapStyleUrl}/></div>
     <label><span>Verification</span><select className="finder-field" name="verified" defaultValue={property.last_verified_at ? "yes" : "no"}><option value="no">Unverified</option><option value="yes">Verified now</option></select></label>
     <label className="wide"><span>Internal summary</span><textarea className="finder-textarea" name="internal_summary" defaultValue={property.internal_summary || ""} /></label>
   </div>{message && <p className="assessment-message" role="status">{message}</p>}<div className="finder-form-actions"><button className="finder-button finder-button--primary" disabled={loading}>{loading ? <Loader2 className="spin" size={14} /> : <Save size={14} />}Save changes</button></div></form>;
