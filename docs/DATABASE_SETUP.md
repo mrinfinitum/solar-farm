@@ -16,6 +16,13 @@ Migration order:
 3. `202608020003_identity_and_tenant_security.sql` — organizations, membership roles/statuses, tenant isolation, explicit RLS policies, and invitation activation.
 4. Apply all later migrations in filename order for the property, project, conversion, and finance modules.
 
+The current final migration is `202608040001_property_provider_integrations.sql`. Confirm both the migration ledger and the observable remote schema after every push:
+
+```bash
+npx supabase migration list --linked
+npm run verify:remote-environment
+```
+
 The `--include-seed` flag applies `supabase/seed.sql` after the migrations. The seed creates only the supplied 1 Cornerstone Lane reference property/project/milestones. Unknown acreage, price, parcel, coordinates, capacity, flood, zoning, engineering, PPA, finance, and grant values remain null or unverified.
 
 ## Auth configuration
@@ -25,6 +32,7 @@ The `--include-seed` flag applies `supabase/seed.sql` after the migrations. The 
 - Create users manually.
 - Configure the Site URL and `/auth/callback` redirect.
 - Bootstrap the first active owner with `npm run bootstrap:first-owner -- --user-id AUTH_USER_UUID` as documented in `docs/SECURITY_AND_OPERATIONS.md`.
+- The canonical organization identity is name `NSoul LLC` and slug `nsoul`.
 
 ## Role behavior
 

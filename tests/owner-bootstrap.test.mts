@@ -11,7 +11,7 @@ test("first-owner CLI accepts an explicit Auth UUID", () => {
   assert.deepEqual(parseBootstrapOptions(["--user-id", userId], { ...process.env }), {
     userId,
     verifyOnly: false,
-    organizationName: "NSoul",
+    organizationName: "NSoul LLC",
     organizationSlug: "nsoul",
   });
 });

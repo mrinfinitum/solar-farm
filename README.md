@@ -52,6 +52,10 @@ See `.env.example`:
 - `NEXT_PUBLIC_MAP_STYLE_URL` — optional MapLibre-compatible style URL
 - `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` — optional public contact delivery
 - `LEGAL_CONTACT_EMAIL` — legal and privacy contact displayed on the draft policy pages
+- `GEOCODING_PROVIDER`, `SECONDARY_GEOCODING_PROVIDER`, `SECONDARY_GEOCODING_API_KEY` — geocoding selection and optional server-only fallback
+- `SOLAR_RESOURCE_API_KEY` — optional server-only NLR solar-resource access
+- `PARCEL_PROVIDER` — reserved for a selected and implemented parcel adapter
+- `SCREENING_BATCH_MAX` — bounded screening batch size
 
 Missing map/email values produce safe configured-state messages. Missing Supabase values disable private authentication and storage operations without breaking the public build.
 

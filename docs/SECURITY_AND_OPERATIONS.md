@@ -68,6 +68,14 @@ npm run verify:first-owner -- --user-id AUTH_USER_UUID
 
 The JSON report includes Auth existence and account state, profile existence, organization existence, membership existence, organization match, role, status, and `loginReady`. A non-ready result exits with status 2. The script never prints the service-role key or imports it into application/browser code.
 
+Verify the broader remote schema surface and expected NSoul identity without changing data:
+
+```bash
+npm run verify:remote-environment
+```
+
+This check reports the configured project reference, canonical table/function availability, observable migration surfaces, latest provider-operation columns, and owner readiness. It does not replace `supabase migration list`, because the PostgREST schema surface cannot prove the exact migration ledger.
+
 Verify the owner can sign in, visit `/dashboard/users`, and see their active owner membership. The application prevents deactivating or demoting the final active owner.
 
 ## Inviting the first additional user
@@ -130,4 +138,4 @@ npm audit --omit=dev
 - This sprint enforces one organization membership per user. A future multi-tenant release needs an explicit active-organization selector and must remove the `unique(user_id)` constraint only alongside corresponding session changes.
 - Enable backups/PITR appropriate to the subscription tier, rehearse restore, monitor Auth/admin-route failures, and alert on owner-role changes and user deactivation.
 - Run migrations and authorization tests against a dedicated staging Supabase project before production. Local static verification cannot prove hosted project configuration.
-- The current dependency audit reports three high-severity transitive advisories in Next.js-bundled `postcss`/`sharp`. npm currently proposes an invalid breaking downgrade rather than a safe in-range update; track the upstream Next.js release and upgrade promptly when a patched stable version is available. Do not run `npm audit fix --force` against production without reviewing the resulting framework downgrade.
+- Dependency-audit results are time-dependent. The last recorded application validation reported zero production vulnerabilities; re-run `npm audit --omit=dev` for every release and record the date/result in `docs/LIVE_ENVIRONMENT_STATUS.md`. Do not run `npm audit fix --force` against production.

@@ -1,11 +1,17 @@
 # Property enrichment and preliminary GIS screening
 
-Sprint 3 adds an authenticated, tenant-scoped screening pipeline without turning preliminary public-source context into a diligence conclusion. The migration order is:
+Sprint 3 adds an authenticated, tenant-scoped screening pipeline without turning preliminary public-source context into a diligence conclusion. Apply the repository migrations in this filename order:
 
-1. `202608030000_sprint1_auth_rbac.sql`
-2. `202608030001_property_acquisition.sql`
-3. `202608030002_property_intelligence_crm.sql`
-4. `202608030003_property_enrichment_gis.sql`
+1. `202608020001_site_finder_schema.sql`
+2. `202608020002_site_finder_rls.sql`
+3. `202608020003_identity_and_tenant_security.sql`
+4. `202608030001_property_acquisition.sql`
+5. `202608030002_property_intelligence_crm.sql`
+6. `202608030003_property_enrichment_gis.sql`
+7. `202608030004_conversion_intake.sql`
+8. `202608030005_project_development_command_center.sql`
+9. `202608030006_financial_modeling_capital_readiness.sql`
+10. `202608040001_property_provider_integrations.sql`
 
 ## Provider architecture
 
@@ -54,4 +60,4 @@ The application remains usable without provider credentials: manual entry, scori
 
 ## Migration order addition
 
-Apply `202608040001_property_provider_integrations.sql` after the four migrations above. It adds non-secret provider operations fields, correct public-service credential flags, cache controls, health state, and provider seeding for future organizations without weakening existing RLS.
+`202608040001_property_provider_integrations.sql` adds non-secret provider operations fields, correct public-service credential flags, cache controls, health state, and provider seeding for future organizations without weakening existing RLS. The dated live-environment verification record is maintained in `docs/LIVE_ENVIRONMENT_STATUS.md`; source presence alone is not proof that a migration is deployed.

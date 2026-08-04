@@ -20,11 +20,12 @@ Complete and record each item before commercial launch.
 
 ## Supabase and administration
 
-- [ ] Apply migrations in filename order through `202608030004_conversion_intake.sql`.
+- [ ] Apply every migration in filename order through `202608040001_property_provider_integrations.sql`; confirm the remote migration ledger and observable schema both match the checkout.
 - [ ] Confirm RLS is enabled and explicit policies are present on every exposed application table.
 - [ ] Confirm anonymous users cannot read land submissions or storage objects.
 - [ ] Confirm the `site-finder-documents` bucket is private and supports PDF, JPG, and PNG intake.
 - [ ] Bootstrap the first owner using the procedure in `docs/SECURITY_AND_OPERATIONS.md`.
+- [ ] Run `npm run verify:remote-environment` and retain the non-secret report with the deployment record.
 - [ ] Invite the first additional user from Dashboard → Users and verify the activity log.
 - [ ] Test backup creation, database export, storage inventory, and restore ownership.
 

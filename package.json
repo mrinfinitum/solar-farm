@@ -11,6 +11,7 @@
     "verify:browser-secrets": "node scripts/verify-browser-secrets.mjs",
     "bootstrap:first-owner": "node --env-file-if-exists=.env.local scripts/bootstrap-first-owner.mjs",
     "verify:first-owner": "node --env-file-if-exists=.env.local scripts/bootstrap-first-owner.mjs --verify-only",
+    "verify:remote-environment": "node --env-file-if-exists=.env.local scripts/verify-remote-environment.mjs",
     "test:property": "node --experimental-strip-types --test tests/property-acquisition.test.mts",
     "test:enrichment": "node --experimental-strip-types --test tests/property-enrichment.test.mts",
     "test:marketing": "node --experimental-strip-types --test tests/marketing-readiness.test.mts",

@@ -26,7 +26,7 @@ export function parseBootstrapOptions(argv, env = process.env) {
   return {
     userId,
     verifyOnly,
-    organizationName: env.NSOUL_INITIAL_ORGANIZATION_NAME?.trim() || "NSoul",
+    organizationName: env.NSOUL_INITIAL_ORGANIZATION_NAME?.trim() || "NSoul LLC",
     organizationSlug: "nsoul",
   };
 }
