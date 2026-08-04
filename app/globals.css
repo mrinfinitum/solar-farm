@@ -1570,10 +1570,14 @@ a {
 }
 
 /* Development */
+.development-section {
+  padding-block: 64px 110px;
+}
+
 .development-layout {
   display: grid;
   grid-template-columns: .75fr 1.25fr;
-  gap: 100px;
+  gap: 72px;
   align-items: start;
 }
 
@@ -1592,14 +1596,14 @@ a {
 }
 
 .development-intro .section-description {
-  margin-top: 28px;
+  margin-top: 22px;
 }
 
 .status-key {
   display: flex;
   flex-wrap: wrap;
   gap: 9px 16px;
-  margin-top: 37px;
+  margin-top: 28px;
 }
 
 .status-key span {
@@ -2248,7 +2252,7 @@ a {
   .assumptions-card .eyebrow, .assumptions-card h3 { grid-column: 1 / -1; }
   .assumptions-card ul { margin-bottom: 0; }
   .assumption-highlight { align-self: end; }
-  .development-layout { grid-template-columns: 1fr; gap: 65px; }
+  .development-layout { grid-template-columns: 1fr; gap: 48px; }
   .development-intro { position: static; }
   .development-intro .section-heading h2 { max-width: 720px; }
   .contact-shell { grid-template-columns: 1fr; padding: 54px; }
@@ -2444,7 +2448,7 @@ a {
 .cornerstone-project-actions > p { max-width: 700px; margin: 0; color: var(--dim); font-size: 11px; line-height: 1.55; }
 .cornerstone-project-actions > div { display: flex; flex: 0 0 auto; gap: 9px; }
 
-.trust-strip { padding: 28px 0 92px; background: var(--bg); }
+.trust-strip { padding: 28px 0 44px; background: var(--bg); }
 .trust-strip-shell { display: grid; grid-template-columns: .58fr 1.42fr; gap: 56px; align-items: center; padding: 30px 34px; border: 1px solid var(--border); border-radius: 22px; background: var(--surface); }
 .trust-strip .eyebrow { margin-bottom: 8px; }
 .trust-strip h2 { margin: 0; font-size: 25px; letter-spacing: -.035em; }
@@ -2669,7 +2673,7 @@ a {
   .cornerstone-project-actions { align-items: stretch; flex-direction: column; }
   .cornerstone-project-actions > div { align-items: stretch; flex-direction: column; }
   .cornerstone-project-actions .button { width: 100%; }
-  .trust-strip { padding-bottom: 64px; }
+  .trust-strip { padding-bottom: 36px; }
   .trust-strip-shell { gap: 28px; padding: 24px; }
   .trust-strip ul { grid-template-columns: 1fr; }
   .faq-section { padding-block: 84px; }
@@ -6276,8 +6280,8 @@ html[data-theme="light"] .milestone-grid--featured .savings-card:last-child {
 /* Increase development-step legibility without loosening the timeline. */
 .timeline-item {
   grid-template-columns: 98px 1fr;
-  min-height: 166px;
-  padding-bottom: 35px;
+  min-height: 138px;
+  padding-bottom: 24px;
 }
 
 .development-timeline::before {
@@ -6291,7 +6295,7 @@ html[data-theme="light"] .milestone-grid--featured .savings-card:last-child {
 }
 
 .timeline-dot {
-  top: 31px;
+  top: 27px;
   left: 59px;
   width: 12px;
   height: 12px;
@@ -6303,15 +6307,15 @@ html[data-theme="light"] .milestone-grid--featured .savings-card:last-child {
 }
 
 .timeline-item h3 {
-  margin: 18px 0 11px;
-  font-size: 22px;
+  margin: 13px 0 8px;
+  font-size: 21px;
   line-height: 1.16;
 }
 
 .timeline-item p {
   max-width: 720px;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 @media (max-width: 768px) {
@@ -6321,7 +6325,7 @@ html[data-theme="light"] .milestone-grid--featured .savings-card:last-child {
 
   .timeline-item {
     grid-template-columns: 75px 1fr;
-    min-height: 156px;
+    min-height: 132px;
   }
 
   .timeline-marker {
