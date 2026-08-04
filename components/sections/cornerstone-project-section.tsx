@@ -16,11 +16,9 @@ const projectFacts = [
 
 const developmentStages = [
   "Site and customer qualification",
-  "Utility and interconnection review",
-  "Engineering and production modeling",
-  "Commercial energy agreement",
-  "Financing and permitting",
-  "Construction and commissioning",
+  "Utility, engineering, and production validation",
+  "Commercial agreement and financing",
+  "Permitting, construction, and commissioning",
   "Long-term ownership and operations",
 ] as const;
 

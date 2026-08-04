@@ -19,7 +19,7 @@ export function VisionHero() {
         <p className="eyebrow">Our vision</p>
         <h1 id="vision-title">Through the power of the sun,<br /><em>we enlighten the community.</em></h1>
         <p className="vision-hero__lede">
-          NSoul is being built to create long-term value from renewable energy—value that strengthens businesses, creates durable local infrastructure, and helps expand opportunity for people and communities.
+          NSoul is being built to create long-term value from renewable energy, value that strengthens businesses, creates durable local infrastructure, and helps expand opportunity for people and communities.
         </p>
         <div className="vision-hero__actions">
           <Link className="button button--primary button--large" href="#model">Explore the NSoul model <ArrowDownRight aria-hidden="true" size={17} /></Link>

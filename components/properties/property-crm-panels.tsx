@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { CheckCircle2, CircleAlert, Loader2, Plus } from "lucide-react";
 
 type Row = Record<string, unknown>;
-const text = (value: unknown) => value == null || value === "" ? "—" : String(value);
+const text = (value: unknown) => value == null || value === "" ? "Not available" : String(value);
 
 async function send(propertyId: string, method: "POST" | "PATCH", body: Record<string, unknown>) {
   const response = await fetch(`/api/properties/${propertyId}/crm`, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });

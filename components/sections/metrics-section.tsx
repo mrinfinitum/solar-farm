@@ -42,7 +42,7 @@ export function MetricsSection() {
             <p className="eyebrow">Built for business owners</p>
             <h2>Keep more capital working in the business.</h2>
           </div>
-          <p>Solar structured around operating priorities—not equipment ownership.</p>
+          <p>Solar structured around operating priorities, not equipment ownership.</p>
         </Reveal>
         <div className="metric-grid">
           {ownerMetrics.map((metric, index) => (

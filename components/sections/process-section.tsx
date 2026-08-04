@@ -6,7 +6,7 @@ const steps = [
   {
     label: "Develop",
     title: "We build and own the project.",
-    detail: "Development, financing, construction, and operations—handled.",
+    detail: "Development, financing, construction, and operations, handled.",
     icon: Building2,
   },
   {

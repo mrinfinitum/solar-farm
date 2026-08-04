@@ -98,7 +98,7 @@ export function calculatePreliminaryScore(input: PreliminaryScoreInput) {
         ? "moderate"
         : "low";
   const recommendation = fatalRisks.length > 0
-    ? "Hold — fatal risk requires resolution"
+    ? "Hold, fatal risk requires resolution"
     : displayedScore >= 70
       ? "Advance to the next diligence stage"
       : displayedScore >= 55

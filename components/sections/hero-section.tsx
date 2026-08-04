@@ -15,7 +15,7 @@ export function HeroSection() {
             Commercial energy that costs less <em>from day one.</em>
           </h1>
           <p className="hero-description">
-            We develop and operate regional solar infrastructure that gives commercial and industrial facilities access to predictable, discounted electricity—with no upfront equipment investment.
+            We develop and operate regional solar infrastructure that gives commercial and industrial facilities access to predictable, discounted electricity, with no upfront equipment investment.
           </p>
           <div className="hero-actions">
             <TrackedLink className="hero-primary-cta" href="#project" event="hero_primary_cta">

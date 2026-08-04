@@ -70,7 +70,7 @@ async function sendWithResend(data: Submission) {
     from,
     to: [to],
     reply_to: data.email,
-    subject: `New NSoul Commercial Energy Inquiry — ${data.company}`,
+    subject: `New NSoul Commercial Energy Inquiry, ${data.company}`,
     text,
     html: `<div style="font-family:Arial,sans-serif;max-width:720px;margin:auto;padding:32px"><h1 style="color:#102c1e">New commercial energy inquiry</h1><p style="color:#617269">Structured submission ${escapeHtml(data.submissionId)}</p>${rows}</div>`,
   });

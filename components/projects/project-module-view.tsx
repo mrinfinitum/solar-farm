@@ -5,9 +5,9 @@ import { calculateCapitalStack, titleCaseStatus } from "@/lib/projects/domain";
 import type { ProjectCommandData } from "@/types/project-command";
 
 type Row=Record<string,unknown>;
-const date=(value:unknown)=>value?new Date(String(value)).toLocaleDateString():"—";
-const money=(value:unknown)=>value==null?"—":`$${Number(value).toLocaleString(undefined,{maximumFractionDigits:0})}`;
-const value=(input:unknown)=>input==null||input===""?"—":String(input);
+const date=(value:unknown)=>value?new Date(String(value)).toLocaleDateString():"Not available";
+const money=(value:unknown)=>value==null?"Not available":`$${Number(value).toLocaleString(undefined,{maximumFractionDigits:0})}`;
+const value=(input:unknown)=>input==null||input===""?"Not available":String(input);
 
 const sectionMeta={
   interconnection:{eyebrow:"Utility pathway",title:"Interconnection",description:"Separate nearby infrastructure and preliminary feedback from formal study results and executed agreements.",icon:PlugZap},

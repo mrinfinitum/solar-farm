@@ -30,14 +30,14 @@ export const metadata: Metadata = {
 };
 
 const modelSteps = [
-  { phase: "Origination", title: "Control or acquire suitable land", icon: MapPin },
-  { phase: "Development", title: "Develop financeable solar projects", icon: SunMedium },
-  { phase: "Grid", title: "Secure interconnection and engineering", icon: Cable },
-  { phase: "Commercial", title: "Contract with energy buyers", icon: Handshake },
-  { phase: "Capital", title: "Finance and build the asset", icon: CircleDollarSign },
-  { phase: "Ownership", title: "Retain ownership", icon: ShieldCheck },
-  { phase: "Operations", title: "Operate for recurring revenue", icon: Gauge },
-  { phase: "Impact", title: "Reinvest in projects and future impact", icon: RefreshCw },
+  { phase: "Origination", title: "Control or acquire suitable land", icon: MapPin, image: "/brand/nsoul-owner-confidence.jpg" },
+  { phase: "Development", title: "Develop financeable solar projects", icon: SunMedium, image: "/brand/nsoul-solar-business-model.jpg" },
+  { phase: "Grid", title: "Secure interconnection and engineering", icon: Cable, image: "/brand/nsoul-solar-generation-v2.png" },
+  { phase: "Commercial", title: "Contract with energy buyers", icon: Handshake, image: "/brand/nsoul-business-isolated.png" },
+  { phase: "Capital", title: "Finance and build the asset", icon: CircleDollarSign, image: "/brand/nsoul-solar-business-campus.jpg" },
+  { phase: "Ownership", title: "Retain ownership", icon: ShieldCheck, image: "/brand/nsoul-family-business-solar.jpg" },
+  { phase: "Operations", title: "Operate for recurring revenue", icon: Gauge, image: "/brand/nsoul-automated-factory-v2.png" },
+  { phase: "Impact", title: "Reinvest in projects and future impact", icon: RefreshCw, image: "/brand/nsoul-clean-energy-team.jpg" },
 ] as const;
 
 const milestones = [
@@ -61,10 +61,10 @@ export default function OurVisionPage() {
             <div className="vision-why__statement">
               <div className="vision-why__graphic">
                 <Image
-                  src="/brand/nsoul-energy-community-ecosystem.png"
-                  alt="Illustration of sunlight powering solar infrastructure, businesses, homes, and a shared community space"
-                  width={1672}
-                  height={941}
+                  src="/brand/nsoul-energy-community-soft.png"
+                  alt="Soft illustrated solar panel, commercial building, and tree connected by clean energy"
+                  width={1536}
+                  height={1024}
                   sizes="(max-width: 900px) calc(100vw - 44px), 58vw"
                 />
               </div>
@@ -72,7 +72,7 @@ export default function OurVisionPage() {
             </div>
             <div className="vision-long-copy">
               <p>We are not building NSoul simply to install solar panels. We are building a long-term energy company designed to own productive assets, serve commercial customers, reinvest responsibly, and create lasting benefit beyond the meter.</p>
-              <p>Responsible ownership can turn an energy project into durable local infrastructure. Rather than treating projects as short-term transactions, NSoul intends to retain and operate assets over time—creating recurring value that can support future development and, as the business grows, clearly defined community work.</p>
+              <p>Responsible ownership can turn an energy project into durable local infrastructure. Rather than treating projects as short-term transactions, NSoul intends to retain and operate assets over time, creating recurring value that can support future development and, as the business grows, clearly defined community work.</p>
             </div>
           </div>
         </section>
@@ -95,6 +95,7 @@ export default function OurVisionPage() {
                   const Icon = step.icon;
                   return (
                     <li key={step.title}>
+                      <span className="vision-model__card-image" style={{ backgroundImage: `url(${step.image})` }} aria-hidden="true" />
                       <div className="vision-model__card-meta">
                         <span>{String(index + 1).padStart(2, "0")}</span>
                         <i><Icon aria-hidden="true" size={18} /></i>

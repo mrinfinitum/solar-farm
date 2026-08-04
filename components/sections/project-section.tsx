@@ -28,7 +28,7 @@ export function ProjectSection() {
         <SectionHeading
           eyebrow="Illustrative project model"
           title="An example of how a regional solar project could be structured."
-          description="Representative values show the shape of a commercial solar development—not a specific site, offer, or operating forecast."
+          description="Representative values show the shape of a commercial solar development, not a specific site, offer, or operating forecast."
         />
 
         <div className="project-dashboard">
@@ -99,7 +99,7 @@ export function ProjectSection() {
             <div className="facility-story-copy">
               <p className="eyebrow">How the relationship works</p>
               <h3>A repeatable model for commercial demand.</h3>
-              <p>In a typical structure, we could develop, own, and operate the solar asset while a qualified customer purchases energy through a long-term agreement—without buying or maintaining the equipment.</p>
+              <p>In a typical structure, we could develop, own, and operate the solar asset while a qualified customer purchases energy through a long-term agreement, without buying or maintaining the equipment.</p>
               <span>Illustrative concept · not a project offer or commitment</span>
             </div>
             <div className="facility-story-art">
