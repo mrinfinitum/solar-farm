@@ -7325,6 +7325,35 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   padding-block: clamp(96px, 12vw, 180px);
 }
 
+.vision-why__statement {
+  display: grid;
+  gap: clamp(44px, 5vw, 76px);
+}
+
+.vision-why__graphic {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(24, 55, 40, .1);
+  border-radius: clamp(20px, 2.2vw, 34px);
+  background: #f3f7ef;
+  box-shadow: 0 32px 80px rgba(13, 43, 29, .1);
+}
+
+.vision-why__graphic::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.vision-why__graphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .vision-why h2,
 .vision-section-head h2,
 .vision-commitment h2,
@@ -7772,6 +7801,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   }
 
   .vision-section-head > p { max-width: 680px; }
+  .vision-why__statement { gap: 36px; }
   .vision-model__steps { grid-template-columns: 1fr; }
   .vision-pillars__grid { grid-template-columns: 1fr; }
   .vision-pillars__grid article { min-height: 0; padding: 30px 0 40px; }

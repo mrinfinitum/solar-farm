@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
@@ -57,7 +58,18 @@ export default function OurVisionPage() {
 
         <section className="vision-why section" aria-labelledby="why-title">
           <div className="container vision-editorial-grid">
-            <div><p className="eyebrow">Why NSoul exists</p><h2 id="why-title">Energy should create more than power.</h2></div>
+            <div className="vision-why__statement">
+              <div className="vision-why__graphic">
+                <Image
+                  src="/brand/nsoul-energy-community-ecosystem.png"
+                  alt="Illustration of sunlight powering solar infrastructure, businesses, homes, and a shared community space"
+                  width={1672}
+                  height={941}
+                  sizes="(max-width: 900px) calc(100vw - 44px), 58vw"
+                />
+              </div>
+              <div><p className="eyebrow">Why NSoul exists</p><h2 id="why-title">Energy should create more than power.</h2></div>
+            </div>
             <div className="vision-long-copy">
               <p>We are not building NSoul simply to install solar panels. We are building a long-term energy company designed to own productive assets, serve commercial customers, reinvest responsibly, and create lasting benefit beyond the meter.</p>
               <p>Responsible ownership can turn an energy project into durable local infrastructure. Rather than treating projects as short-term transactions, NSoul intends to retain and operate assets over time—creating recurring value that can support future development and, as the business grows, clearly defined community work.</p>
