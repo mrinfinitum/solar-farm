@@ -1,6 +1,8 @@
 "use client";
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { navigation } from "@/lib/project-data";
@@ -12,16 +14,29 @@ import { trackEvent } from "@/lib/analytics";
 
 const desktopNavigation = [
   { label: "Overview", href: "#top" },
+  { label: "Our Vision", href: "/our-vision" },
   ...navigation.slice(1, 5).map((item) => ({
     ...item,
     label: item.href === "#how-it-works" ? "Process" : item.label,
   })),
 ];
 
-export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean }) {
+const mobileNavigation = [
+  { label: "Overview", href: "#top" },
+  { label: "Our Vision", href: "/our-vision" },
+  ...navigation,
+];
+
+function resolveHref(href: string, onHomePage: boolean) {
+  return href.startsWith("#") && !onHomePage ? `/${href}` : href;
+}
+
+export function SiteHeader({ termSheetAvailable, tone = "default" }: { termSheetAvailable: boolean; tone?: "default" | "dark" }) {
+  const pathname = usePathname();
+  const onHomePage = pathname === "/";
   const [headerState, setHeaderState] = useState<"top" | "hidden" | "sticky">("top");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState("#top");
+  const [activeHref, setActiveHref] = useState(pathname === "/our-vision" ? "/our-vision" : "#top");
 
   useEffect(() => {
     let lastY = Math.max(0, window.scrollY);
@@ -69,7 +84,9 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
   }, [menuOpen]);
 
   useEffect(() => {
+    if (!onHomePage) return;
     const sections = desktopNavigation
+      .filter((item) => item.href.startsWith("#"))
       .map((item) => document.querySelector(item.href))
       .filter((section): section is Element => section !== null);
 
@@ -85,7 +102,7 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [onHomePage]);
 
   const sticky = headerState === "sticky" || menuOpen;
 
@@ -93,27 +110,28 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
     <header
       className={cn(
         "site-header",
+        tone === "dark" && "site-header--dark-top",
         sticky && "site-header--sticky site-header--scrolled",
         headerState === "hidden" && !menuOpen && "site-header--hidden",
       )}
     >
       <div className="nav-shell">
-        <a className="brand-link" href="#top" aria-label="NSoul home">
+        <Link className="brand-link" href="/" aria-label="NSoul home">
           <ProjectMark />
           <span><strong>NSOUL</strong></span>
-        </a>
+        </Link>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           {desktopNavigation.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
+              href={resolveHref(item.href, onHomePage)}
               className={cn(activeHref === item.href && "is-active")}
               aria-current={activeHref === item.href ? "location" : undefined}
               onClick={() => setActiveHref(item.href)}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -122,7 +140,7 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
           <TermSheetLink available={termSheetAvailable} className="nav-term-sheet" label="Term sheet" context="header" />
           <a
             className="nav-contact"
-            href="#contact"
+            href={onHomePage ? "#contact" : "/#contact"}
             aria-label="Discuss your energy needs"
             onClick={() => trackEvent("nav_contact_click", { context: "header" })}
           >
@@ -144,10 +162,10 @@ export function SiteHeader({ termSheetAvailable }: { termSheetAvailable: boolean
 
       <div id="mobile-menu" className={cn("mobile-menu", menuOpen && "mobile-menu--open")}>
         <nav aria-label="Mobile navigation">
-          {navigation.map((item, index) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+          {mobileNavigation.map((item, index) => (
+            <Link key={`${item.label}-${item.href}`} href={resolveHref(item.href, onHomePage)} onClick={() => setMenuOpen(false)}>
               <span>0{index + 1}</span>{item.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <TermSheetLink available={termSheetAvailable} className="button button--secondary mobile-download" context="mobile-menu" />

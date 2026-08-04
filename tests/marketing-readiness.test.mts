@@ -47,11 +47,28 @@ test("FAQ uses keyboard-native disclosures", () => {
 });
 
 test("public routes and canonical metadata exist", () => {
-  for (const path of ["app/page.tsx", "app/privacy/page.tsx", "app/terms/page.tsx", "app/submit-property/page.tsx", "app/sitemap.ts", "app/robots.ts"]) {
+  for (const path of ["app/page.tsx", "app/our-vision/page.tsx", "app/privacy/page.tsx", "app/terms/page.tsx", "app/submit-property/page.tsx", "app/sitemap.ts", "app/robots.ts"]) {
     assert.equal(existsSync(new URL(`../${path}`, import.meta.url)), true, path);
   }
   assert.match(read("lib/site-config.ts"), /https:\/\/www\.nsoul\.co/);
   assert.doesNotMatch(read("app/layout.tsx"), /\.example/);
+});
+
+test("Our Vision is discoverable, qualified, and shareable", () => {
+  const page = read("app/our-vision/page.tsx");
+  const header = read("components/layout/site-header.tsx");
+  const footer = read("components/layout/site-footer.tsx");
+  const sitemap = read("app/sitemap.ts");
+
+  assert.match(page, /title: "Our Vision \| NSoul"/);
+  assert.match(page, /alternates: \{ canonical: "\/our-vision" \}/);
+  assert.match(page, /openGraph:/);
+  assert.match(page, /NSoul is being structured/);
+  assert.match(page, /[Aa]s operating success permits/);
+  assert.match(page, /development-stage/);
+  assert.match(header, /Our Vision/);
+  assert.match(footer, /href="\/our-vision"/);
+  assert.match(sitemap, /\/our-vision/);
 });
 
 test("public term sheet is a real non-empty PDF", () => {
