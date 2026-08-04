@@ -58,6 +58,8 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   const page = read("app/our-vision/page.tsx");
   const header = read("components/layout/site-header.tsx");
   const footer = read("components/layout/site-footer.tsx");
+  const founderStatement = read("components/vision/founder-statement.tsx");
+  const scrollReset = read("components/vision/vision-scroll-reset.tsx");
   const sitemap = read("app/sitemap.ts");
 
   assert.match(page, /title: "Our Vision \| NSoul"/);
@@ -66,6 +68,9 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   assert.match(page, /NSoul is being structured/);
   assert.match(page, /[Aa]s operating success permits/);
   assert.match(page, /development-stage/);
+  assert.match(page, /VisionScrollReset/);
+  assert.match(scrollReset, /window\.scrollTo\(0, 0\)/);
+  assert.doesNotMatch(founderStatement, /wealthy|making money/i);
   assert.match(header, /Our Vision/);
   assert.match(footer, /href="\/our-vision"/);
   assert.match(sitemap, /\/our-vision/);

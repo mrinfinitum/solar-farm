@@ -1,6 +1,6 @@
 const commitments = [
   "Build responsibly",
-  "Tell the truth about project risk",
+  "Be transparent about project risk",
   "Use sound financial discipline",
   "Respect land, customers, and communities",
   "Measure impact",

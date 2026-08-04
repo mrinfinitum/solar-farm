@@ -7,6 +7,7 @@ import { VisionCommitment } from "@/components/vision/vision-commitment";
 import { VisionFlywheel } from "@/components/vision/vision-flywheel";
 import { VisionHero } from "@/components/vision/vision-hero";
 import { VisionPillars } from "@/components/vision/vision-pillars";
+import { VisionScrollReset } from "@/components/vision/vision-scroll-reset";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { isTermSheetAvailable } from "@/lib/term-sheet";
@@ -49,6 +50,7 @@ export default function OurVisionPage() {
   const termSheetAvailable = isTermSheetAvailable();
   return (
     <>
+      <VisionScrollReset />
       <SiteHeader termSheetAvailable={termSheetAvailable} tone="dark" />
       <main className="public-site vision-page">
         <VisionHero />
