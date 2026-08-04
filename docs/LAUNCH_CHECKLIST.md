@@ -20,7 +20,7 @@ Complete and record each item before commercial launch.
 
 ## Supabase and administration
 
-- [ ] Apply every migration in filename order through `202608040001_property_provider_integrations.sql`; confirm the remote migration ledger and observable schema both match the checkout.
+- [ ] Apply every migration in filename order through `202608040002_remote_function_lint_fixes.sql`; confirm the remote migration ledger and observable schema both match the checkout.
 - [ ] Confirm RLS is enabled and explicit policies are present on every exposed application table.
 - [ ] Confirm anonymous users cannot read land submissions or storage objects.
 - [ ] Confirm the `site-finder-documents` bucket is private and supports PDF, JPG, and PNG intake.

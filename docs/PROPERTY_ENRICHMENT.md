@@ -12,6 +12,7 @@ Sprint 3 adds an authenticated, tenant-scoped screening pipeline without turning
 8. `202608030005_project_development_command_center.sql`
 9. `202608030006_financial_modeling_capital_readiness.sql`
 10. `202608040001_property_provider_integrations.sql`
+11. `202608040002_remote_function_lint_fixes.sql`
 
 ## Provider architecture
 

@@ -4,6 +4,7 @@ import { test } from "node:test";
 import { buildProjection, calculateFundingReadiness, canApproveFinancialModel, canEditFinancialModel, canManageCapitalData, DEFAULT_FINANCE_INPUTS, irr, npv, paybackYear, runSensitivity } from "../lib/finance/engine.ts";
 
 const migration=readFileSync(new URL("../supabase/migrations/202608030006_financial_modeling_capital_readiness.sql",import.meta.url),"utf8");
+const lintFixMigration=readFileSync(new URL("../supabase/migrations/202608040002_remote_function_lint_fixes.sql",import.meta.url),"utf8");
 const modelApi=readFileSync(new URL("../app/api/projects/[id]/finance/models/route.ts",import.meta.url),"utf8");
 const approvalApi=readFileSync(new URL("../app/api/projects/[id]/finance/models/[modelId]/approve/route.ts",import.meta.url),"utf8");
 const partnerApi=readFileSync(new URL("../app/api/capital/partners/route.ts",import.meta.url),"utf8");
@@ -29,3 +30,4 @@ test("approval requires owner or administrator and rejects stale models",()=>{as
 test("material source changes invalidate approved models",()=>{for(const table of ["production_models","epc_proposals","ppa_scenarios","interconnection_cost_estimates","project_incentives","debt_terms"])assert.match(migration,new RegExp(`on public\\.${table}`));assert.match(migration,/is_stale=true/)});
 test("funding package requires an approved non-stale model and approved documents",()=>{assert.match(packageApi,/not\("approved_at", "is", null\)/);assert.match(packageApi,/eq\("is_stale", false\)/);assert.match(packageApi,/eq\("approved_for_package", true\)/);assert.match(packageApi,/private, no-store/)});
 test("Sprint 5 tables enforce organization RLS and deny anonymous access",()=>{assert.match(migration,/enable row level security/);assert.match(migration,/organization_id=public\.current_organization_id\(\)/);assert.match(migration,/revoke all on public\.%I from anon/);assert.doesNotMatch(partnerApi,/createAdminClient|SUPABASE_SERVICE_ROLE_KEY/)});
+test("remote database lint defects have forward-only fixes",()=>{assert.match(lintFixMigration,/add column if not exists assigned_to uuid/);assert.match(lintFixMigration,/factors jsonb := '\[\]'::jsonb/);assert.match(lintFixMigration,/create or replace function public\.recalculate_project_health/);assert.doesNotMatch(lintFixMigration,/drop table|drop column|truncate|delete from/i)});

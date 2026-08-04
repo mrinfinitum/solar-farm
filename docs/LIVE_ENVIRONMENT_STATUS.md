@@ -19,11 +19,14 @@ This is a dated operational snapshot, not a substitute for rechecking the live s
 ### Supabase
 
 - Application project reference: `rvvzosuxytifazgbssqr`.
-- The repository had no `supabase/config.toml` or CLI link metadata at the start of the audit.
-- The Supabase CLI was not authenticated, so `projects list` and the exact remote migration ledger could not be read and no `db push` was attempted.
+- The repository had no `supabase/config.toml` or CLI link metadata at the start of the audit. On the follow-up stabilization run, the CLI was authenticated, the checkout was initialized and linked, and the non-secret local config was aligned to invitation-only Auth defaults.
+- The exact remote ledger returned no applied versions for the ten migrations present at query time. The observable remote schema nevertheless contains every migration surface through `202608030006_financial_modeling_capital_readiness.sql`. This means the schema was applied outside the Supabase migration ledger. The locally prepared lint-fix migration now brings the repository inventory to eleven migrations.
 - Read-only service-role verification observed every migration surface through `202608030006_financial_modeling_capital_readiness.sql`.
 - `202608040001_property_provider_integrations.sql` is not applied: `data_providers.enabled` and the other provider-operations columns were absent.
-- The pending migration was reviewed. It is forward-only for application data: it adds provider-operation columns/constraints/indexes, normalizes provider metadata, replaces two provider triggers/functions, and seeds missing provider rows. It contains no table/column drop, truncate, or data deletion. It still requires a backup and an authenticated migration-ledger comparison before application.
+- The pending migration was reviewed. It is forward-only for application data: it adds provider-operation columns/constraints/indexes, normalizes provider metadata, replaces two provider triggers/functions, and seeds missing provider rows. It contains no table/column drop, truncate, or data deletion.
+- `db push` is unsafe while the ledger is empty because it would attempt to replay every migration against an already-populated schema. Forced migration repair was explicitly prohibited, so no ledger repair or migration application was performed.
+- The project reports no physical backups and PITR is disabled. A supported logical dump was attempted but could not run because Docker/`pg_dump` is unavailable. The remote state is documented by the exact ledger result and `npm run verify:remote-environment`, but a recoverable database snapshot is still required before reconciliation.
+- Remote `supabase db lint` found an error in `refresh_funding_notifications()` because `lender_requirements.assigned_to` did not exist, plus a type warning in `recalculate_project_health()` because an empty JSON array literal lacked an explicit `jsonb` cast. Forward-only migration `202608040002_remote_function_lint_fixes.sql` adds the missing assignment field/index and replaces the health function with the explicit cast. It is prepared and tested locally but not deployed.
 - Owner Auth user `837fbd1a-4c1d-4c23-bbee-71040ead75c7` exists, is active, and is confirmed.
 - Organization `a3e17009-78eb-4b48-9226-30ba193061b6` has canonical name `NSoul LLC` and slug `nsoul`. During this audit, the idempotent bootstrap corrected the remote name from `NSoul` to `NSoul LLC`; the profile compatibility organization value was updated, while the active owner membership and existing bootstrap audit remained unchanged.
 - Owner membership is `owner` / `active`, matches the expected organization, and the read-only readiness checks return `loginReady: true`.
@@ -58,17 +61,18 @@ Endpoint health means only that a service responded. It does not prove coverage,
 
 - `npm run build`: passed with Next.js 16.3.0.
 - `npm run lint`: passed.
-- `npm test`: passed all 96 tests, including owner/auth boundary tests and the built-bundle service-role scan.
+- `npm test`: passed all 97 tests, including owner/auth boundary tests, forward-only lint-fix coverage, and the built-bundle service-role scan.
 - `npm audit --omit=dev`: reported zero vulnerabilities.
-- `npm run verify:remote-environment`: owner ready and migrations through `202608030006` observable; exits non-ready because the final provider migration is absent.
+- `npm run verify:remote-environment`: owner ready and migrations through `202608030006` observable; exits non-ready because the provider-operations and lint-fix migrations are absent.
 
 ### Required completion actions
 
-1. Authenticate the Supabase CLI (`npx supabase login`) under the NSoul project owner account, initialize/link this checkout to `rvvzosuxytifazgbssqr`, and run `npx supabase migration list --linked`.
-2. Take/confirm a recoverable database backup, confirm only `202608040001_property_provider_integrations.sql` is pending, apply it with `npx supabase db push`, then re-run `npm run verify:remote-environment` and `npx supabase migration list --linked`.
-3. Grant the operating account access to the NSoul Vercel project or link the checkout to it, then inspect variable names/scopes without printing values, confirm the deployed Git SHA, and redeploy if the migration or environment changes require it.
-4. Connect the in-app browser or perform a user-assisted production smoke test: login, callback, activation, dashboard/profile resolution, owner navigation, logout, and repeat login.
-5. Run a real property screening through the authenticated Studio after the provider migration is live, including cache, failure, proposal review, report, mobile, and both themes.
+1. Create or confirm a recoverable Supabase backup. Current project status has no physical backups/PITR, and local logical dump tooling is unavailable.
+2. Reconcile the empty migration ledger with the observed schema through an explicitly approved, reviewed process. Do not run `db push` until migrations through `202608030006` are recorded consistently; replaying them is unsafe. The original task prohibited forced migration repair, so this requires a new user-approved operational decision.
+3. After the ledger and backup gates are satisfied, apply `202608040001_property_provider_integrations.sql` followed by `202608040002_remote_function_lint_fixes.sql`, then re-run `npm run verify:remote-environment`, `npx supabase migration list --linked`, and `npx supabase db lint --linked`.
+4. Grant the operating account access to the NSoul Vercel project or link the checkout to it, then inspect variable names/scopes without printing values, confirm the deployed Git SHA, and redeploy if the migration or environment changes require it.
+5. Connect the in-app browser or perform a user-assisted production smoke test: login, callback, activation, dashboard/profile resolution, owner navigation, logout, and repeat login.
+6. Run a real property screening through the authenticated Studio after the provider migration is live, including cache, failure, proposal review, report, mobile, and both themes.
 
 ### Recommended next implementation sequence
 

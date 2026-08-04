@@ -46,6 +46,10 @@ const MIGRATION_SURFACES = {
     "data_providers",
     "id,enabled,health_status,last_checked_at,cache_duration_seconds",
   ],
+  "202608040002_remote_function_lint_fixes.sql": [
+    "lender_requirements",
+    "id,assigned_to,due_date",
+  ],
 };
 
 function requiredValue(value, label) {
