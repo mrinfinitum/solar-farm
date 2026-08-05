@@ -93,6 +93,9 @@ test("Why NSoul section explains benefits for businesses of different sizes", ()
   assert.doesNotMatch(benefits, /guaranteed savings|risk-free/i);
   assert.match(benefits, /Three ways NSoul creates value/);
   assert.match(benefits, /Commercial benefits/);
+  assert.doesNotMatch(benefits, /regional-project-process/);
+  assert.match(benefits, /Based on actual bill review/);
+  assert.match(benefits, /Metered and reportable/);
   assert.match(styles, /regional-project-facts[\s\S]*grid-template-columns: repeat\(3/);
   assert.match(styles, /regional-project-roles[\s\S]*grid-template-columns: repeat\(2/);
 });

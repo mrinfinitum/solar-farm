@@ -10,9 +10,9 @@ const responsibilitySteps = [
 ] as const;
 
 const protectionAnswers = [
-  { value: "SAVE", title: "Modeled energy-cost opportunity", copy: "We compare proposed pricing with your real utility data. Savings are indicative until final terms are executed." },
-  { value: "$0", title: "Proposed equipment purchase", copy: "Keep business capital focused on operations instead of owning a solar asset." },
-  { value: "LOCAL", title: "Renewable energy value", copy: "A visible Oklahoma project can provide metered renewable power and potential REC value under the final agreement." },
+  { value: "SAVE", title: "Modeled energy-cost opportunity", copy: "We compare proposed pricing with your real utility data. Savings are indicative until final terms are executed.", proof: "Based on actual bill review" },
+  { value: "$0", title: "Proposed equipment purchase", copy: "Keep business capital focused on operations instead of owning a solar asset.", proof: "No equipment ownership" },
+  { value: "LOCAL", title: "Renewable energy value", copy: "A visible Oklahoma project can provide metered renewable power and potential REC value under the final agreement.", proof: "Metered and reportable" },
 ] as const;
 
 const commercialRoles = [
@@ -22,7 +22,6 @@ const commercialRoles = [
   { name: "Procurement teams", description: "Inspectable assumptions, project diligence, and documented energy and REC treatment before commitment." },
 ] as const;
 
-const process = ["Review", "Model", "Agree", "Power"] as const;
 const priorities = ["Lower operating costs", "Long-term budget visibility", "No equipment ownership", "Renewable-energy goals", "A direct regional relationship"] as const;
 
 export function RegionalProjectFeature() {
@@ -53,20 +52,18 @@ export function RegionalProjectFeature() {
                   <strong>{fact.value}</strong>
                   <h3>{fact.title}</h3>
                   <p>{fact.copy}</p>
+                  <small>{fact.proof}</small>
                 </article>
               ))}
             </div>
 
             <div className="regional-project-roles">
               <h3>Built for businesses of every scale</h3>
-              {commercialRoles.map((role) => <div key={role.name}><strong>{role.name}</strong><p>{role.description}</p></div>)}
+              {commercialRoles.map((role, index) => <div key={role.name}><span>0{index + 1}</span><strong>{role.name}</strong><p>{role.description}</p></div>)}
             </div>
           </div>
         </div>
 
-        <ol className="regional-project-process" aria-label="Customer journey: review, model, agree, power">
-          {process.map((step, index) => <li key={step}><span>{step}</span>{index < process.length - 1 ? <ArrowRight aria-hidden="true" /> : null}</li>)}
-        </ol>
       </Reveal>
 
       <Reveal className="buyer-confirmation-panel">

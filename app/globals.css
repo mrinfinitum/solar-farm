@@ -6019,6 +6019,13 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 
 .regional-project-kicker { margin-bottom: 23px; }
 
+.regional-project-diagram > ol {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .regional-project-node {
   position: relative;
   display: grid;
@@ -6127,6 +6134,9 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 }
 
 .regional-project-facts > article {
+  display: flex;
+  min-height: 230px;
+  flex-direction: column;
   padding: 20px 17px;
   border: 1px solid rgba(184, 234, 105, .13);
   border-radius: 16px;
@@ -6160,6 +6170,16 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   line-height: 1.55;
 }
 
+.regional-project-facts small {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, .07);
+  color: #718179;
+  font: 550 8px/1.4 var(--font-geist-mono), monospace;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
 .regional-project-roles {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6184,6 +6204,14 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   border-radius: 14px;
   background: rgba(255, 255, 255, .018);
   transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
+}
+
+.regional-project-roles > div > span {
+  display: block;
+  margin-bottom: 20px;
+  color: #8fbf49;
+  font: 600 9px/1 var(--font-geist-mono), monospace;
+  letter-spacing: .1em;
 }
 
 .regional-project-roles strong {
@@ -8641,7 +8669,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 
 /* Buyer confidence and public diligence --------------------------------- */
 .regional-project-diagram > ol { margin: 0; padding: 0; list-style: none; }
-.regional-project-note { max-width: 470px; margin: 24px 0 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.1); color: #b5c1ba; font-size: 13px; line-height: 1.65; }
+.regional-project-note { max-width: 590px; margin: 30px 0 0; padding-top: 26px; border-top: 1px solid rgba(184,234,105,.18); color: #d6dfd9; font-size: clamp(16px,1.25vw,19px); font-weight: 480; letter-spacing: -.012em; line-height: 1.6; }
 .regional-project-process { margin: 0; list-style: none; }
 .regional-project-process li { display: flex; align-items: center; gap: clamp(20px,4vw,56px); color: #dce5df; font-size: 13px; font-weight: 680; letter-spacing: .12em; text-transform: uppercase; }
 .buyer-confirmation-panel { display: grid; grid-template-columns: .8fr 1.6fr auto; align-items: center; gap: 35px; margin-top: 18px; padding: 25px 30px; border: 1px solid rgba(23,48,37,.13); border-radius: 20px; background: rgba(255,255,255,.42); }
