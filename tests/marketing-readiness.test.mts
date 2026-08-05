@@ -73,6 +73,7 @@ test("homepage marketing stays regional rather than exposing project specifics",
 test("Why NSoul section explains benefits for businesses of different sizes", () => {
   const section = read("components/sections/project-model-section.tsx");
   const benefits = read("components/project-model/regional-project-feature.tsx");
+  const styles = read("app/globals.css");
 
   assert.match(section, /Lower costs\. Less capital\. Local renewable power\./);
   assert.match(section, /actual electricity usage/);
@@ -90,6 +91,10 @@ test("Why NSoul section explains benefits for businesses of different sizes", ()
   assert.match(benefits, /Savings are indicative until final terms are executed/);
   assert.match(benefits, /REC value under the final agreement/);
   assert.doesNotMatch(benefits, /guaranteed savings|risk-free/i);
+  assert.match(benefits, /Three ways NSoul creates value/);
+  assert.match(benefits, /Commercial benefits/);
+  assert.match(styles, /regional-project-facts[\s\S]*grid-template-columns: repeat\(3/);
+  assert.match(styles, /regional-project-roles[\s\S]*grid-template-columns: repeat\(2/);
 });
 
 test("Our Vision is discoverable, qualified, and shareable", () => {

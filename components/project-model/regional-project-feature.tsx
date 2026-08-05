@@ -32,6 +32,7 @@ export function RegionalProjectFeature() {
         <div className="regional-project-main">
           <div className="regional-project-diagram" aria-labelledby="buyer-model-steps">
             <h3 id="buyer-model-steps" className="sr-only">Why businesses choose NSoul</h3>
+            <p className="regional-project-kicker">Three ways NSoul creates value</p>
             <ol>
               {responsibilitySteps.map(({ icon: Icon, title, description }, index) => (
                 <li className="regional-project-node" key={title}>
@@ -45,6 +46,7 @@ export function RegionalProjectFeature() {
           </div>
 
           <div className="regional-project-snapshot">
+            <div className="regional-project-snapshot-header"><span>Commercial benefits</span><small>Built around your energy data</small></div>
             <div className="regional-project-facts" aria-label="Potential business benefits">
               {protectionAnswers.map((fact) => (
                 <article key={fact.title}>
