@@ -9,13 +9,13 @@ export function ProjectModelSection() {
     <section id="project" className="project-model-section">
       <div className="container project-model-container">
         <Reveal className="project-model-intro">
-          <p className="eyebrow">Buyer protection model</p>
-          <h2>A commercial structure designed to keep project responsibility off the customer.</h2>
+          <p className="eyebrow">How your business benefits</p>
+          <h2>Buying power, not solar panels.</h2>
           <p className="project-model-description">
-            The customer buys qualifying energy. NSoul and the responsible project parties coordinate the asset, while the utility and metering structure support approved delivery and measurement.
+            Keep your capital focused on running your business, not building an energy project.
           </p>
           <p className="project-model-disclosure">
-            Proposed structure only. Payment, responsibilities, protections, and delivery remain subject to definitive documentation, utility review, engineering, financing, and executed agreements.
+            Proposed commercial model. Final pricing, metering, responsibilities, and delivery remain subject to definitive documentation and executed agreements.
           </p>
         </Reveal>
 
