@@ -6012,7 +6012,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 .regional-project-snapshot-header span {
   margin: 0;
   color: #b8ea69;
-  font: 650 10px/1.2 var(--font-geist-mono), monospace;
+  font: 650 11px/1.2 var(--font-geist-mono), monospace;
   letter-spacing: .13em;
   text-transform: uppercase;
 }
@@ -6123,7 +6123,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 
 .regional-project-snapshot-header small {
   color: #718179;
-  font: 500 9px/1.2 var(--font-geist-mono), monospace;
+  font: 500 10px/1.2 var(--font-geist-mono), monospace;
   letter-spacing: .06em;
 }
 
@@ -6156,7 +6156,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 .regional-project-facts h3 {
   margin: 9px 0 0;
   color: #b8ea69;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 650;
   letter-spacing: .05em;
   line-height: 1.4;
@@ -6166,8 +6166,8 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 .regional-project-facts p {
   margin: 9px 0 0;
   color: #91a198;
-  font-size: 11px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .regional-project-facts small {
@@ -6175,7 +6175,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, .07);
   color: #718179;
-  font: 550 8px/1.4 var(--font-geist-mono), monospace;
+  font: 550 9px/1.4 var(--font-geist-mono), monospace;
   letter-spacing: .07em;
   text-transform: uppercase;
 }
@@ -6191,7 +6191,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   grid-column: 1 / -1;
   margin: 0 0 5px;
   color: #b8ea69;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 650;
   letter-spacing: .01em;
 }
@@ -6210,21 +6210,21 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   display: block;
   margin-bottom: 20px;
   color: #8fbf49;
-  font: 600 9px/1 var(--font-geist-mono), monospace;
+  font: 600 10px/1 var(--font-geist-mono), monospace;
   letter-spacing: .1em;
 }
 
 .regional-project-roles strong {
   color: #eef2ec;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 620;
 }
 
 .regional-project-roles p {
   margin: 8px 0 0;
   color: #8c9d93;
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 @media (hover: hover) {

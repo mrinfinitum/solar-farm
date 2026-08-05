@@ -88,14 +88,14 @@ test("Why NSoul section explains benefits for businesses of different sizes", ()
     "No equipment ownership",
     "Renewable-energy goals",
   ]) assert.match(benefits, new RegExp(message, "i"));
-  assert.match(benefits, /Savings are indicative until final terms are executed/);
-  assert.match(benefits, /REC value under the final agreement/);
+  assert.match(benefits, /Compare a proposed project rate with your actual utility costs/);
+  assert.match(benefits, /REC terms defined by contract/);
   assert.doesNotMatch(benefits, /guaranteed savings|risk-free/i);
   assert.match(benefits, /Three ways NSoul creates value/);
   assert.match(benefits, /Commercial benefits/);
   assert.doesNotMatch(benefits, /regional-project-process/);
-  assert.match(benefits, /Based on actual bill review/);
-  assert.match(benefits, /Metered and reportable/);
+  assert.match(benefits, /Bill-based estimate/);
+  assert.match(benefits, /Capital stays in your business/);
   assert.match(styles, /regional-project-facts[\s\S]*grid-template-columns: repeat\(3/);
   assert.match(styles, /regional-project-roles[\s\S]*grid-template-columns: repeat\(2/);
 });

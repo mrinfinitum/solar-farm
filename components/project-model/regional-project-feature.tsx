@@ -10,16 +10,16 @@ const responsibilitySteps = [
 ] as const;
 
 const protectionAnswers = [
-  { value: "SAVE", title: "Modeled energy-cost opportunity", copy: "We compare proposed pricing with your real utility data. Savings are indicative until final terms are executed.", proof: "Based on actual bill review" },
-  { value: "$0", title: "Proposed equipment purchase", copy: "Keep business capital focused on operations instead of owning a solar asset.", proof: "No equipment ownership" },
-  { value: "LOCAL", title: "Renewable energy value", copy: "A visible Oklahoma project can provide metered renewable power and potential REC value under the final agreement.", proof: "Metered and reportable" },
+  { value: "SAVE", title: "Lower energy costs", copy: "Compare a proposed project rate with your actual utility costs.", proof: "Bill-based estimate" },
+  { value: "$0", title: "No equipment purchase", copy: "No equipment to buy. No construction to fund.", proof: "Capital stays in your business" },
+  { value: "LOCAL", title: "Renewable energy", copy: "Use metered Oklahoma solar to support your renewable-energy goals.", proof: "REC terms defined by contract" },
 ] as const;
 
 const commercialRoles = [
-  { name: "Growing businesses", description: "A practical path to potential savings without adding equipment ownership or a specialized energy team." },
-  { name: "Regional institutions", description: "Long-term budget planning, local accountability, and renewable-energy value aligned to facility needs." },
-  { name: "Large energy users", description: "Load-based modeling, metered reporting, and commercial terms designed for more complex operations." },
-  { name: "Procurement teams", description: "Inspectable assumptions, project diligence, and documented energy and REC treatment before commitment." },
+  { name: "Growing businesses", description: "Potential savings without owning or managing energy equipment." },
+  { name: "Regional institutions", description: "Long-term pricing and renewable energy aligned to your facility." },
+  { name: "Large energy users", description: "Load-based modeling, metered reporting, and terms built for complex operations." },
+  { name: "Procurement teams", description: "Clear assumptions, diligence, and documented energy and REC terms." },
 ] as const;
 
 const priorities = ["Lower operating costs", "Long-term budget visibility", "No equipment ownership", "Renewable-energy goals", "A direct regional relationship"] as const;
