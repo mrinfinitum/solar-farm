@@ -83,7 +83,9 @@ test("regional map explains the buyer opportunity and qualification model", () =
     "Could your facility fit?",
     "Project economics",
   ]) assert.match(section, new RegExp(message.replace(/[?]/g, "\\?"), "i"));
+  for (const detail of ["County cluster", "Evaluation focus", "No project announced", "Oklahoma, Canadian, Logan"]) assert.match(section, new RegExp(detail, "i"));
   assert.match(section, /not announced, approved, financed, or constructed projects/);
+  assert.doesNotMatch(section, /cornerstone-map-label--state/);
   assert.doesNotMatch(section, /actual customer|utility-approved|guaranteed/i);
 });
 
