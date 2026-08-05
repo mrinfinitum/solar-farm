@@ -91,6 +91,8 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   assert.doesNotMatch(page, />SOL<|>SOUL<|The NSoul idea/);
   assert.match(page, /VisionScrollReset/);
   assert.match(scrollReset, /window\.scrollTo\(0, 0\)/);
+  assert.match(scrollReset, /scrollRestoration = "manual"/);
+  assert.match(scrollReset, /requestAnimationFrame\(reset\)/);
   assert.doesNotMatch(founderStatement, /wealthy|making money/i);
   assert.match(styles, /@keyframes vision-node-spin/);
   assert.match(styles, /prefers-reduced-motion: reduce/);

@@ -188,12 +188,12 @@
 
 @media (max-width: 520px) {
   .site-header .nav-shell {
-    width: calc(100% - 28px);
+    width: calc(100% - 48px);
   }
 
   .site-header .mobile-menu {
-    right: 10px;
-    left: 10px;
+    right: 18px;
+    left: 18px;
     border-radius: 17px;
   }
 

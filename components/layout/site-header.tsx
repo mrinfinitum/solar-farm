@@ -171,7 +171,10 @@ export function SiteHeader({ termSheetAvailable, tone = "default" }: { termSheet
       <div id="mobile-menu" className={cn("mobile-menu", menuOpen && "mobile-menu--open")} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile navigation">
           {mobileNavigation.map((item) => (
-            <Link key={`${item.label}-${item.href}`} href={resolveHref(item.href, onHomePage)} onClick={() => setMenuOpen(false)}>
+            <Link key={`${item.label}-${item.href}`} href={resolveHref(item.href, onHomePage)} scroll onClick={(event) => {
+              event.currentTarget.blur();
+              setMenuOpen(false);
+            }}>
               {item.label}
             </Link>
           ))}
