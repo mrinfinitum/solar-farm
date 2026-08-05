@@ -104,7 +104,7 @@ test("Why NSoul section explains benefits for businesses of different sizes", ()
     "Regional institutions",
     "Large energy users",
     "Procurement teams",
-    "No equipment ownership",
+    "No equipment purchase",
     "Renewable-energy goals",
   ]) assert.match(benefits, new RegExp(message, "i"));
   assert.match(benefits, /Compare a proposed project rate with your actual utility costs/);

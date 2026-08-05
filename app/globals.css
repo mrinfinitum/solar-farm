@@ -8881,16 +8881,6 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 .regional-project-note { max-width: 590px; margin: 30px 0 0; padding-top: 26px; border-top: 1px solid rgba(184,234,105,.18); color: #d6dfd9; font-size: clamp(16px,1.25vw,19px); font-weight: 480; letter-spacing: -.012em; line-height: 1.6; }
 .regional-project-process { margin: 0; list-style: none; }
 .regional-project-process li { display: flex; align-items: center; gap: clamp(20px,4vw,56px); color: #dce5df; font-size: 13px; font-weight: 680; letter-spacing: .12em; text-transform: uppercase; }
-.buyer-confirmation-panel { display: grid; grid-template-columns: .8fr 1.6fr auto; align-items: center; gap: 35px; margin-top: 18px; padding: 25px 30px; border: 1px solid rgba(23,48,37,.13); border-radius: 20px; background: rgba(255,255,255,.42); }
-.buyer-confirmation-panel h3 { margin: 6px 0 0; color: #173025; font-size: 22px; letter-spacing: -.03em; }
-.buyer-confirmation-panel ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.buyer-confirmation-panel li { padding: 8px 10px; border: 1px solid rgba(23,48,37,.12); border-radius: 999px; color: #566c5e; font-size: 11px; }
-.buyer-confirmation-panel > a { display: inline-flex; align-items: center; gap: 7px; color: #173025; font-size: 12px; font-weight: 680; white-space: nowrap; }
-.buyer-confirmation-panel svg { width: 15px; }
-html[data-theme="dark"] .buyer-confirmation-panel { border-color: var(--border); background: var(--surface); }
-html[data-theme="dark"] .buyer-confirmation-panel h3, html[data-theme="dark"] .buyer-confirmation-panel > a { color: var(--text); }
-html[data-theme="dark"] .buyer-confirmation-panel li { border-color: var(--border); color: var(--muted); }
-
 .buyer-confidence { padding: clamp(88px,9vw,140px) 0; }
 .buyer-confidence__shell { display: grid; grid-template-columns: minmax(0,.8fr) minmax(560px,1.2fr); gap: 54px 80px; padding: clamp(34px,5vw,68px); border: 1px solid var(--border); border-radius: 30px; background: var(--surface); }
 .buyer-confidence__intro h2 { max-width: 680px; margin: 12px 0 22px; font-size: clamp(42px,5vw,70px); font-weight: 510; letter-spacing: -.06em; line-height: .98; }
@@ -9088,7 +9078,6 @@ html[data-theme="dark"] .buyer-confirmation-panel li { border-color: var(--borde
   .buyer-confidence__shell { min-width: 0; padding: 28px 20px; border-radius: 22px; }
   .buyer-confidence__points { grid-template-columns: 1fr; }
   .buyer-confidence__points article { min-height: 0; padding: 24px 18px; }
-  .buyer-confirmation-panel { grid-template-columns: 1fr; }
   .regional-project-process { align-items: flex-start; flex-direction: column; gap: 13px; }
   .regional-project-process li { width: 100%; justify-content: space-between; }
   .trust-form-grid { grid-template-columns: 1fr; }

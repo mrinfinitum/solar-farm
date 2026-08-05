@@ -1,5 +1,4 @@
-import { ArrowRight, CircleDollarSign, Leaf, WalletCards } from "lucide-react";
-import Link from "next/link";
+import { CircleDollarSign, Leaf, WalletCards } from "lucide-react";
 
 import { Reveal } from "@/components/ui/reveal";
 
@@ -22,55 +21,44 @@ const commercialRoles = [
   { name: "Procurement teams", description: "Clear assumptions, diligence, and documented energy and REC terms." },
 ] as const;
 
-const priorities = ["Lower operating costs", "Long-term budget visibility", "No equipment ownership", "Renewable-energy goals", "A direct regional relationship"] as const;
-
 export function RegionalProjectFeature() {
   return (
-    <>
-      <Reveal className="regional-project-feature">
-        <div className="regional-project-main">
-          <div className="regional-project-diagram" aria-labelledby="buyer-model-steps">
-            <h3 id="buyer-model-steps" className="sr-only">Why businesses choose NSoul</h3>
-            <p className="regional-project-kicker">Three ways NSoul creates value</p>
-            <ol>
-              {responsibilitySteps.map(({ icon: Icon, title, description }, index) => (
-                <li className="regional-project-node" key={title}>
-                  <div className="regional-project-icon" aria-hidden="true"><Icon strokeWidth={1.6} /></div>
-                  <div><h3>{title}</h3><p>{description}</p></div>
-                  {index < responsibilitySteps.length - 1 ? <span className="regional-project-connector" aria-hidden="true" /> : null}
-                </li>
-              ))}
-            </ol>
-            <p className="regional-project-note">The opportunity is evaluated around your business, your actual energy use, and the benefits that matter to your organization.</p>
-          </div>
-
-          <div className="regional-project-snapshot">
-            <div className="regional-project-snapshot-header"><span>Commercial benefits</span><small>Built around your energy data</small></div>
-            <div className="regional-project-facts" aria-label="Potential business benefits">
-              {protectionAnswers.map((fact) => (
-                <article key={fact.title}>
-                  <strong>{fact.value}</strong>
-                  <h3>{fact.title}</h3>
-                  <p>{fact.copy}</p>
-                  <small>{fact.proof}</small>
-                </article>
-              ))}
-            </div>
-
-            <div className="regional-project-roles">
-              <h3>Built for businesses of every scale</h3>
-              {commercialRoles.map((role, index) => <div key={role.name}><span>0{index + 1}</span><strong>{role.name}</strong><p>{role.description}</p></div>)}
-            </div>
-          </div>
+    <Reveal className="regional-project-feature">
+      <div className="regional-project-main">
+        <div className="regional-project-diagram" aria-labelledby="buyer-model-steps">
+          <h3 id="buyer-model-steps" className="sr-only">Why businesses choose NSoul</h3>
+          <p className="regional-project-kicker">Three ways NSoul creates value</p>
+          <ol>
+            {responsibilitySteps.map(({ icon: Icon, title, description }, index) => (
+              <li className="regional-project-node" key={title}>
+                <div className="regional-project-icon" aria-hidden="true"><Icon strokeWidth={1.6} /></div>
+                <div><h3>{title}</h3><p>{description}</p></div>
+                {index < responsibilitySteps.length - 1 ? <span className="regional-project-connector" aria-hidden="true" /> : null}
+              </li>
+            ))}
+          </ol>
+          <p className="regional-project-note">The opportunity is evaluated around your business, your actual energy use, and the benefits that matter to your organization.</p>
         </div>
 
-      </Reveal>
+        <div className="regional-project-snapshot">
+          <div className="regional-project-snapshot-header"><span>Commercial benefits</span><small>Built around your energy data</small></div>
+          <div className="regional-project-facts" aria-label="Potential business benefits">
+            {protectionAnswers.map((fact) => (
+              <article key={fact.title}>
+                <strong>{fact.value}</strong>
+                <h3>{fact.title}</h3>
+                <p>{fact.copy}</p>
+                <small>{fact.proof}</small>
+              </article>
+            ))}
+          </div>
 
-      <Reveal className="buyer-confirmation-panel">
-        <div><p className="eyebrow">Start with your priorities</p><h3>What could better power do for your business?</h3></div>
-        <ul>{priorities.map((priority) => <li key={priority}>{priority}</li>)}</ul>
-        <Link href="/energy-assessment" aria-label="Request an Energy Assessment">Request an Assessment <ArrowRight aria-hidden="true" /></Link>
-      </Reveal>
-    </>
+          <div className="regional-project-roles">
+            <h3>Built for businesses of every scale</h3>
+            {commercialRoles.map((role, index) => <div key={role.name}><span>0{index + 1}</span><strong>{role.name}</strong><p>{role.description}</p></div>)}
+          </div>
+        </div>
+      </div>
+    </Reveal>
   );
 }
