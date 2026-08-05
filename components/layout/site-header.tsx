@@ -24,7 +24,10 @@ const desktopNavigation = [
 const mobileNavigation = [
   { label: "Overview", href: "#top" },
   { label: "Our Vision", href: "/our-vision" },
-  ...navigation,
+  ...navigation.slice(0, 5).map((item) => ({
+    ...item,
+    label: item.href === "#how-it-works" ? "Process" : item.label,
+  })),
 ];
 
 function resolveHref(href: string, onHomePage: boolean) {
@@ -76,11 +79,16 @@ export function SiteHeader({ termSheetAvailable, tone = "default" }: { termSheet
 
   useEffect(() => {
     if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [menuOpen]);
 
   useEffect(() => {
@@ -160,15 +168,31 @@ export function SiteHeader({ termSheetAvailable, tone = "default" }: { termSheet
         </div>
       </div>
 
-      <div id="mobile-menu" className={cn("mobile-menu", menuOpen && "mobile-menu--open")}>
+      <div id="mobile-menu" className={cn("mobile-menu", menuOpen && "mobile-menu--open")} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile navigation">
-          {mobileNavigation.map((item, index) => (
+          {mobileNavigation.map((item) => (
             <Link key={`${item.label}-${item.href}`} href={resolveHref(item.href, onHomePage)} onClick={() => setMenuOpen(false)}>
-              <span>0{index + 1}</span>{item.label}
+              {item.label}
             </Link>
           ))}
         </nav>
-        <TermSheetLink available={termSheetAvailable} className="button button--secondary mobile-download" context="mobile-menu" />
+        <div className="mobile-menu__actions">
+          <a
+            className="mobile-menu__contact"
+            href={onHomePage ? "#contact" : "/#contact"}
+            onClick={() => {
+              setMenuOpen(false);
+              trackEvent("nav_contact_click", { context: "mobile-menu" });
+            }}
+          >
+            Contact <ArrowUpRight aria-hidden="true" size={18} />
+          </a>
+          <div className="mobile-menu__utility">
+            <span>Appearance</span>
+            <ThemeToggle />
+          </div>
+          <TermSheetLink available={termSheetAvailable} className="mobile-download" context="mobile-menu" />
+        </div>
       </div>
     </header>
   );

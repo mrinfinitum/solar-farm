@@ -95,6 +95,9 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   assert.match(styles, /@keyframes vision-node-spin/);
   assert.match(styles, /prefers-reduced-motion: reduce/);
   assert.match(header, /Our Vision/);
+  assert.match(header, /aria-controls="mobile-menu"/);
+  assert.match(header, /mobile-menu__contact/);
+  assert.doesNotMatch(header, /<span>0\{index \+ 1\}<\/span>/);
   assert.match(footer, /href="\/our-vision"/);
   assert.match(sitemap, /\/our-vision/);
 });
