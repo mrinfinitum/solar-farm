@@ -9,7 +9,7 @@ const regionalOpportunities = [
   { region: "Central region", position: "central", counties: "Oklahoma, Canadian, Logan", focus: "Manufacturing, healthcare, and distribution" },
   { region: "Northeast region", position: "northeast", counties: "Tulsa, Rogers, Mayes", focus: "Industrial, commercial, and institutional demand" },
   { region: "Southwest region", position: "southwest", counties: "Comanche, Caddo, Kiowa", focus: "Processing, logistics, and regional operations" },
-  { region: "Southeast region", position: "southeast", counties: "Pittsburg, Atoka, Pushmataha", focus: "Manufacturing, forestry, and public facilities" },
+  { region: "Southeast region", position: "southeast", counties: "Pittsburg, Atoka, Pushmataha, McCurtain", focus: "Manufacturing, forestry, and public facilities" },
 ] as const;
 
 const localAdvantages = [

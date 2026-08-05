@@ -18,8 +18,8 @@ export const responsibilityParties = [
 ] as const;
 
 export const homepageTrustPoints = [
-  { title: "Customer capital protected", copy: "The proposed structure does not require the customer to purchase the solar equipment or fund project construction." },
-  { title: "Metered energy", copy: "Commercial billing is intended to be based on energy measured under the definitive agreement and approved metering structure." },
-  { title: "Defined responsibilities", copy: "Development, engineering, financing, construction, insurance, maintenance, and operations are assigned to the responsible project parties in final documentation." },
-  { title: "Transparent diligence", copy: "Project status, assumptions, risks, third-party reviews, and available documents are disclosed through the project-diligence process." },
+  { label: "Capital clarity", title: "Customer capital protected", copy: "The proposed structure does not require the customer to purchase the solar equipment or fund project construction." },
+  { label: "Billing clarity", title: "Metered energy", copy: "Commercial billing is intended to be based on energy measured under the definitive agreement and approved metering structure." },
+  { label: "Clear accountability", title: "Defined responsibilities", copy: "Development, engineering, financing, construction, insurance, maintenance, and operations are assigned to the responsible project parties in final documentation." },
+  { label: "Visible process", title: "Transparent diligence", copy: "Project status, assumptions, risks, third-party reviews, and available documents are disclosed through the project-diligence process." },
 ] as const;

@@ -11,7 +11,6 @@ import { ProcessSection } from "@/components/sections/process-section";
 import { EnergyFlowSection } from "@/components/sections/energy-flow-section";
 import { ProjectModelSection } from "@/components/sections/project-model-section";
 import { FaqSection } from "@/components/sections/faq-section";
-import { TrustStrip } from "@/components/sections/trust-strip";
 import { BuyerConfidenceSection } from "@/components/sections/buyer-confidence-section";
 import { isTermSheetAvailable } from "@/lib/term-sheet";
 
@@ -57,7 +56,6 @@ export default function Home() {
         <CornerstoneProjectSection />
         <BuyerConfidenceSection />
         <EconomicsSection />
-        <TrustStrip />
         <DevelopmentSection />
         <FaqSection />
         <ContactSection termSheetAvailable={termSheetAvailable} />

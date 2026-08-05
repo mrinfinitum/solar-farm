@@ -16,7 +16,11 @@ export function BuyerConfidenceSection() {
         <div className="buyer-confidence__points">
           {homepageTrustPoints.map((point, index) => (
             <Reveal key={point.title} delay={index * 0.04}>
-              <article><CircleCheck aria-hidden="true" /><div><h3>{point.title}</h3><p>{point.copy}</p></div></article>
+              <article>
+                <span className="buyer-confidence__index">0{index + 1}</span>
+                <span className="buyer-confidence__icon"><CircleCheck aria-hidden="true" /></span>
+                <div><small>{point.label}</small><h3>{point.title}</h3><p>{point.copy}</p></div>
+              </article>
             </Reveal>
           ))}
         </div>
