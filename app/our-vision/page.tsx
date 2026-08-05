@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Cable, CircleDollarSign, Gauge, Handshake, MapPin, RefreshCw, ShieldCheck, SunMedium } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BadgeCheck, Cable, CircleDollarSign, Gauge, Handshake, HeartHandshake, Infinity as InfinityIcon, Layers3, MapPin, RefreshCw, ShieldCheck, SunMedium } from "lucide-react";
 
 import { FounderStatement } from "@/components/vision/founder-statement";
 import { VisionCommitment } from "@/components/vision/vision-commitment";
@@ -41,10 +41,10 @@ const modelSteps = [
 ] as const;
 
 const milestones = [
-  { label: "First project", title: "Prove the model.", copy: "Advance a development-stage project through disciplined validation, contracting, financing, and delivery." },
-  { label: "Portfolio growth", title: "Build recurring value.", copy: "Develop additional assets and long-term commercial energy relationships without sacrificing underwriting discipline." },
-  { label: "Community partnerships", title: "Create measurable programs.", copy: "As operating success permits, establish accountable partnerships focused on housing, opportunity, and local resilience." },
-  { label: "Long-term legacy", title: "Serve future generations.", copy: "Retain productive infrastructure, deepen local relationships, and grow impact alongside the company’s operating capacity." },
+  { label: "First project", title: "Prove the model.", copy: "Advance a development-stage project through disciplined validation, contracting, financing, and delivery.", icon: BadgeCheck },
+  { label: "Portfolio growth", title: "Build recurring value.", copy: "Develop additional assets and long-term commercial energy relationships without sacrificing underwriting discipline.", icon: Layers3 },
+  { label: "Community partnerships", title: "Create measurable programs.", copy: "As operating success permits, establish accountable partnerships focused on housing, opportunity, and local resilience.", icon: HeartHandshake },
+  { label: "Long-term legacy", title: "Serve future generations.", copy: "Retain productive infrastructure, deepen local relationships, and grow impact alongside the company’s operating capacity.", icon: InfinityIcon },
 ] as const;
 
 export default function OurVisionPage() {
@@ -129,9 +129,33 @@ export default function OurVisionPage() {
               <div><p className="eyebrow">What success looks like</p><h2 id="success-title">Growth measured in assets, relationships, and service.</h2></div>
               <p>The long-term goal is a repeatable development platform, multiple operating assets, trusted local partnerships, and measurable community investment that grows with operating success.</p>
             </div>
-            <ol className="vision-milestones">
-              {milestones.map((milestone, index) => <li key={milestone.label}><span>0{index + 1}</span><p>{milestone.label}</p><h3>{milestone.title}</h3><small>{milestone.copy}</small></li>)}
-            </ol>
+            <div className="vision-milestones__panel">
+              <div className="vision-milestones__toolbar">
+                <span><i aria-hidden="true" /> NSoul growth roadmap</span>
+                <small>Four horizons · Built sequentially</small>
+              </div>
+              <ol className="vision-milestones">
+                {milestones.map((milestone, index) => {
+                  const Icon = milestone.icon;
+                  return (
+                    <li key={milestone.label}>
+                      <div className="vision-milestones__meta">
+                        <span>0{index + 1}</span>
+                        <i><Icon aria-hidden="true" size={18} /></i>
+                      </div>
+                      <div className="vision-milestones__copy">
+                        <p>{milestone.label}</p>
+                        <h3>{milestone.title}</h3>
+                        <small>{milestone.copy}</small>
+                      </div>
+                      <div className="vision-milestones__progress" aria-hidden="true">
+                        {milestones.map((item, segmentIndex) => <i className={segmentIndex <= index ? "is-active" : undefined} key={item.label} />)}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
           </div>
         </section>
 

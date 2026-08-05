@@ -2988,13 +2988,23 @@ a {
   .cornerstone-project-heading > p { font-size: 15px; }
   .cornerstone-map-panel, .cornerstone-facts-panel, .cornerstone-status-panel { padding: 22px; }
   .cornerstone-map { min-height: 310px; }
-  .cornerstone-map--network { min-height: clamp(340px, 96vw, 400px); aspect-ratio: auto; }
+  .cornerstone-map--network {
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 680 / 390;
+    margin: 24px 0 18px;
+  }
+  .cornerstone-map--network svg { inset: 0; width: 100%; height: 100%; }
   .cornerstone-map-label--corridor { display: none; }
   .cornerstone-project-popover { width: min(236px, calc(100vw - 82px)); padding: 13px 14px 12px; }
   .cornerstone-project-popover > strong { font-size: 14px; }
   .cornerstone-project-popover > span { font-size: 9px; }
-  .cornerstone-project-pin--central > .cornerstone-project-popover { top: -88px; bottom: auto; transform-origin: center left; }
-  .cornerstone-project-pin--southeast > .cornerstone-project-popover { right: 13px; }
+  .cornerstone-project-pin--northwest > .cornerstone-project-popover { left: 8px; }
+  .cornerstone-project-pin--central > .cornerstone-project-popover { right: auto; bottom: 18px; left: -112px; transform-origin: bottom center; }
+  .cornerstone-project-pin--southwest > .cornerstone-project-popover { right: auto; left: -88px; transform-origin: bottom center; }
+  .cornerstone-project-pin--northeast > .cornerstone-project-popover,
+  .cornerstone-project-pin--southeast > .cornerstone-project-popover { right: 8px; left: auto; }
   .cornerstone-map-label--project { top: 55%; left: 17%; }
   .cornerstone-map-label--region { right: 0; bottom: 17%; }
   .cornerstone-map-legend { gap: 10px 14px; }
@@ -8186,6 +8196,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   .vision-pillars__visual::before,
   .vision-pillars__visual::after,
   .vision-pillars__glyph,
+  .vision-milestones li,
   .regional-project-icon,
   .regional-project-icon::before {
     transition-duration: .01ms;
@@ -8211,7 +8222,8 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   .vision-pillars__grid article:hover,
   .vision-pillars__grid article:hover .vision-pillars__glyph,
   .vision-pillars__grid article:hover .vision-pillars__visual::before,
-  .vision-pillars__grid article:hover .vision-pillars__visual::after {
+  .vision-pillars__grid article:hover .vision-pillars__visual::after,
+  .vision-milestones li:hover {
     transform: none;
   }
 
@@ -8636,43 +8648,115 @@ html[data-theme="dark"] .vision-pillars__glyph { border-color: rgba(166, 222, 69
   padding-block: clamp(100px, 12vw, 180px);
 }
 
+.vision-milestones__panel {
+  margin-top: clamp(52px, 6vw, 88px);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  box-shadow: 0 28px 76px rgba(13, 43, 29, .08);
+}
+
+.vision-milestones__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 4px 12px 16px;
+}
+
+.vision-milestones__toolbar span,
+.vision-milestones__toolbar small {
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.vision-milestones__toolbar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--vision-ink);
+  font-weight: 650;
+}
+
+.vision-milestones__toolbar span i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vision-accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--vision-accent) 14%, transparent);
+}
+
 .vision-milestones {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: clamp(68px, 8vw, 116px) 0 0;
+  gap: 10px;
+  margin: 0;
   padding: 0;
-  border-top: 1px solid var(--line);
   list-style: none;
 }
 
 .vision-milestones li {
   position: relative;
-  min-height: 380px;
-  padding: 32px clamp(20px, 2.4vw, 40px) 36px 0;
+  display: flex;
+  min-height: 356px;
+  flex-direction: column;
+  padding: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  transition: border-color .3s ease, box-shadow .35s ease, transform .35s cubic-bezier(.22, 1, .36, 1);
 }
 
-.vision-milestones li + li {
-  padding-left: clamp(22px, 2.4vw, 40px);
-  border-left: 1px solid var(--line);
+.vision-milestones li:first-child {
+  border-color: color-mix(in srgb, var(--vision-accent) 40%, var(--line));
+  background:
+    radial-gradient(circle at 85% 12%, color-mix(in srgb, var(--vision-accent) 18%, transparent), transparent 32%),
+    color-mix(in srgb, var(--card) 94%, var(--vision-accent));
 }
 
-.vision-milestones li::before {
-  position: absolute;
-  top: -5px;
-  left: 0;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--accent);
-  content: "";
+.vision-milestones li:hover {
+  z-index: 1;
+  border-color: color-mix(in srgb, var(--vision-accent) 48%, var(--line));
+  box-shadow: 0 22px 50px rgba(13, 43, 29, .11);
+  transform: translateY(-5px);
 }
 
-.vision-milestones li + li::before {
-  left: clamp(22px, 2.4vw, 40px);
+.vision-milestones__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.vision-milestones li > p {
-  margin: 108px 0 12px;
+.vision-milestones__meta > span {
+  color: var(--vision-accent);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: .15em;
+}
+
+.vision-milestones__meta > i {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--vision-accent) 28%, var(--line));
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--vision-accent) 9%, transparent);
+  color: var(--vision-accent);
+}
+
+.vision-milestones__copy {
+  margin-top: auto;
+  padding-top: clamp(54px, 6vw, 86px);
+}
+
+.vision-milestones__copy > p {
+  margin: 0 0 12px;
   color: var(--vision-accent);
   font-family: var(--font-mono), monospace;
   font-size: 11px;
@@ -8690,9 +8774,31 @@ html[data-theme="dark"] .vision-pillars__glyph { border-color: rgba(166, 222, 69
 }
 
 .vision-milestones small {
+  display: block;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.65;
+}
+
+.vision-milestones__progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin-top: 28px;
+}
+
+.vision-milestones__progress i {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.vision-milestones__progress i.is-active {
+  background: var(--vision-accent);
+}
+
+html[data-theme="dark"] .vision-milestones li:first-child {
+  background: radial-gradient(circle at 85% 12%, rgba(166, 222, 69, .14), transparent 32%), color-mix(in srgb, var(--card) 94%, #173622);
 }
 
 .founder-statement {
@@ -8825,9 +8931,6 @@ html[data-theme="dark"] .vision-pillars__glyph { border-color: rgba(166, 222, 69
   .vision-flywheel__rail li:nth-child(4) { border-left: 0; }
   .vision-model__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .vision-milestones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .vision-milestones li:nth-child(3) { border-left: 0; }
-  .vision-milestones li:nth-child(n + 3) { border-top: 1px solid var(--line); }
-  .vision-milestones li:nth-child(3)::before { left: 0; }
 }
 
 @media (max-width: 900px) {
@@ -8901,17 +9004,11 @@ html[data-theme="dark"] .vision-pillars__glyph { border-color: rgba(166, 222, 69
   .vision-pillars__visual { min-height: 176px; }
   .vision-pillars__copy { padding: 24px 14px 0; }
   .vision-intent-note { align-items: flex-start; flex-direction: column; gap: 10px; padding: 18px; }
+  .vision-milestones__panel { padding: 8px; border-radius: 22px; }
+  .vision-milestones__toolbar { align-items: flex-start; flex-direction: column; gap: 8px; padding: 10px 10px 18px; }
   .vision-milestones { grid-template-columns: 1fr; }
-  .vision-milestones li,
-  .vision-milestones li + li {
-    min-height: 0;
-    padding: 28px 0 38px;
-    border-top: 1px solid var(--line);
-    border-left: 0;
-  }
-  .vision-milestones li::before,
-  .vision-milestones li + li::before { left: 0; }
-  .vision-milestones li > p { margin-top: 52px; }
+  .vision-milestones li { min-height: 310px; padding: 20px; }
+  .vision-milestones__copy { padding-top: 48px; }
   .founder-statement blockquote p { font-size: clamp(34px, 9.8vw, 50px); }
   .founder-statement blockquote footer { align-items: flex-start; flex-direction: column; gap: 4px; }
   .vision-commitment__layout { grid-template-columns: 1fr; }
