@@ -98,6 +98,8 @@ test("Why NSoul section explains benefits for businesses of different sizes", ()
   assert.match(benefits, /Capital stays in your business/);
   assert.match(styles, /regional-project-facts[\s\S]*grid-template-columns: repeat\(3/);
   assert.match(styles, /regional-project-roles[\s\S]*grid-template-columns: repeat\(2/);
+  assert.match(styles, /nsoul-hero-solar-field\.png/);
+  assert.match(styles, /regional-project-diagram:hover::before/);
 });
 
 test("Our Vision is discoverable, qualified, and shareable", () => {

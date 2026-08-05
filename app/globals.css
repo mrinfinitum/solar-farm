@@ -6000,12 +6000,46 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 }
 
 .regional-project-diagram {
+  position: relative;
+  isolation: isolate;
   display: flex;
+  overflow: hidden;
   min-height: 640px;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
   padding: clamp(48px, 4.4vw, 68px);
+}
+
+.regional-project-diagram::before,
+.regional-project-diagram::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.regional-project-diagram::before {
+  z-index: -2;
+  background: url("/brand/nsoul-hero-solar-field.png") center / cover no-repeat;
+  filter: saturate(.65) contrast(1.05);
+  opacity: .12;
+  transform: scale(1.025);
+  transition: opacity .6s ease, transform 1.2s cubic-bezier(.22, 1, .36, 1);
+}
+
+.regional-project-diagram::after {
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(10, 24, 17, .94), rgba(10, 24, 17, .79) 50%, rgba(10, 24, 17, .93)),
+    linear-gradient(180deg, rgba(10, 24, 17, .72), rgba(10, 24, 17, .95));
+}
+
+@media (hover: hover) {
+  .regional-project-diagram:hover::before {
+    opacity: .2;
+    transform: scale(1.01);
+  }
 }
 
 .regional-project-kicker,
@@ -6477,6 +6511,10 @@ html[data-theme="dark"] .project-model-section .button--secondary {
 
 @media (prefers-reduced-motion: reduce) {
   .project-model-section .button {
+    transition: none;
+  }
+
+  .regional-project-diagram::before {
     transition: none;
   }
 }
