@@ -7812,6 +7812,22 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   transition: opacity .3s ease, transform .45s cubic-bezier(.22, 1, .36, 1);
 }
 
+.vision-flywheel__rail span::after {
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, transparent 0 68%, #b5f564 76%, transparent 84%);
+  content: "";
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0);
+  opacity: 0;
+}
+
+.vision-flywheel__rail span b {
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
 @media (hover: hover) {
   .vision-flywheel__rail li:hover span {
     border-color: #b5f564;
@@ -7824,6 +7840,11 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
     animation: vision-node-spin 2.4s linear infinite;
     opacity: 1;
     transform: scale(1);
+  }
+
+  .vision-flywheel__rail li:hover span::after {
+    animation: vision-node-spin 1.8s linear infinite reverse;
+    opacity: 1;
   }
 }
 
@@ -7848,6 +7869,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 @media (prefers-reduced-motion: reduce) {
   .vision-flywheel__rail span,
   .vision-flywheel__rail span::before,
+  .vision-flywheel__rail span::after,
   .vision-model__steps li,
   .vision-model__card-arrow,
   .vision-model__card-image,
@@ -7861,6 +7883,10 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   }
 
   .vision-flywheel__rail li:hover span::before {
+    animation: none;
+  }
+
+  .vision-flywheel__rail li:hover span::after {
     animation: none;
   }
 
@@ -8399,4 +8425,133 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   .vision-commitment li { grid-template-columns: 42px 1fr; min-height: 72px; }
   .vision-final-cta .container > div { width: 100%; flex-direction: column; }
   .vision-final-cta .button { width: 100%; }
+}
+
+/* Spacious mobile composition for the solar-to-business story. */
+@media (max-width: 768px) {
+  .energy-flow-layout {
+    gap: 52px;
+    padding-block: 86px 76px;
+  }
+
+  .energy-flow-copy {
+    display: block;
+    max-width: 410px;
+  }
+
+  .energy-flow-copy .eyebrow {
+    margin-bottom: 18px;
+  }
+
+  .energy-flow-copy h2 {
+    max-width: 390px;
+    margin-top: 0;
+    font-size: clamp(52px, 14.8vw, 66px);
+    line-height: .91;
+  }
+
+  .energy-flow-copy > p:last-child {
+    max-width: 350px;
+    margin-top: 26px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .energy-flow-graphic--models {
+    display: grid;
+    width: min(100%, 430px);
+    min-height: 778px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 250px 64px 150px 64px 250px;
+    justify-self: center;
+    overflow: visible;
+  }
+
+  .energy-flow-graphic--models::before {
+    inset: 218px auto 218px 50%;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgba(181, 245, 100, .72) 12%, rgba(181, 245, 100, .72) 88%, transparent);
+    transform: none;
+  }
+
+  .energy-flow-graphic--models > .energy-model {
+    grid-column: 1;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .energy-flow-graphic--models > .energy-model--solar { grid-row: 1; }
+  .energy-flow-graphic--models > .energy-model--business { grid-row: 5; }
+
+  .energy-flow-graphic--models .energy-model__art {
+    inset: -34px 0 52px;
+  }
+
+  .energy-flow-graphic--models .energy-model--solar .energy-model__art,
+  .energy-flow-graphic--models .energy-model--business .energy-model__art,
+  .energy-flow-graphic--models .energy-model--solar:hover .energy-model__art,
+  .energy-flow-graphic--models .energy-model--business:hover .energy-model__art {
+    transform: scale(1.12);
+  }
+
+  .energy-flow-graphic--models .energy-model > span {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .energy-flow-graphic--models .energy-model > span small {
+    font-size: 10px;
+  }
+
+  .energy-flow-graphic--models .energy-model > span strong {
+    font-size: 21px;
+  }
+
+  .energy-flow-graphic--models > .energy-current {
+    grid-column: 1;
+    align-self: stretch;
+    justify-self: center;
+    width: 2px;
+    height: 100%;
+    background: rgba(181, 245, 100, .34);
+  }
+
+  .energy-flow-graphic--models > .energy-current--left { grid-row: 2; }
+  .energy-flow-graphic--models > .energy-current--right { grid-row: 4; }
+
+  .energy-flow-graphic--models > .energy-current i {
+    top: -4px;
+    left: 50%;
+    animation: energy-travel-mobile 2.6s linear infinite;
+  }
+
+  .energy-flow-graphic--models > .energy-core {
+    grid-column: 1;
+    grid-row: 3;
+    width: 132px;
+    height: 132px;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .energy-flow-graphic--models > .energy-core > svg {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 5px;
+    padding: 9px;
+  }
+
+  .energy-flow-graphic--models > .energy-core small { font-size: 7px; }
+  .energy-flow-graphic--models > .energy-core strong { font-size: 14px; }
+  .energy-flow-marquee { display: none; }
+}
+
+@media (max-width: 390px) {
+  .energy-flow-layout { gap: 44px; }
+  .energy-flow-graphic--models { width: 100%; }
+  .energy-flow-graphic--models .energy-model__art { inset-inline: -8px; }
 }

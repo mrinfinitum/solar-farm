@@ -17,7 +17,7 @@ export function VisionFlywheel() {
         <ol className="vision-flywheel__rail">
           {flywheel.map((item, index) => (
             <li key={item.title}>
-              <span>0{index + 1}</span>
+              <span><b>0{index + 1}</b></span>
               <h3>{item.title}</h3>
               <p>{item.copy}</p>
             </li>
