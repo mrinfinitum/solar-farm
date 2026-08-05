@@ -112,7 +112,12 @@ export default function OurVisionPage() {
                 })}
               </ol>
             </div>
-            <p className="vision-model__principle">Purpose does not replace sound economics. <em>It depends on them.</em></p>
+            <div className="vision-model__principle">
+              <p>Purpose does not replace sound economics. <em>It depends on them.</em></p>
+              <Link className="button button--primary" href="/energy-assessment">
+                Assess your energy opportunity <ArrowRight aria-hidden="true" size={16} />
+              </Link>
+            </div>
           </div>
         </section>
 

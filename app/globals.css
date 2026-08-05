@@ -8219,6 +8219,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 
 .vision-model {
   padding-block: clamp(100px, 12vw, 184px);
+  padding-bottom: clamp(72px, 8vw, 116px);
 }
 
 .vision-model__workflow {
@@ -8385,8 +8386,16 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 }
 
 .vision-model__principle {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 76px);
+  margin: clamp(56px, 7vw, 96px) 0 0;
+}
+
+.vision-model__principle > p {
   max-width: 1100px;
-  margin: clamp(70px, 9vw, 130px) 0 0;
+  margin: 0;
   color: var(--vision-ink);
   font-size: clamp(40px, 5vw, 82px);
   font-weight: 480;
@@ -8394,14 +8403,21 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   line-height: 1;
 }
 
-.vision-model__principle em {
+.vision-model__principle > p em {
   color: var(--vision-accent);
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 400;
 }
 
+.vision-model__principle .button {
+  flex: 0 0 auto;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
 .vision-pillars {
   padding-block: clamp(84px, 8vw, 128px);
+  padding-top: clamp(68px, 6vw, 96px);
   border-top: 1px solid var(--line);
   background: color-mix(in srgb, var(--vision-soft) 70%, var(--bg));
 }
@@ -8669,6 +8685,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   .vision-pillars__grid article { min-height: 0; padding: 30px 0 40px; }
   .vision-pillars__grid article + article { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
   .vision-pillars__grid h3 { margin-top: 52px; }
+  .vision-model__principle { align-items: flex-start; flex-direction: column; gap: 28px; }
 }
 
 @media (max-width: 720px) {
@@ -8721,7 +8738,8 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   .vision-model__steps { grid-template-columns: 1fr; gap: 8px; }
   .vision-model__steps li { min-height: 190px; padding: 20px; }
   .vision-model__card-copy { padding: 36px 34px 0 0; }
-  .vision-model__principle { font-size: clamp(38px, 11vw, 56px); }
+  .vision-model__principle > p { font-size: clamp(38px, 11vw, 56px); }
+  .vision-model__principle .button { width: 100%; }
   .vision-milestones { grid-template-columns: 1fr; }
   .vision-milestones li,
   .vision-milestones li + li {
