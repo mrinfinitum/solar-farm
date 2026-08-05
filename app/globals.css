@@ -8282,7 +8282,7 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) 96%, var(--vision-accent));
   transition: transform .3s cubic-bezier(.22, 1, .36, 1), border-color .25s ease, background-color .25s ease, box-shadow .3s ease;
 }
 
@@ -8297,10 +8297,10 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 .vision-model__card-image {
   position: absolute;
   inset: 0;
-  background-position: center;
+  background-position: center 38%;
   background-size: cover;
-  filter: grayscale(.18) saturate(.78) brightness(.94);
-  opacity: .18;
+  filter: grayscale(.08) saturate(.92) contrast(1.02) brightness(.9);
+  opacity: .38;
   transform: scale(1.02);
   transition: opacity .45s ease, filter .45s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
 }
@@ -8308,13 +8308,18 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 .vision-model__card-image::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 65%, transparent), color-mix(in srgb, var(--card) 94%, transparent) 72%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--card) 24%, transparent) 0%,
+    color-mix(in srgb, var(--card) 58%, transparent) 48%,
+    color-mix(in srgb, var(--card) 96%, transparent) 84%
+  );
   content: "";
 }
 
 .vision-model__steps li:hover .vision-model__card-image {
-  filter: saturate(1.05) brightness(.9);
-  opacity: .52;
+  filter: saturate(1.12) contrast(1.04) brightness(.84);
+  opacity: .72;
   transform: scale(1.07);
 }
 
