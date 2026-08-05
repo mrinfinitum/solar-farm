@@ -20,6 +20,7 @@ Apply migrations in filename order:
 1. `202608020001_site_finder_schema.sql` — legacy application schema and private Storage bucket.
 2. `202608020002_site_finder_rls.sql` — legacy policies required by the existing deployment history.
 3. `202608020003_identity_and_tenant_security.sql` — organizations, membership, roles, invitation activation, tenant columns, explicit operation policies, private tenant-prefixed Storage, and hardened audit access. This migration removes and supersedes the broad legacy policies.
+4. Continue through `202608040003_public_buyer_trust_intake.sql`, which adds server-mediated energy assessments, controlled diligence requests, private bill metadata, and the private `energy-assessment-bills` bucket. Anonymous and ordinary authenticated table access remain revoked.
 
 Use `supabase db push` against a staging project first. Take a database backup before applying migration 003 to a populated environment. Existing records are assigned to the initial `NSoul LLC` organization (`nsoul`) during migration.
 

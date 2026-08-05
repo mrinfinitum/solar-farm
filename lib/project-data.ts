@@ -22,6 +22,10 @@ export type ProjectDetails = {
   targetOperation: string;
   agreement: string;
   stage: string;
+  informationDate: string;
+  legalEntity: string;
+  projectCompany: string | null;
+  utility: string;
 };
 
 export type Metric = {
@@ -66,6 +70,10 @@ export const project: ProjectDetails = {
   targetOperation: "Q2/Q3 2027",
   agreement: "20-year commercial PPA",
   stage: "Development",
+  informationDate: "August 2026",
+  legalEntity: "NSoul LLC",
+  projectCompany: null,
+  utility: "Public Service Company of Oklahoma (PSO)",
 };
 
 export const commercialTerms = {
@@ -169,7 +177,8 @@ export const industries: IndustryCategory[] = [
 ];
 
 export const navigation = [
-  { label: "Opportunity", href: "#opportunity" },
+  { label: "Overview", href: "#top" },
+  { label: "Why NSoul", href: "/why-nsoul" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Project", href: "#project" },
   { label: "Economics", href: "#economics" },

@@ -8,7 +8,7 @@ Complete and record each item before commercial launch.
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the canonical `https://` origin with no placeholder domain.
 - [ ] Confirm the production, preview, and development Vercel environment scopes.
 - [ ] Confirm Supabase Auth Site URL and callback allow-list entries match the production domain.
-- [ ] Verify `/`, `/login`, `/submit-property`, `/privacy`, `/terms`, `/sitemap.xml`, and `/robots.txt` return successfully.
+- [ ] Verify `/`, `/why-nsoul`, `/energy-assessment`, `/project-diligence`, `/login`, `/submit-property`, `/privacy`, `/terms`, `/sitemap.xml`, and `/robots.txt` return successfully.
 
 ## Environment variables
 
@@ -20,10 +20,11 @@ Complete and record each item before commercial launch.
 
 ## Supabase and administration
 
-- [ ] Apply every migration in filename order through `202608040002_remote_function_lint_fixes.sql`; confirm the remote migration ledger and observable schema both match the checkout.
+- [ ] Apply every migration in filename order through `202608040003_public_buyer_trust_intake.sql`; confirm the remote migration ledger and observable schema both match the checkout.
 - [ ] Confirm RLS is enabled and explicit policies are present on every exposed application table.
 - [ ] Confirm anonymous users cannot read land submissions or storage objects.
 - [ ] Confirm the `site-finder-documents` bucket is private and supports PDF, JPG, and PNG intake.
+- [ ] Confirm the `energy-assessment-bills` bucket is private, limits files to 4 MB, and permits only PDF, JPG, JPEG, PNG, CSV, and XLSX.
 - [ ] Bootstrap the first owner using the procedure in `docs/SECURITY_AND_OPERATIONS.md`.
 - [ ] Run `npm run verify:remote-environment` and retain the non-secret report with the deployment record.
 - [ ] Invite the first additional user from Dashboard → Users and verify the activity log.
@@ -37,6 +38,8 @@ Complete and record each item before commercial launch.
 - [ ] Test contact validation, honeypot behavior, rate limiting, accessible errors, and the no-email safe fallback.
 - [ ] Submit land information with and without an attachment.
 - [ ] Confirm land intake remains usable when private storage is unavailable and never exposes a public file URL.
+- [ ] Submit an energy assessment with and without bills, verify no production success is claimed unless the request is stored or delivered, and confirm bill downloads require owner or administrator access.
+- [ ] Submit a data-room request and confirm it does not automatically expose private documents.
 
 ## Content, legal, and measurement
 

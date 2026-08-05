@@ -3,6 +3,7 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import test from "node:test";
 
 import { contactSchema } from "../lib/validation.ts";
+import { dataRoomRequestSchema, energyAssessmentSchema } from "../lib/validation/public-trust.ts";
 
 const read = (path: string) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
@@ -109,4 +110,97 @@ test("public term sheet is a real non-empty PDF", () => {
   assert.equal(existsSync(pdf), true);
   assert.ok(statSync(pdf).size > 5_000);
   assert.equal(readFileSync(pdf).subarray(0, 4).toString(), "%PDF");
+});
+
+test("Why NSoul and the homepage buyer-confidence teaser render", () => {
+  const page = read("app/why-nsoul/page.tsx");
+  const home = read("app/page.tsx");
+  const teaser = read("components/sections/buyer-confidence-section.tsx");
+  const faq = read("components/why-nsoul/procurement-faq.tsx");
+  assert.match(page, /Local energy development with a structure built for commercial confidence/);
+  assert.match(page, /buyerProtectionModules/);
+  assert.match(page, /responsibilityParties/);
+  assert.match(page, /audiencePaths/);
+  assert.match(home, /BuyerConfidenceSection/);
+  assert.match(teaser, /A smaller developer should not mean greater customer risk/);
+  assert.match(faq, /<details/);
+  assert.match(faq, /<summary>/);
+  assert.match(faq, /procurement_faq_open/);
+});
+
+test("buyer-confidence navigation and contextual routes are discoverable", () => {
+  const header = read("components/layout/site-header.tsx");
+  const footer = read("components/layout/site-footer.tsx");
+  const sitemap = read("app/sitemap.ts");
+  const projectData = read("lib/project-data.ts");
+  assert.match(projectData, /Why NSoul/);
+  assert.match(header, /mobileNavigation/);
+  for (const route of ["/why-nsoul", "/project-diligence", "/energy-assessment"]) {
+    assert.match(`${header}\n${footer}\n${sitemap}\n${projectData}`, new RegExp(route.replace("/", "\\/")));
+  }
+});
+
+test("energy assessment validates commercial qualification data", () => {
+  const result = energyAssessmentSchema.safeParse({
+    firstName: "Jordan", lastName: "Lee", email: "jordan@example.com", company: "Example Manufacturing", jobTitle: "Operations Director",
+    phone: "", facilityName: "Main Plant", facilityAddress: "100 Main Street", city: "Idabel", state: "OK", zipCode: "74745",
+    facilityType: "Manufacturing", currentUtility: "PSO", yearsAtFacility: "20", annualElectricityUse: "1500000",
+    monthlyElectricitySpend: "12000", currentBlendedRate: ".095", daytimeOperatingHours: "7 to 5", electricMeters: "2",
+    demandChargesKnown: "Yes", peakDemand: "900", existingRenewableContracts: "None", desiredContractTerm: "20 years",
+    desiredTimeline: "Within 6 months", consent: "on", website: "",
+  });
+  assert.equal(result.success, true);
+  assert.equal(energyAssessmentSchema.safeParse({}).success, false);
+});
+
+test("bill upload is private, constrained, and graceful when unconfigured", () => {
+  const form = read("components/forms/energy-assessment-form.tsx");
+  const route = read("app/api/energy-assessments/route.ts");
+  const signedRoute = read("app/api/energy-assessments/[id]/files/[fileId]/route.ts");
+  const migration = read("supabase/migrations/202608040003_public_buyer_trust_intake.sql");
+  assert.match(form, /disabled=\{!storageConfigured\}/);
+  assert.match(form, /provide bills securely after we contact you/);
+  assert.match(route, /MAX_FILE_SIZE = 4 \* 1024 \* 1024/);
+  assert.match(route, /files\.length > 12/);
+  assert.match(route, /sanitizeFilename/);
+  assert.match(migration, /public, file_size_limit/);
+  assert.match(migration, /'energy-assessment-bills'.*false/s);
+  assert.match(signedRoute, /getApiActor\(ADMIN_ROLES\)/);
+  assert.match(signedRoute, /createSignedUrl/);
+});
+
+test("data-room access requests are validated and never expose files", () => {
+  const valid = dataRoomRequestSchema.safeParse({
+    name: "Jordan Lee", company: "Example Manufacturing", title: "Counsel", email: "jordan@example.com", phone: "",
+    organizationType: "Commercial energy buyer", reason: "Commercial and legal diligence for a potential energy agreement.",
+    documentsRequested: "Utility correspondence and entity documentation.", ndaWillingness: "Yes", projectRelationship: "Potential off-taker", website: "",
+  });
+  assert.equal(valid.success, true);
+  assert.equal(dataRoomRequestSchema.safeParse({}).success, false);
+  assert.match(read("app/api/data-room-requests/route.ts"), /intakeResult/);
+  assert.match(read("components/forms/data-room-request-form.tsx"), /does not grant access or expose private project files/);
+});
+
+test("project diligence renders accurate statuses and missing document states", () => {
+  const page = read("app/project-diligence/page.tsx");
+  const content = read("lib/content/project-diligence.ts");
+  assert.match(page, /Information as of \{project\.informationDate\}/);
+  assert.match(content, /PSO circuit-capacity response pending/);
+  assert.match(content, /Not yet published/);
+  assert.match(content, /Available under NDA/);
+  assert.match(content, /Not yet available/);
+  assert.match(content, /commercialTerms\.startingPpaRate/);
+  assert.doesNotMatch(content, /0\.08075|1 Cornerstone Lane|2_250_000/);
+});
+
+test("new public pages include metadata, responsive navigation, themes, and reduced motion", () => {
+  for (const path of ["app/why-nsoul/page.tsx", "app/project-diligence/page.tsx", "app/energy-assessment/page.tsx"]) {
+    const page = read(path);
+    assert.match(page, /export const metadata/);
+    assert.match(page, /alternates: \{ canonical:/);
+  }
+  const styles = read("app/globals.css");
+  assert.match(styles, /html\[data-theme="dark"\]/);
+  assert.match(styles, /@media \(max-width: 430px\)/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });

@@ -1,4 +1,5 @@
 import { Info } from "lucide-react";
+import Link from "next/link";
 
 import { RateChart } from "@/components/ui/rate-chart";
 import { Reveal } from "@/components/ui/reveal";
@@ -55,6 +56,7 @@ export function EconomicsSection() {
           <Info aria-hidden="true" size={17} />
           <p>All economics shown are preliminary, non-binding development-stage estimates. Actual savings depend on final design, production, usage, interconnection, legal terms, and utility rates.</p>
         </div>
+        <div className="economics-context-links"><Link href="/energy-assessment">Test these assumptions against your bills</Link><Link href="/project-diligence">Review project diligence</Link></div>
       </div>
     </section>
   );

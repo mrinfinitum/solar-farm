@@ -5,6 +5,9 @@ This repository contains two coordinated products:
 - `/` — public NSoul marketing site for the proposed 1 Cornerstone Lane Solar Farm.
 - `/dashboard` — private **Cornerstone Site Finder** property pipeline and due-diligence application.
 - `/submit-property` — public, non-binding rural Oklahoma land-submission intake.
+- `/why-nsoul` — buyer-protection and commercial-confidence framework.
+- `/energy-assessment` — qualified commercial energy intake with optional private utility-bill upload.
+- `/project-diligence` — public project-status register and controlled data-room access request.
 
 The internal application uses Next.js App Router, TypeScript, Supabase PostgreSQL/Auth/Storage, `@supabase/ssr`, Zod, React Hook Form, Recharts, MapLibre GL, Papa Parse, and Lucide.
 
@@ -35,7 +38,7 @@ npx supabase db push --include-seed
 
 The `--include-seed` flag runs `supabase/seed.sql` after the migrations. Alternatively, apply the migrations with `npx supabase db push`, then paste `supabase/seed.sql` into the Supabase SQL Editor.
 
-The migration creates the private `site-finder-documents` bucket, its 15 MB/type restrictions, RLS policies, profile trigger, scoring configuration, target profile, audit triggers, and all application tables.
+The migrations create the private `site-finder-documents` and `energy-assessment-bills` buckets, their size and type restrictions, RLS policies, profile trigger, scoring configuration, target profile, audit triggers, public-intake records, and all application tables.
 
 ## First owner and additional users
 
@@ -50,7 +53,7 @@ See `.env.example`:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_MAP_STYLE_URL` — optional MapLibre-compatible style URL
-- `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` — optional public contact delivery
+- `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` — optional public contact, assessment, and diligence-request delivery
 - `LEGAL_CONTACT_EMAIL` — legal and privacy contact displayed on the draft policy pages
 - `GEOCODING_PROVIDER`, `SECONDARY_GEOCODING_PROVIDER`, `SECONDARY_GEOCODING_API_KEY` — geocoding selection and optional server-only fallback
 - `SOLAR_RESOURCE_API_KEY` — optional server-only NLR solar-resource access

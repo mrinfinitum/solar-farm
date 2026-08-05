@@ -12,22 +12,15 @@ import { TermSheetLink } from "@/components/ui/term-sheet-link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { trackEvent } from "@/lib/analytics";
 
-const desktopNavigation = [
-  { label: "Overview", href: "#top" },
-  { label: "Our Vision", href: "/our-vision" },
-  ...navigation.slice(1, 5).map((item) => ({
-    ...item,
-    label: item.href === "#how-it-works" ? "Process" : item.label,
-  })),
-];
+const desktopNavigation = navigation.filter((item) => item.label !== "Contact").map((item) => ({
+  ...item,
+  label: item.href === "#how-it-works" ? "Process" : item.label,
+}));
 
 const mobileNavigation = [
-  { label: "Overview", href: "#top" },
+  ...desktopNavigation.slice(0, 2),
   { label: "Our Vision", href: "/our-vision" },
-  ...navigation.slice(0, 5).map((item) => ({
-    ...item,
-    label: item.href === "#how-it-works" ? "Process" : item.label,
-  })),
+  ...desktopNavigation.slice(2),
 ];
 
 function resolveHref(href: string, onHomePage: boolean) {
@@ -39,7 +32,7 @@ export function SiteHeader({ termSheetAvailable, tone = "default" }: { termSheet
   const onHomePage = pathname === "/";
   const [headerState, setHeaderState] = useState<"top" | "hidden" | "sticky">("top");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState(pathname === "/our-vision" ? "/our-vision" : "#top");
+  const [activeHref, setActiveHref] = useState(pathname === "/" ? "#top" : pathname);
 
   useEffect(() => {
     let lastY = Math.max(0, window.scrollY);

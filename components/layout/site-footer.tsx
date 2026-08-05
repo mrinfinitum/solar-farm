@@ -22,11 +22,14 @@ export function SiteFooter({ termSheetAvailable }: { termSheetAvailable: boolean
           <div>
             <p className="footer-label">Explore</p>
             <Link href="/our-vision">Our Vision</Link>
-            {navigation.slice(0, 4).map((item) => <Link key={item.href} href={`/${item.href}`}>{item.label}</Link>)}
+            <Link href="/why-nsoul">Why NSoul</Link>
+            <Link href="/project-diligence">Project Diligence</Link>
+            {navigation.filter((item) => item.href.startsWith("#")).slice(1, 3).map((item) => <Link key={item.href} href={`/${item.href}`}>{item.label}</Link>)}
           </div>
           <div>
             <p className="footer-label">Connect</p>
             <Link href="/#development">Development</Link>
+            <Link href="/energy-assessment">Energy Assessment</Link>
             <Link href="/#contact">Contact <ArrowUpRight aria-hidden="true" size={13} /></Link>
             <Link href="/login">Studio login <LogIn aria-hidden="true" size={13} /></Link>
             <TermSheetLink available={termSheetAvailable} className="footer-download" context="footer" />

@@ -37,6 +37,7 @@ export function ContactSection({ termSheetAvailable }: { termSheetAvailable: boo
             <span><strong>Own rural Oklahoma land?</strong><small>Submit Land for Consideration</small></span>
             <ArrowUpRight aria-hidden="true" />
           </Link>
+          <div className="contact-context-links"><Link href="/energy-assessment">Request an Energy Assessment</Link><Link href="/project-diligence">View Project Diligence</Link></div>
         </div>
 
         <div className="contact-form-card">

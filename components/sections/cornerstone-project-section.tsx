@@ -1,4 +1,5 @@
 import { ArrowRight, Building2, MapPin } from "lucide-react";
+import Link from "next/link";
 
 import { Reveal } from "@/components/ui/reveal";
 import { TermSheetLink } from "@/components/ui/term-sheet-link";
@@ -82,6 +83,7 @@ export function CornerstoneProjectSection({ termSheetAvailable }: { termSheetAva
               Discuss an Energy Agreement <ArrowRight aria-hidden="true" />
             </TrackedLink>
             <TermSheetLink available={termSheetAvailable} className="button button--secondary" label="Download Indicative Term Sheet" context="regional-development" />
+            <Link className="button button--secondary" href="/project-diligence">View Project Diligence</Link>
           </div>
         </Reveal>
       </div>

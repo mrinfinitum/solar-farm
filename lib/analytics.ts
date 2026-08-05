@@ -12,7 +12,21 @@ export type AnalyticsEvent =
   | "land_submission_start"
   | "land_submission_submit"
   | "land_submission_success"
-  | "faq_open";
+  | "faq_open"
+  | "why_nsoul_view"
+  | "why_nsoul_cta"
+  | "buyer_protection_view"
+  | "energy_assessment_start"
+  | "energy_assessment_submit"
+  | "energy_assessment_success"
+  | "bill_upload_start"
+  | "bill_upload_success"
+  | "diligence_view"
+  | "diligence_document_click"
+  | "data_room_request_start"
+  | "data_room_request_submit"
+  | "audience_path_select"
+  | "procurement_faq_open";
 
 type EventProperties = Record<string, string | number | boolean | null | undefined>;
 
