@@ -1,30 +1,29 @@
-import { ArrowRight, Building2, Gauge, ShieldCheck } from "lucide-react";
+import { ArrowRight, CircleDollarSign, Leaf, WalletCards } from "lucide-react";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/reveal";
 
 const responsibilitySteps = [
-  { icon: ShieldCheck, title: "Project company", description: "Develops, finances, owns, and operates the solar asset." },
-  { icon: Gauge, title: "Utility and metering", description: "Supports approved interconnection, delivery, and energy measurement." },
-  { icon: Building2, title: "Commercial customer", description: "Purchases qualifying energy under the final agreement." },
+  { icon: CircleDollarSign, title: "Potential cost savings", description: "Pricing is evaluated against your actual electricity costs to determine whether the opportunity makes commercial sense." },
+  { icon: WalletCards, title: "Capital stays in your business", description: "The proposed model does not require your organization to purchase equipment or fund project construction." },
+  { icon: Leaf, title: "Measurable renewable value", description: "Metered local solar and associated energy attributes may support sustainability goals when defined in the final agreement." },
 ] as const;
 
 const protectionAnswers = [
-  { value: "$0", title: "Proposed customer equipment investment", copy: "The customer is not expected to purchase the solar array or fund project construction." },
-  { value: "METERED", title: "Basis for commercial billing", copy: "The final agreement should define approved metering, invoice calculations, and reconciliation procedures." },
-  { value: "AFTER OPERATION", title: "When energy purchasing begins", copy: "Customer payment should begin only after agreed commercial-operation requirements are satisfied." },
+  { value: "SAVE", title: "Modeled energy-cost opportunity", copy: "We compare proposed pricing with your real utility data. Savings are indicative until final terms are executed." },
+  { value: "$0", title: "Proposed equipment purchase", copy: "Keep business capital focused on operations instead of owning a solar asset." },
+  { value: "LOCAL", title: "Renewable energy value", copy: "A visible Oklahoma project can provide metered renewable power and potential REC value under the final agreement." },
 ] as const;
 
 const commercialRoles = [
-  { name: "Project owner", description: "Responsible for project development, financing, ownership, and operating obligations defined in final documentation." },
-  { name: "Energy customer", description: "Purchases metered project energy under the executed commercial agreement." },
-  { name: "Utility", description: "Maintains its applicable interconnection, grid, metering, and regulated-service responsibilities." },
-  { name: "Engineering and EPC providers", description: "Complete technical design, construction, testing, and commissioning under their contracted scopes." },
-  { name: "Operations provider", description: "Supports monitoring, maintenance, reporting, and equipment service as defined by project contracts." },
+  { name: "Growing businesses", description: "A practical path to potential savings without adding equipment ownership or a specialized energy team." },
+  { name: "Regional institutions", description: "Long-term budget planning, local accountability, and renewable-energy value aligned to facility needs." },
+  { name: "Large energy users", description: "Load-based modeling, metered reporting, and commercial terms designed for more complex operations." },
+  { name: "Procurement teams", description: "Inspectable assumptions, project diligence, and documented energy and REC treatment before commitment." },
 ] as const;
 
-const process = ["Validate", "Build", "Meter", "Deliver"] as const;
-const questions = ["When payment begins", "How energy is measured", "Who maintains the system", "What happens if the project is delayed", "What remedies and termination rights apply"] as const;
+const process = ["Review", "Model", "Agree", "Power"] as const;
+const priorities = ["Lower operating costs", "Long-term budget visibility", "No equipment ownership", "Renewable-energy goals", "A direct regional relationship"] as const;
 
 export function RegionalProjectFeature() {
   return (
@@ -32,7 +31,7 @@ export function RegionalProjectFeature() {
       <Reveal className="regional-project-feature">
         <div className="regional-project-main">
           <div className="regional-project-diagram" aria-labelledby="buyer-model-steps">
-            <h3 id="buyer-model-steps" className="sr-only">Proposed project responsibility chain</h3>
+            <h3 id="buyer-model-steps" className="sr-only">Why businesses choose NSoul</h3>
             <ol>
               {responsibilitySteps.map(({ icon: Icon, title, description }, index) => (
                 <li className="regional-project-node" key={title}>
@@ -42,11 +41,11 @@ export function RegionalProjectFeature() {
                 </li>
               ))}
             </ol>
-            <p className="regional-project-note">The customer is not expected to purchase, construct, own, operate, or maintain the solar equipment.</p>
+            <p className="regional-project-note">The opportunity is evaluated around your business, your actual energy use, and the benefits that matter to your organization.</p>
           </div>
 
           <div className="regional-project-snapshot">
-            <div className="regional-project-facts" aria-label="Proposed customer protection answers">
+            <div className="regional-project-facts" aria-label="Potential business benefits">
               {protectionAnswers.map((fact) => (
                 <article key={fact.title}>
                   <strong>{fact.value}</strong>
@@ -57,21 +56,21 @@ export function RegionalProjectFeature() {
             </div>
 
             <div className="regional-project-roles">
-              <h3>Customer protection framework</h3>
+              <h3>Built for businesses of every scale</h3>
               {commercialRoles.map((role) => <div key={role.name}><strong>{role.name}</strong><p>{role.description}</p></div>)}
             </div>
           </div>
         </div>
 
-        <ol className="regional-project-process" aria-label="Proposed delivery sequence: validate, build, meter, deliver">
+        <ol className="regional-project-process" aria-label="Customer journey: review, model, agree, power">
           {process.map((step, index) => <li key={step}><span>{step}</span>{index < process.length - 1 ? <ArrowRight aria-hidden="true" /> : null}</li>)}
         </ol>
       </Reveal>
 
       <Reveal className="buyer-confirmation-panel">
-        <div><p className="eyebrow">Before signing</p><h3>What the customer should confirm</h3></div>
-        <ul>{questions.map((question) => <li key={question}>{question}</li>)}</ul>
-        <Link href="/our-vision" aria-label="See Our Vision">See Our Vision <ArrowRight aria-hidden="true" /></Link>
+        <div><p className="eyebrow">Start with your priorities</p><h3>What could better power do for your business?</h3></div>
+        <ul>{priorities.map((priority) => <li key={priority}>{priority}</li>)}</ul>
+        <Link href="/energy-assessment" aria-label="Request an Energy Assessment">Request an Assessment <ArrowRight aria-hidden="true" /></Link>
       </Reveal>
     </>
   );

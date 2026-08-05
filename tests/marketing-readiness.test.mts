@@ -70,6 +70,28 @@ test("homepage marketing stays regional rather than exposing project specifics",
   assert.doesNotMatch(publicHomepage, /1 Cornerstone Lane|Idabel project site|McCurtain County|Southeast Oklahoma|Q2\/Q3 2027|2\.25M kWh/i);
 });
 
+test("Why NSoul section explains benefits for businesses of different sizes", () => {
+  const section = read("components/sections/project-model-section.tsx");
+  const benefits = read("components/project-model/regional-project-feature.tsx");
+
+  assert.match(section, /Lower costs\. Less capital\. Local renewable power\./);
+  assert.match(section, /actual electricity usage/);
+  for (const message of [
+    "Potential cost savings",
+    "Capital stays in your business",
+    "Measurable renewable value",
+    "Growing businesses",
+    "Regional institutions",
+    "Large energy users",
+    "Procurement teams",
+    "No equipment ownership",
+    "Renewable-energy goals",
+  ]) assert.match(benefits, new RegExp(message, "i"));
+  assert.match(benefits, /Savings are indicative until final terms are executed/);
+  assert.match(benefits, /REC value under the final agreement/);
+  assert.doesNotMatch(benefits, /guaranteed savings|risk-free/i);
+});
+
 test("Our Vision is discoverable, qualified, and shareable", () => {
   const page = read("app/our-vision/page.tsx");
   const header = read("components/layout/site-header.tsx");
