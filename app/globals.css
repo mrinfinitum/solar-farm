@@ -5940,7 +5940,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 
 /* Regional project feature */
 .project-model-section {
-  padding: 112px 0 104px;
+  padding: 82px 0 104px;
   background: #edf2e8;
   color: #173025;
 }
@@ -6374,7 +6374,7 @@ html[data-theme="dark"] .project-model-section .button--secondary {
 
 @media (max-width: 1024px) {
   .project-model-section {
-    padding: 96px 0 88px;
+    padding: 76px 0 88px;
   }
 
   .regional-project-main {
@@ -6399,7 +6399,7 @@ html[data-theme="dark"] .project-model-section .button--secondary {
 
 @media (max-width: 680px) {
   .project-model-section {
-    padding: 76px 0 70px;
+    padding: 62px 0 70px;
   }
 
   .project-model-container {
