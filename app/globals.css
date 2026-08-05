@@ -2608,9 +2608,6 @@ a {
 .cornerstone-oklahoma { fill: rgba(133, 176, 115, .08); stroke: #536a60; stroke-width: 2; }
 .cornerstone-corridor { fill: none; stroke: #8ee6b4; stroke-width: 2; stroke-dasharray: 7 10; opacity: .7; }
 .cornerstone-load { fill: #8ee6b4; }
-.cornerstone-project-marker { fill: #a6de45; stroke: rgba(166, 222, 69, .28); stroke-width: 8; }
-.cornerstone-facility-marker { fill: #8ee6b4; stroke: #0a1913; stroke-width: 2; }
-.cornerstone-map-annotations { fill: #aebdb4; font: 8px var(--font-geist-mono), monospace; paint-order: stroke; stroke: #0a1913; stroke-width: 4px; stroke-linejoin: round; }
 
 .cornerstone-map-label {
   position: absolute;
@@ -2631,12 +2628,6 @@ a {
 .cornerstone-map-label--corridor { top: 48%; left: 43%; }
 .cornerstone-map-label--region { right: 4%; bottom: 12%; }
 .cornerstone-map-panel > p { margin: 0; color: #74887d; font-size: 10px; }
-.cornerstone-map-legend { display: flex; flex-wrap: wrap; gap: 9px 16px; margin: 0 0 14px; padding: 0; color: #82968a; font-size: 8px; list-style: none; }
-.cornerstone-map-legend li { display: flex; align-items: center; gap: 6px; }
-.cornerstone-map-legend i { display: inline-block; flex: 0 0 auto; }
-.cornerstone-legend-project { width: 8px; height: 8px; border-radius: 50%; background: #a6de45; box-shadow: 0 0 0 3px rgba(166,222,69,.12); }
-.cornerstone-legend-facility { width: 7px; height: 7px; border: 1px solid #8ee6b4; border-radius: 1px; }
-.cornerstone-legend-path { width: 19px; border-top: 1px dashed #8ee6b4; }
 
 .cornerstone-facts-panel { padding: 30px 34px; border-bottom: 1px solid rgba(255, 255, 255, .09); }
 .cornerstone-facts-panel dl { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0 0; }
@@ -2644,7 +2635,6 @@ a {
 .cornerstone-facts-panel dl > div:nth-child(even) { padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, .08); }
 .cornerstone-facts-panel dt { color: #758a7e; font: 8px/1.4 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
 .cornerstone-facts-panel dd { margin: 9px 0 0; color: #edf4ee; font-size: 13px; font-weight: 550; line-height: 1.45; }
-.cornerstone-facts-panel dd small { display: block; margin-top: 5px; color: #758a7e; font-size: 8px; font-weight: 430; line-height: 1.45; }
 
 .cornerstone-status-panel { padding: 26px 34px 28px; }
 .cornerstone-status-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
@@ -2654,10 +2644,6 @@ a {
 .cornerstone-status-panel ol { display: grid; margin: 20px 0 0; padding: 0; list-style: none; }
 .cornerstone-status-panel li { display: grid; grid-template-columns: 68px 1fr; gap: 14px; align-items: center; min-height: 58px; border-top: 1px solid rgba(255, 255, 255, .075); }
 .cornerstone-status-panel li > span:last-child { color: #d4dfd8; font-size: 13px; line-height: 1.4; }
-.cornerstone-status-panel li > span:last-child strong,
-.cornerstone-status-panel li > span:last-child small { display: block; }
-.cornerstone-status-panel li > span:last-child strong { font-weight: 580; }
-.cornerstone-status-panel li > span:last-child small { margin-top: 3px; color: #72867a; font-size: 8px; line-height: 1.45; }
 .cornerstone-stage-index { color: #a6de45; font: 9px/1 var(--font-geist-mono), monospace; letter-spacing: .12em; }
 
 .cornerstone-project-actions { display: flex; align-items: center; justify-content: space-between; gap: 36px; margin-top: 24px; }
@@ -8593,9 +8579,8 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 .regional-project-facts > article strong { display: block; color: #f4f5ef; font-size: clamp(28px,3vw,42px); font-weight: 520; letter-spacing: -.045em; line-height: 1; }
 .regional-project-facts > article h3 { margin: 10px 0 0; color: #b8ea69; font-size: 12px; font-weight: 650; letter-spacing: .05em; text-transform: uppercase; }
 .regional-project-facts > article p { margin: 8px 0 0; color: #91a198; font-size: 13px; line-height: 1.55; }
-.regional-project-process { position: relative; }
-.regional-project-footer-message { position: absolute; right: 20px; bottom: 8px; left: 20px; margin: 0; color: #718078; font: 8px var(--font-geist-mono); letter-spacing: .06em; text-align: center; text-transform: none; }
-.regional-project-facts > div p { margin: 7px 0 0; color: #91a198; font-size: 11px; font-weight: 430; line-height: 1.5; }
+.regional-project-process { margin: 0; list-style: none; }
+.regional-project-process li { display: flex; align-items: center; gap: clamp(20px,4vw,56px); color: #dce5df; font-size: 13px; font-weight: 680; letter-spacing: .12em; text-transform: uppercase; }
 .buyer-confirmation-panel { display: grid; grid-template-columns: .8fr 1.6fr auto; align-items: center; gap: 35px; margin-top: 18px; padding: 25px 30px; border: 1px solid rgba(23,48,37,.13); border-radius: 20px; background: rgba(255,255,255,.42); }
 .buyer-confirmation-panel h3 { margin: 6px 0 0; color: #173025; font-size: 22px; letter-spacing: -.03em; }
 .buyer-confirmation-panel ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }

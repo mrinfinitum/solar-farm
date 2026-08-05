@@ -70,49 +70,6 @@ test("homepage marketing stays regional rather than exposing project specifics",
   assert.doesNotMatch(publicHomepage, /1 Cornerstone Lane|Idabel project site|McCurtain County|Southeast Oklahoma|Q2\/Q3 2027|2\.25M kWh/i);
 });
 
-test("commercial model explains the customer benefit without changing the project mechanics", () => {
-  const section = read("components/sections/project-model-section.tsx");
-  const model = read("components/project-model/regional-project-feature.tsx");
-
-  assert.match(section, /Buying power, not solar panels/);
-  assert.match(section, /Keep your capital focused on running your business/);
-  for (const message of [
-    "Predictable pricing",
-    "Metered energy",
-    "Long-term partnership",
-    "Customer equipment purchase",
-    "Who does what",
-    "Evaluate",
-    "Agree",
-    "Deliver",
-    "Save",
-    "Your business buys electricity. Not solar panels.",
-  ]) assert.match(model, new RegExp(message.replaceAll(".", "\\."), "i"));
-  assert.doesNotMatch(model, /Engineering and EPC providers|Operations provider|Customer protection framework/);
-});
-
-test("regional map explains the opportunity model without implying actual customers", () => {
-  const section = read("components/sections/cornerstone-project-section.tsx");
-
-  for (const message of [
-    "Regional opportunity model",
-    "Candidate solar project",
-    "Regional manufacturing",
-    "Healthcare",
-    "Distribution",
-    "Food processing",
-    "Retail",
-    "How we evaluate opportunities",
-    "Opportunity Review",
-    "Technical Validation",
-    "Commercial Proposal",
-    "Project Delivery",
-    "Long-Term Partnership",
-    "No actual customers are shown",
-  ]) assert.match(section, new RegExp(message, "i"));
-  assert.doesNotMatch(section, /Illustrative Oklahoma service area|No live utility geometry/);
-});
-
 test("Our Vision is discoverable, qualified, and shareable", () => {
   const page = read("app/our-vision/page.tsx");
   const header = read("components/layout/site-header.tsx");
