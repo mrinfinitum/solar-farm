@@ -23,7 +23,7 @@ export function ProjectModelSection() {
 
         <Reveal className="project-model-cta">
           <div>
-            <h3>See what local solar could mean for your business.</h3>
+            <h3>See what <em>local solar</em> could mean for <strong>your business.</strong></h3>
             <p>Start with your utility bills, operating profile, and long-term energy goals.</p>
           </div>
           <div>
