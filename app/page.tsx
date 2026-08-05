@@ -54,7 +54,7 @@ export default function Home() {
         <EnergyFlowSection />
         <ProcessSection />
         <ProjectModelSection />
-        <CornerstoneProjectSection termSheetAvailable={termSheetAvailable} />
+        <CornerstoneProjectSection />
         <BuyerConfidenceSection />
         <EconomicsSection />
         <TrustStrip />

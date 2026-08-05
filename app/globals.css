@@ -2665,6 +2665,107 @@ a {
 .cornerstone-project-actions > p { max-width: 700px; margin: 0; color: var(--dim); font-size: 11px; line-height: 1.55; }
 .cornerstone-project-actions > div { display: flex; flex: 0 0 auto; gap: 9px; }
 
+/* Simplified Oklahoma opportunity network */
+.cornerstone-intelligence--network { grid-template-columns: minmax(0, 1.25fr) minmax(360px, .75fr); }
+.cornerstone-intelligence--network .cornerstone-map-panel { grid-row: auto; min-height: 620px; }
+.cornerstone-map-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.cornerstone-map-heading > span { color: #62766b; font: 500 8px/1.2 var(--font-geist-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
+.cornerstone-map--network { flex: 1; min-height: 0; aspect-ratio: 680 / 390; margin: auto 0; }
+.cornerstone-map--network svg { inset: 0; height: 100%; }
+.cornerstone-map--network .cornerstone-oklahoma { fill: rgba(133, 176, 115, .1); stroke: #61796d; stroke-width: 2.2; }
+
+.cornerstone-project-pin {
+  position: absolute;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #a6de45;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.cornerstone-project-pin > i {
+  position: absolute;
+  inset: 5px;
+  display: block;
+  border: 2px solid #c2f270;
+  border-radius: 50%;
+  background: #6fa72e;
+  box-shadow: 0 0 0 5px rgba(166, 222, 69, .12), 0 0 20px rgba(166, 222, 69, .28);
+}
+
+.cornerstone-project-pin > i::after {
+  position: absolute;
+  inset: -9px;
+  border: 1px solid rgba(166, 222, 69, .42);
+  border-radius: 50%;
+  content: "";
+  animation: cornerstone-project-pulse 2.8s ease-out infinite;
+}
+
+@keyframes cornerstone-project-pulse {
+  0% { opacity: .85; transform: scale(.55); }
+  75%, 100% { opacity: 0; transform: scale(1.35); }
+}
+
+.cornerstone-project-pin > span {
+  position: absolute;
+  z-index: 4;
+  bottom: 18px;
+  left: 18px;
+  width: max-content;
+  min-width: 142px;
+  padding: 10px 12px;
+  border: 1px solid rgba(194, 242, 112, .22);
+  border-radius: 10px;
+  background: rgba(5, 17, 11, .94);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, .28);
+  opacity: 0;
+  pointer-events: none;
+  text-align: left;
+  transform: translateY(5px) scale(.96);
+  transform-origin: bottom left;
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.cornerstone-project-pin > span strong,
+.cornerstone-project-pin > span small { display: block; }
+.cornerstone-project-pin > span strong { color: #eff7ed; font-size: 10px; font-weight: 620; }
+.cornerstone-project-pin > span small { margin-top: 4px; color: #7f9488; font: 500 7px/1.3 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
+.cornerstone-project-pin:hover > span,
+.cornerstone-project-pin:focus-visible > span,
+.cornerstone-project-pin--central > span { opacity: 1; transform: translateY(0) scale(1); }
+.cornerstone-project-pin--northwest { top: 27%; left: 27%; }
+.cornerstone-project-pin--central { top: 55%; left: 57%; }
+.cornerstone-project-pin--northeast { top: 40%; left: 77%; }
+.cornerstone-project-pin--southwest { top: 67%; left: 46%; }
+.cornerstone-project-pin--southeast { top: 73%; left: 82%; }
+.cornerstone-project-pin--northeast > span,
+.cornerstone-project-pin--southeast > span { right: 18px; left: auto; transform-origin: bottom right; }
+.cornerstone-map-legend .is-focus { width: 24px; height: 10px; border-bottom: 1px solid #61796d; }
+
+.cornerstone-opportunity-panel { min-width: 0; padding: 42px 38px; background: linear-gradient(145deg, rgba(255, 255, 255, .026), transparent 65%); }
+.cornerstone-opportunity-panel .eyebrow { margin-bottom: 12px; color: #8ed8ad; }
+.cornerstone-opportunity-panel > h3 { max-width: 390px; margin: 0; font-size: clamp(31px, 3vw, 44px); font-weight: 520; letter-spacing: -.05em; line-height: 1.02; }
+.cornerstone-local-advantages { display: grid; margin-top: 30px; }
+.cornerstone-local-advantages article { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 22px 0; border-top: 1px solid rgba(255, 255, 255, .08); }
+.cornerstone-local-advantages article > span { padding-top: 3px; color: #a6de45; font: 600 8px/1 var(--font-geist-mono), monospace; letter-spacing: .1em; }
+.cornerstone-local-advantages h4 { margin: 0; color: #eef4ef; font-size: 15px; font-weight: 610; }
+.cornerstone-local-advantages p { margin: 7px 0 0; color: #84978c; font-size: 11px; line-height: 1.55; }
+.cornerstone-opportunity-panel aside { padding: 18px 20px; border: 1px solid rgba(166, 222, 69, .16); border-radius: 15px; background: rgba(166, 222, 69, .045); }
+.cornerstone-opportunity-panel aside strong { color: #b8ea69; font-size: 12px; }
+.cornerstone-opportunity-panel aside p { margin: 6px 0 0; color: #8ea097; font-size: 10px; line-height: 1.55; }
+
+.cornerstone-fit-panel { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(260px, .45fr) minmax(0, 1.55fr); align-items: center; gap: 36px; padding: 30px 38px; border-top: 1px solid rgba(255, 255, 255, .09); background: rgba(255, 255, 255, .012); }
+.cornerstone-fit-panel .eyebrow { margin-bottom: 7px; color: #8ed8ad; }
+.cornerstone-fit-panel h3 { margin: 0; font-size: 24px; font-weight: 540; letter-spacing: -.035em; }
+.cornerstone-fit-panel ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.cornerstone-fit-panel li { min-height: 62px; padding: 8px 15px; border-left: 1px solid rgba(255, 255, 255, .08); color: #dce6df; font-size: 11px; line-height: 1.35; }
+.cornerstone-fit-panel li span { display: block; margin-bottom: 10px; color: #a6de45; font: 600 8px/1 var(--font-geist-mono), monospace; letter-spacing: .08em; }
+
 .trust-strip { padding: 28px 0 44px; background: var(--bg); }
 .trust-strip-shell { display: grid; grid-template-columns: .58fr 1.42fr; gap: 56px; align-items: center; padding: 30px 34px; border: 1px solid var(--border); border-radius: 22px; background: var(--surface); }
 .trust-strip .eyebrow { margin-bottom: 8px; }
@@ -2867,8 +2968,10 @@ a {
   .nav-term-sheet { display: none; }
   .cornerstone-project-heading { grid-template-columns: 1fr; gap: 26px; }
   .cornerstone-intelligence { grid-template-columns: 1fr; }
+  .cornerstone-intelligence--network .cornerstone-map-panel { min-height: 0; }
   .cornerstone-map-panel { grid-row: auto; border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .09); }
   .cornerstone-map { min-height: 410px; }
+  .cornerstone-fit-panel { grid-column: auto; grid-template-columns: 1fr; }
   .trust-strip-shell, .faq-layout { grid-template-columns: 1fr; }
   .faq-layout { gap: 42px; }
   .faq-layout > div:first-child { position: static; }
@@ -2884,6 +2987,13 @@ a {
   .cornerstone-map-label--project { top: 55%; left: 17%; }
   .cornerstone-map-label--region { right: 0; bottom: 17%; }
   .cornerstone-map-legend { gap: 10px 14px; }
+  .cornerstone-map-heading > span { display: none; }
+  .cornerstone-opportunity-panel { padding: 32px 22px; }
+  .cornerstone-fit-panel { gap: 24px; padding: 28px 22px; }
+  .cornerstone-fit-panel ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cornerstone-fit-panel li { border-top: 1px solid rgba(255, 255, 255, .08); border-left: 0; }
+  .cornerstone-fit-panel li:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, .08); }
+  .cornerstone-fit-panel li:last-child { grid-column: 1 / -1; }
   .cornerstone-facts-panel dl { grid-template-columns: 1fr; }
   .cornerstone-facts-panel dl > div:nth-child(even) { padding-left: 0; border-left: 0; }
   .cornerstone-facts-panel dl > div:last-child { grid-column: auto; }

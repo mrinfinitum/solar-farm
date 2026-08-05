@@ -74,16 +74,16 @@ test("regional map explains the buyer opportunity and qualification model", () =
   const section = read("components/sections/cornerstone-project-section.tsx");
 
   for (const message of [
-    "Opportunity model",
-    "Can this work for my business?",
+    "Local development model",
+    "Oklahoma opportunity network",
     "Why Oklahoma?",
     "Why local?",
-    "Why not only the utility?",
-    "How do we determine fit?",
-    "Your utility remains essential",
-    "From bills to a clear answer",
+    "Why change from utility-only power?",
+    "Your utility stays essential",
+    "Could your facility fit?",
+    "Project economics",
   ]) assert.match(section, new RegExp(message.replace(/[?]/g, "\\?"), "i"));
-  assert.match(section, /No customer, utility, or infrastructure locations are shown/);
+  assert.match(section, /not announced, approved, financed, or constructed projects/);
   assert.doesNotMatch(section, /actual customer|utility-approved|guaranteed/i);
 });
 
