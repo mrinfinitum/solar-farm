@@ -22,7 +22,6 @@ export function SiteFooter({ termSheetAvailable }: { termSheetAvailable: boolean
           <div>
             <p className="footer-label">Explore</p>
             <Link href="/our-vision">Our Vision</Link>
-            <Link href="/why-nsoul">Why NSoul</Link>
             <Link href="/project-diligence">Project Diligence</Link>
             {navigation.filter((item) => item.href.startsWith("#")).slice(1, 3).map((item) => <Link key={item.href} href={`/${item.href}`}>{item.label}</Link>)}
           </div>

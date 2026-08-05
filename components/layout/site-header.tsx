@@ -17,11 +17,7 @@ const desktopNavigation = navigation.filter((item) => item.label !== "Contact").
   label: item.href === "#how-it-works" ? "Process" : item.label,
 }));
 
-const mobileNavigation = [
-  ...desktopNavigation.slice(0, 2),
-  { label: "Our Vision", href: "/our-vision" },
-  ...desktopNavigation.slice(2),
-];
+const mobileNavigation = desktopNavigation;
 
 function resolveHref(href: string, onHomePage: boolean) {
   return href.startsWith("#") && !onHomePage ? `/${href}` : href;

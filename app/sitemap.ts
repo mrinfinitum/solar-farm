@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: absoluteUrl("/"), changeFrequency: "monthly", priority: 1 },
     { url: absoluteUrl("/our-vision"), changeFrequency: "monthly", priority: 0.8 },
-    { url: absoluteUrl("/why-nsoul"), changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/project-diligence"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/energy-assessment"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/submit-property"), changeFrequency: "monthly", priority: 0.7 },

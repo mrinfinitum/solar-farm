@@ -71,7 +71,7 @@ export function RegionalProjectFeature() {
       <Reveal className="buyer-confirmation-panel">
         <div><p className="eyebrow">Before signing</p><h3>What the customer should confirm</h3></div>
         <ul>{questions.map((question) => <li key={question}>{question}</li>)}</ul>
-        <Link href="/why-nsoul" aria-label="See Why NSoul for the complete buyer-protection framework">See Why NSoul <ArrowRight aria-hidden="true" /></Link>
+        <Link href="/our-vision" aria-label="See Our Vision">See Our Vision <ArrowRight aria-hidden="true" /></Link>
       </Reveal>
     </>
   );

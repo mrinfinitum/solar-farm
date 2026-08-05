@@ -74,6 +74,7 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   const page = read("app/our-vision/page.tsx");
   const header = read("components/layout/site-header.tsx");
   const footer = read("components/layout/site-footer.tsx");
+  const projectData = read("lib/project-data.ts");
   const founderStatement = read("components/vision/founder-statement.tsx");
   const scrollReset = read("components/vision/vision-scroll-reset.tsx");
   const styles = read("app/globals.css");
@@ -97,7 +98,7 @@ test("Our Vision is discoverable, qualified, and shareable", () => {
   assert.doesNotMatch(founderStatement, /wealthy|making money/i);
   assert.match(styles, /@keyframes vision-node-spin/);
   assert.match(styles, /prefers-reduced-motion: reduce/);
-  assert.match(header, /Our Vision/);
+  assert.match(`${header}\n${projectData}`, /Our Vision/);
   assert.match(header, /aria-controls="mobile-menu"/);
   assert.match(header, /mobile-menu__contact/);
   assert.doesNotMatch(header, /<span>0\{index \+ 1\}<\/span>/);
@@ -112,20 +113,17 @@ test("public term sheet is a real non-empty PDF", () => {
   assert.equal(readFileSync(pdf).subarray(0, 4).toString(), "%PDF");
 });
 
-test("Why NSoul and the homepage buyer-confidence teaser render", () => {
-  const page = read("app/why-nsoul/page.tsx");
+test("Why NSoul redirects to Our Vision and the homepage buyer-confidence teaser renders", () => {
+  const nextConfig = read("next.config.ts");
   const home = read("app/page.tsx");
   const teaser = read("components/sections/buyer-confidence-section.tsx");
-  const faq = read("components/why-nsoul/procurement-faq.tsx");
-  assert.match(page, /Local energy development with a structure built for commercial confidence/);
-  assert.match(page, /buyerProtectionModules/);
-  assert.match(page, /responsibilityParties/);
-  assert.match(page, /audiencePaths/);
+  assert.equal(existsSync(new URL("../app/why-nsoul/page.tsx", import.meta.url)), false);
+  assert.match(nextConfig, /source: "\/why-nsoul"/);
+  assert.match(nextConfig, /destination: "\/our-vision"/);
+  assert.match(nextConfig, /permanent: true/);
   assert.match(home, /BuyerConfidenceSection/);
   assert.match(teaser, /A smaller developer should not mean greater customer risk/);
-  assert.match(faq, /<details/);
-  assert.match(faq, /<summary>/);
-  assert.match(faq, /procurement_faq_open/);
+  assert.match(teaser, /href="\/our-vision"/);
 });
 
 test("buyer-confidence navigation and contextual routes are discoverable", () => {
@@ -133,11 +131,13 @@ test("buyer-confidence navigation and contextual routes are discoverable", () =>
   const footer = read("components/layout/site-footer.tsx");
   const sitemap = read("app/sitemap.ts");
   const projectData = read("lib/project-data.ts");
-  assert.match(projectData, /Why NSoul/);
+  assert.match(projectData, /Our Vision/);
+  assert.doesNotMatch(projectData, /Why NSoul/);
   assert.match(header, /mobileNavigation/);
-  for (const route of ["/why-nsoul", "/project-diligence", "/energy-assessment"]) {
+  for (const route of ["/our-vision", "/project-diligence", "/energy-assessment"]) {
     assert.match(`${header}\n${footer}\n${sitemap}\n${projectData}`, new RegExp(route.replace("/", "\\/")));
   }
+  assert.doesNotMatch(sitemap, /\/why-nsoul/);
 });
 
 test("energy assessment validates commercial qualification data", () => {
@@ -194,7 +194,7 @@ test("project diligence renders accurate statuses and missing document states", 
 });
 
 test("new public pages include metadata, responsive navigation, themes, and reduced motion", () => {
-  for (const path of ["app/why-nsoul/page.tsx", "app/project-diligence/page.tsx", "app/energy-assessment/page.tsx"]) {
+  for (const path of ["app/project-diligence/page.tsx", "app/energy-assessment/page.tsx"]) {
     const page = read(path);
     assert.match(page, /export const metadata/);
     assert.match(page, /alternates: \{ canonical:/);

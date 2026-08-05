@@ -178,7 +178,7 @@ export const industries: IndustryCategory[] = [
 
 export const navigation = [
   { label: "Overview", href: "#top" },
-  { label: "Why NSoul", href: "/why-nsoul" },
+  { label: "Our Vision", href: "/our-vision" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Project", href: "#project" },
   { label: "Economics", href: "#economics" },

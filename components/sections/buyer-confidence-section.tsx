@@ -21,7 +21,7 @@ export function BuyerConfidenceSection() {
           ))}
         </div>
         <div className="buyer-confidence__actions">
-          <Link className="button button--primary" href="/why-nsoul">Why NSoul <ArrowRight aria-hidden="true" /></Link>
+          <Link className="button button--primary" href="/our-vision">Our Vision <ArrowRight aria-hidden="true" /></Link>
           <Link className="button button--secondary" href="/project-diligence">View Project Diligence</Link>
         </div>
       </div>
