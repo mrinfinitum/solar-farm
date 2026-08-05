@@ -2579,7 +2579,9 @@ a {
 .cornerstone-status-panel { min-width: 0; }
 
 .cornerstone-map-panel {
+  display: flex;
   grid-row: span 2;
+  flex-direction: column;
   padding: 30px;
   border-right: 1px solid rgba(255, 255, 255, .09);
   background:
@@ -2603,11 +2605,13 @@ a {
 }
 
 .cornerstone-panel-label svg { width: 15px; }
-.cornerstone-map { position: relative; min-height: 465px; }
+.cornerstone-map { position: relative; flex: 1; min-height: 560px; }
 .cornerstone-map svg { position: absolute; inset: 22px 0 0; width: 100%; height: calc(100% - 34px); }
 .cornerstone-oklahoma { fill: rgba(133, 176, 115, .08); stroke: #536a60; stroke-width: 2; }
 .cornerstone-corridor { fill: none; stroke: #8ee6b4; stroke-width: 2; stroke-dasharray: 7 10; opacity: .7; }
-.cornerstone-load { fill: #8ee6b4; }
+.cornerstone-project-halo { fill: rgba(166, 222, 69, .12); stroke: rgba(166, 222, 69, .48); stroke-width: 6; }
+.cornerstone-project-node { fill: #a6de45; }
+.cornerstone-facility-node { fill: #8ee6b4; stroke: rgba(232, 255, 239, .7); stroke-width: 1.5; }
 
 .cornerstone-map-label {
   position: absolute;
@@ -2625,16 +2629,25 @@ a {
 
 .cornerstone-map-label svg { width: 12px; height: 12px; color: #a6de45; }
 .cornerstone-map-label--state { top: 18%; left: 22%; }
-.cornerstone-map-label--corridor { top: 48%; left: 43%; }
-.cornerstone-map-label--region { right: 4%; bottom: 12%; }
+.cornerstone-map-label--project { top: 54%; left: 26%; }
+.cornerstone-map-label--corridor { top: 47%; left: 55%; }
+.cornerstone-map-label--region { right: 3%; bottom: 18%; }
+.cornerstone-map-legend { display: flex; flex-wrap: wrap; gap: 11px 20px; padding: 15px 0 12px; border-top: 1px solid rgba(255, 255, 255, .07); }
+.cornerstone-map-legend span { display: inline-flex; align-items: center; gap: 7px; color: #8a9b91; font-size: 9px; }
+.cornerstone-map-legend i { display: inline-block; flex: 0 0 auto; }
+.cornerstone-map-legend .is-project { width: 9px; height: 9px; border-radius: 50%; background: #a6de45; box-shadow: 0 0 0 4px rgba(166, 222, 69, .12); }
+.cornerstone-map-legend .is-facility { width: 9px; height: 9px; border: 1px solid #8ee6b4; border-radius: 2px; }
+.cornerstone-map-legend .is-relationship { width: 26px; height: 1px; border-top: 1px dashed #8ee6b4; }
 .cornerstone-map-panel > p { margin: 0; color: #74887d; font-size: 10px; }
 
 .cornerstone-facts-panel { padding: 30px 34px; border-bottom: 1px solid rgba(255, 255, 255, .09); }
 .cornerstone-facts-panel dl { display: grid; grid-template-columns: 1fr 1fr; margin: 24px 0 0; }
-.cornerstone-facts-panel dl > div { min-height: 86px; padding: 15px 16px 15px 0; border-top: 1px solid rgba(255, 255, 255, .08); }
+.cornerstone-facts-panel dl > div { min-height: 132px; padding: 17px 16px 16px 0; border-top: 1px solid rgba(255, 255, 255, .08); }
 .cornerstone-facts-panel dl > div:nth-child(even) { padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, .08); }
+.cornerstone-facts-panel dl > div:last-child { grid-column: 1 / -1; min-height: 108px; padding-right: 0; border-left: 0; }
 .cornerstone-facts-panel dt { color: #758a7e; font: 8px/1.4 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
-.cornerstone-facts-panel dd { margin: 9px 0 0; color: #edf4ee; font-size: 13px; font-weight: 550; line-height: 1.45; }
+.cornerstone-facts-panel dd { margin: 9px 0 0; color: #edf4ee; font-size: 15px; font-weight: 620; line-height: 1.35; }
+.cornerstone-facts-panel p { max-width: 360px; margin: 7px 0 0; color: #84978c; font-size: 10px; line-height: 1.5; }
 
 .cornerstone-status-panel { padding: 26px 34px 28px; }
 .cornerstone-status-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
@@ -2642,8 +2655,10 @@ a {
 .cornerstone-status-heading h3 { margin: 0; font-size: 27px; letter-spacing: -.04em; }
 .cornerstone-status-heading > span { color: #6f8377; font-size: 7px; }
 .cornerstone-status-panel ol { display: grid; margin: 20px 0 0; padding: 0; list-style: none; }
-.cornerstone-status-panel li { display: grid; grid-template-columns: 68px 1fr; gap: 14px; align-items: center; min-height: 58px; border-top: 1px solid rgba(255, 255, 255, .075); }
-.cornerstone-status-panel li > span:last-child { color: #d4dfd8; font-size: 13px; line-height: 1.4; }
+.cornerstone-status-panel li { display: grid; grid-template-columns: 68px 1fr; gap: 14px; align-items: center; min-height: 70px; border-top: 1px solid rgba(255, 255, 255, .075); }
+.cornerstone-status-panel li > span:last-child { display: flex; flex-direction: column; gap: 4px; color: #d4dfd8; font-size: 13px; line-height: 1.4; }
+.cornerstone-status-panel li strong { font-weight: 580; }
+.cornerstone-status-panel li small { color: #72857a; font-size: 9px; line-height: 1.45; }
 .cornerstone-stage-index { color: #a6de45; font: 9px/1 var(--font-geist-mono), monospace; letter-spacing: .12em; }
 
 .cornerstone-project-actions { display: flex; align-items: center; justify-content: space-between; gap: 36px; margin-top: 24px; }
@@ -2865,11 +2880,13 @@ a {
   .cornerstone-project-heading > p { font-size: 15px; }
   .cornerstone-map-panel, .cornerstone-facts-panel, .cornerstone-status-panel { padding: 22px; }
   .cornerstone-map { min-height: 310px; }
-  .cornerstone-map-label--state { left: 24%; }
-  .cornerstone-map-label--corridor { right: auto; left: 32%; }
-  .cornerstone-map-label--region { right: 2%; }
+  .cornerstone-map-label--state, .cornerstone-map-label--corridor { display: none; }
+  .cornerstone-map-label--project { top: 55%; left: 17%; }
+  .cornerstone-map-label--region { right: 0; bottom: 17%; }
+  .cornerstone-map-legend { gap: 10px 14px; }
   .cornerstone-facts-panel dl { grid-template-columns: 1fr; }
   .cornerstone-facts-panel dl > div:nth-child(even) { padding-left: 0; border-left: 0; }
+  .cornerstone-facts-panel dl > div:last-child { grid-column: auto; }
   .cornerstone-status-heading { align-items: flex-start; flex-direction: column; }
   .cornerstone-status-panel li { grid-template-columns: 70px 1fr; }
   .cornerstone-project-actions { align-items: stretch; flex-direction: column; }

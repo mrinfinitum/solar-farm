@@ -70,6 +70,23 @@ test("homepage marketing stays regional rather than exposing project specifics",
   assert.doesNotMatch(publicHomepage, /1 Cornerstone Lane|Idabel project site|McCurtain County|Southeast Oklahoma|Q2\/Q3 2027|2\.25M kWh/i);
 });
 
+test("regional map explains the buyer opportunity and qualification model", () => {
+  const section = read("components/sections/cornerstone-project-section.tsx");
+
+  for (const message of [
+    "Opportunity model",
+    "Can this work for my business?",
+    "Why Oklahoma?",
+    "Why local?",
+    "Why not only the utility?",
+    "How do we determine fit?",
+    "Your utility remains essential",
+    "From bills to a clear answer",
+  ]) assert.match(section, new RegExp(message.replace(/[?]/g, "\\?"), "i"));
+  assert.match(section, /No customer, utility, or infrastructure locations are shown/);
+  assert.doesNotMatch(section, /actual customer|utility-approved|guaranteed/i);
+});
+
 test("Why NSoul section explains benefits for businesses of different sizes", () => {
   const section = read("components/sections/project-model-section.tsx");
   const benefits = read("components/project-model/regional-project-feature.tsx");
