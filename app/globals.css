@@ -7964,8 +7964,8 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
   inset: 0;
   background-position: center;
   background-size: cover;
-  filter: grayscale(.35) saturate(.55) brightness(1.08);
-  opacity: .055;
+  filter: grayscale(.18) saturate(.78) brightness(.94);
+  opacity: .18;
   transform: scale(1.02);
   transition: opacity .45s ease, filter .45s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
 }
@@ -7978,8 +7978,8 @@ html[data-theme="light"] .process-step:nth-child(4) > span {
 }
 
 .vision-model__steps li:hover .vision-model__card-image {
-  filter: saturate(.95) brightness(1.02);
-  opacity: .3;
+  filter: saturate(1.05) brightness(.9);
+  opacity: .52;
   transform: scale(1.07);
 }
 
