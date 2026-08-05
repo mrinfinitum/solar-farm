@@ -2739,9 +2739,8 @@ a {
 .cornerstone-project-popover > span b { display: block; margin-bottom: 3px; color: #71877a; font: 550 7px/1.3 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
 .cornerstone-project-popover > em { margin-top: 11px; color: #708379; font: normal 500 7px/1.3 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
 .cornerstone-project-pin:hover,
-.cornerstone-project-pin:focus { z-index: 9; }
+.cornerstone-project-pin:focus-visible { z-index: 9; }
 .cornerstone-project-pin:hover > .cornerstone-project-popover,
-.cornerstone-project-pin:focus > .cornerstone-project-popover,
 .cornerstone-project-pin:focus-visible > .cornerstone-project-popover { opacity: 1; transform: translateY(0) scale(1); }
 .cornerstone-project-pin--northwest { top: 27%; left: 27%; }
 .cornerstone-project-pin--central { top: 55%; left: 57%; }
@@ -6139,7 +6138,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   overflow: hidden;
   border: 1px solid rgba(161, 218, 176, .16);
   border-radius: 28px;
-  background: #092117;
+  background: #061a11;
   color: #f4f5ef;
   box-shadow: 0 30px 80px rgba(15, 55, 34, .18);
 }
@@ -6300,8 +6299,8 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   padding: clamp(48px, 4.4vw, 68px);
   border-left: 1px solid rgba(255, 255, 255, .1);
   background:
-    radial-gradient(circle at 88% 4%, rgba(80, 142, 91, .14), transparent 34%),
-    linear-gradient(145deg, rgba(18, 66, 40, .2), rgba(5, 25, 16, .36));
+    radial-gradient(circle at 88% 4%, rgba(65, 128, 80, .11), transparent 34%),
+    linear-gradient(145deg, rgba(12, 52, 31, .19), rgba(3, 18, 11, .58));
 }
 
 .regional-project-snapshot-header {
@@ -6331,7 +6330,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   padding: 20px 17px;
   border: 1px solid rgba(184, 234, 105, .13);
   border-radius: 16px;
-  background: rgba(4, 27, 16, .58);
+  background: rgba(3, 17, 11, .76);
   transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
 }
 
@@ -6393,7 +6392,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, .075);
   border-radius: 14px;
-  background: rgba(69, 128, 82, .055);
+  background: rgba(55, 112, 69, .045);
   transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
 }
 

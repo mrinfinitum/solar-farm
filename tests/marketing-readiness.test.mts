@@ -75,7 +75,7 @@ test("regional map explains the buyer opportunity and qualification model", () =
 
   for (const message of [
     "Local development model",
-    "Oklahoma opportunity network",
+    "Opportunity network",
     "Why Oklahoma?",
     "Why local?",
     "Why change from utility-only power?",

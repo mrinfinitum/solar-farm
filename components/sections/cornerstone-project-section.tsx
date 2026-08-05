@@ -35,7 +35,7 @@ export function CornerstoneProjectSection() {
         <div className="cornerstone-intelligence cornerstone-intelligence--network">
           <Reveal className="cornerstone-map-panel">
             <div className="cornerstone-map-heading">
-              <div className="cornerstone-panel-label"><MapPin aria-hidden="true" />Oklahoma opportunity network</div>
+              <div className="cornerstone-panel-label"><MapPin aria-hidden="true" />Opportunity network</div>
               <span>Illustrative project opportunities</span>
             </div>
             <div className="cornerstone-map cornerstone-map--network">
