@@ -6021,9 +6021,9 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 
 .regional-project-diagram::before {
   z-index: 0;
-  background: url("/brand/nsoul-hero-solar-field.png") center / cover no-repeat;
-  filter: saturate(.65) contrast(1.05);
-  opacity: .28;
+  background: url("/brand/nsoul-hero-solar-field.png") center bottom / cover no-repeat;
+  filter: saturate(.78) contrast(1.08);
+  opacity: .5;
   transform: scale(1.025);
   transition: opacity .6s ease, transform 1.2s cubic-bezier(.22, 1, .36, 1);
 }
@@ -6031,8 +6031,8 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 .regional-project-diagram::after {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(10, 24, 17, .88), rgba(10, 24, 17, .56) 54%, rgba(10, 24, 17, .84)),
-    linear-gradient(180deg, rgba(10, 24, 17, .08) 42%, rgba(10, 24, 17, .68));
+    linear-gradient(90deg, rgba(7, 20, 14, .76), rgba(7, 20, 14, .38) 58%, rgba(7, 20, 14, .7)),
+    linear-gradient(180deg, rgba(7, 20, 14, .12) 28%, rgba(7, 20, 14, .66));
 }
 
 .regional-project-diagram > * {
@@ -6042,7 +6042,7 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 
 @media (hover: hover) {
   .regional-project-diagram:hover::before {
-    opacity: .4;
+    opacity: .68;
     transform: scale(1.01);
   }
 }
