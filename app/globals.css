@@ -6020,24 +6020,29 @@ html[data-theme="light"] .hero-copy--centered .hero-proof small {
 }
 
 .regional-project-diagram::before {
-  z-index: -2;
+  z-index: 0;
   background: url("/brand/nsoul-hero-solar-field.png") center / cover no-repeat;
   filter: saturate(.65) contrast(1.05);
-  opacity: .12;
+  opacity: .28;
   transform: scale(1.025);
   transition: opacity .6s ease, transform 1.2s cubic-bezier(.22, 1, .36, 1);
 }
 
 .regional-project-diagram::after {
-  z-index: -1;
+  z-index: 1;
   background:
-    linear-gradient(90deg, rgba(10, 24, 17, .94), rgba(10, 24, 17, .79) 50%, rgba(10, 24, 17, .93)),
-    linear-gradient(180deg, rgba(10, 24, 17, .72), rgba(10, 24, 17, .95));
+    linear-gradient(90deg, rgba(10, 24, 17, .88), rgba(10, 24, 17, .56) 54%, rgba(10, 24, 17, .84)),
+    linear-gradient(180deg, rgba(10, 24, 17, .08) 42%, rgba(10, 24, 17, .68));
+}
+
+.regional-project-diagram > * {
+  position: relative;
+  z-index: 2;
 }
 
 @media (hover: hover) {
   .regional-project-diagram:hover::before {
-    opacity: .2;
+    opacity: .4;
     transform: scale(1.01);
   }
 }
