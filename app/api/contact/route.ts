@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 
+import { createAdminClient } from "@/lib/supabase/admin";
 import { contactSchema, type ValidatedContact } from "@/lib/validation";
 
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -117,17 +118,56 @@ export async function POST(request: Request) {
   const submission: Submission = { ...result.data, submissionId: randomUUID(), submittedAt: new Date().toISOString() };
   if (process.env.NODE_ENV !== "production") console.info("[NSoul contact]", submission);
 
+  const admin = createAdminClient();
+  let persisted = false;
+  if (admin) {
+    const { error } = await admin.from("public_contact_submissions").insert({
+      id: submission.submissionId,
+      submitted_at: submission.submittedAt,
+      first_name: submission.firstName,
+      last_name: submission.lastName,
+      email: submission.email,
+      company: submission.company,
+      job_title: submission.jobTitle,
+      phone: submission.phone || null,
+      facility_location: submission.facilityLocation,
+      facility_type: submission.facilityType || null,
+      annual_electricity_usage: submission.annualElectricityUsage || null,
+      electricity_spend: submission.electricitySpend || null,
+      discussion_topic: submission.discussionTopic || null,
+      utility_provider: submission.utilityProvider || null,
+      desired_timeline: submission.desiredTimeline || null,
+      message: submission.message,
+      source_page: submission.sourcePage || null,
+      utm_source: submission.utmSource || null,
+      utm_medium: submission.utmMedium || null,
+      utm_campaign: submission.utmCampaign || null,
+    });
+    persisted = !error;
+    if (error) console.error("[NSoul contact] Persistence failed", error.message);
+  }
+
   try {
     const delivery = await sendWithResend(submission);
+    if (!persisted && !delivery.configured && process.env.NODE_ENV === "production") {
+      return Response.json({ message: "We could not securely store or deliver your request. Please try again shortly." }, { status: 503 });
+    }
     return Response.json({
       submissionId: submission.submissionId,
       submittedAt: submission.submittedAt,
-      message: delivery.configured
+      message: delivery.configured || persisted
         ? "We’ll review your facility needs and follow up soon."
         : "Your request was received. Email delivery will activate when the contact service is configured.",
     });
   } catch (error) {
     console.error("[NSoul contact] Delivery failed", error);
+    if (persisted) {
+      return Response.json({
+        submissionId: submission.submissionId,
+        submittedAt: submission.submittedAt,
+        message: "We’ll review your facility needs and follow up soon.",
+      });
+    }
     return Response.json({ message: "We could not deliver your request. Please try again shortly." }, { status: 502 });
   }
 }

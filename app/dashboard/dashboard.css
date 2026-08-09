@@ -34,6 +34,48 @@
 .finder-sidebar nav a{color:#a0afa4}
 .finder-sidebar nav a:hover,.finder-sidebar nav a.is-active{border-color:rgba(186,255,99,.2);background:#12271a;color:#f4f7f0}
 .finder-sidebar nav a.is-active svg{color:var(--fd-green)}
+
+.submission-metrics{margin-bottom:14px}
+.submission-section{margin-top:14px}
+.submission-list{display:grid}
+.submission-record{border-bottom:1px solid var(--fd-line)}
+.submission-record:last-child{border-bottom:0}
+.submission-record>summary{display:grid;grid-template-columns:38px minmax(220px,1fr) auto auto 24px;align-items:center;gap:13px;padding:16px 18px;cursor:pointer;list-style:none}
+.submission-record>summary::-webkit-details-marker{display:none}
+.submission-record>summary:after{content:"+";display:grid;width:24px;height:24px;place-items:center;border:1px solid var(--fd-line);border-radius:50%;color:var(--fd-muted);font:14px var(--font-geist-mono),monospace}
+.submission-record[open]>summary:after{content:"−"}
+.submission-record>summary:hover{background:rgba(186,255,99,.035)}
+.submission-record>summary>span:nth-child(2){display:grid;gap:4px}
+.submission-record>summary strong{font-size:12px}
+.submission-record>summary small,.submission-record>summary time{color:var(--fd-muted);font-size:9px}
+.submission-record-icon{display:grid;width:36px;height:36px;place-items:center;border:1px solid rgba(186,255,99,.18);border-radius:9px;background:#102319;color:var(--fd-green)}
+.submission-record-icon svg{width:17px}
+.submission-detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;border-top:1px solid var(--fd-line);background:var(--fd-line)}
+.submission-detail-grid--three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.submission-detail-grid>div{padding:20px;background:var(--fd-panel)}
+.submission-detail-grid h3,.submission-files h3{margin:0 0 14px;color:var(--fd-green);font:9px var(--font-geist-mono),monospace;text-transform:uppercase;letter-spacing:.1em}
+.submission-detail-grid dl{display:grid;grid-template-columns:minmax(80px,.55fr) minmax(0,1fr);gap:9px 12px;margin:0}
+.submission-detail-grid dt{color:#718478;font-size:8px;text-transform:uppercase;letter-spacing:.06em}
+.submission-detail-grid dd{min-width:0;margin:0;color:var(--fd-text);font-size:9px;line-height:1.45;overflow-wrap:anywhere}
+.submission-detail-grid a{color:var(--fd-cyan);text-decoration:underline;text-underline-offset:3px}
+.submission-files,.submission-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:15px 18px;border-top:1px solid var(--fd-line)}
+.submission-files h3{width:100%;margin-bottom:4px}
+.submission-files .finder-button small{color:var(--fd-muted)}
+.submission-note{margin:0;padding:13px 18px;border-top:1px solid var(--fd-line);color:var(--fd-muted);font-size:9px;line-height:1.6}
+.submissions-empty{margin-top:14px}
+
+@media(max-width:900px){
+  .submission-detail-grid,.submission-detail-grid--three{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:640px){
+  .submission-record>summary{grid-template-columns:36px minmax(0,1fr) auto;padding:14px}
+  .submission-record>summary time{grid-column:2}
+  .submission-record>summary .finder-status{grid-column:2;width:max-content}
+  .submission-record>summary:after{grid-column:3;grid-row:1}
+  .submission-detail-grid,.submission-detail-grid--three{grid-template-columns:1fr}
+  .submission-detail-grid dl{grid-template-columns:100px minmax(0,1fr)}
+}
 .finder-sidebar-foot{border-color:var(--fd-line);background:#0d1d13}
 .finder-topbar{border-color:var(--fd-line);background:rgba(7,17,11,.9)}
 .finder-search,.finder-icon-button,.finder-mobile-menu{border-color:var(--fd-line);background:#0d1d13;color:var(--fd-muted)}

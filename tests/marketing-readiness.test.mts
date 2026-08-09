@@ -21,11 +21,15 @@ test("commercial inquiry validates the required qualification data", () => {
 
 test("contact delivery has a safe no-email fallback and structured identifiers", () => {
   const route = read("app/api/contact/route.ts");
+  const migration = read("supabase/migrations/202608080001_public_contact_submissions.sql");
   assert.match(route, /randomUUID/);
   assert.match(route, /submittedAt/);
-  assert.match(route, /configured: false/);
+  assert.match(route, /public_contact_submissions/);
+  assert.match(route, /persisted/);
   assert.match(route, /Email delivery will activate/);
   assert.match(route, /New NSoul Commercial Energy Inquiry/);
+  assert.match(migration, /enable row level security/);
+  assert.match(migration, /revoke all.*from public, anon, authenticated/);
 });
 
 test("land intake is validated, private, and resilient when storage is unavailable", () => {
@@ -232,6 +236,23 @@ test("data-room access requests are validated and never expose files", () => {
   assert.equal(dataRoomRequestSchema.safeParse({}).success, false);
   assert.match(read("app/api/data-room-requests/route.ts"), /intakeResult/);
   assert.match(read("components/forms/data-room-request-form.tsx"), /does not grant access or expose private project files/);
+});
+
+test("public submissions appear in one owner and admin inbox", () => {
+  const page = read("app/dashboard/submissions/page.tsx");
+  const data = read("lib/admin-submissions.ts");
+  const shell = read("components/dashboard/dashboard-shell.tsx");
+
+  assert.match(data, /requireRole\(ADMIN_ROLES\)/);
+  assert.match(data, /createAdminClient\(\)/);
+  for (const table of ["public_contact_submissions", "public_energy_assessments", "public_data_room_requests", "public_property_submissions"]) {
+    assert.match(data, new RegExp(table));
+  }
+  assert.match(page, /No submissions yet/);
+  assert.match(page, /Private utility bills/);
+  assert.match(page, /does not grant document access/i);
+  assert.match(page, /\/api\/energy-assessments\/\$\{assessment\.id\}\/files\/\$\{file\.id\}/);
+  assert.match(shell, /"Submissions", "\/dashboard\/submissions"/);
 });
 
 test("project diligence renders accurate statuses and missing document states", () => {
