@@ -1,0 +1,15 @@
+import Link from "next/link";
+import { ArrowRight, CircleDollarSign, Landmark, Layers3 } from "lucide-react";
+import { getProjectFundingOverview } from "@/lib/funding/data";
+import { titleCaseStatus } from "@/lib/projects/domain";
+import type { UserRole } from "@/lib/auth/roles";
+import { FundingSourceAction } from "@/components/funding/funding-actions";
+
+const money=(value:unknown)=>value==null?"Not yet modeled":Number(value).toLocaleString(undefined,{style:"currency",currency:"USD",maximumFractionDigits:0});
+export async function ProjectFundingOverview({projectId,role}:{projectId:string;role:UserRole}){
+  const {sources,latestStack,stackItems}=await getProjectFundingOverview(projectId);
+  const totalCost=latestStack?.approved_project_cost==null?null:Number(latestStack.approved_project_cost);const modeled=sources.filter(source=>source.estimated_amount!=null);const sourceTotal=modeled.reduce((sum,source)=>sum+Number(source.estimated_amount),0);const gap=totalCost==null||!modeled.length?null:Math.max(totalCost-sourceTotal,0);
+  return <section className="funding-workspace"><header className="funding-hero"><div><p className="finder-eyebrow">Project funding</p><h2>Capital, incentives, and agency workflows</h2><p>Track every project funding source without separating it from project evidence, tasks, contacts, and financial models.</p></div><div className="funding-hero-actions">{["owner","admin","developer","analyst"].includes(role)?<FundingSourceAction projectId={projectId}/>:null}<Link className="finder-button finder-button--primary" href={`/dashboard/projects/${projectId}/funding/reap`}>Open USDA REAP <ArrowRight size={15}/></Link></div></header>
+  <div className="funding-source-grid">{sources.map(source=><Link key={source.id} className="funding-source-card" href={source.program_name==="USDA REAP"?`/dashboard/projects/${projectId}/funding/reap`:`/dashboard/projects/${projectId}/finance/capital-stack`}><span><Landmark size={18}/>{titleCaseStatus(source.funding_type)}</span><h3>{source.program_name}</h3><dl><div><dt>Status</dt><dd>{titleCaseStatus(source.status)}</dd></div><div><dt>Potential amount</dt><dd>{money(source.estimated_amount)}</dd></div></dl><ArrowRight/></Link>)}{!sources.length?<div className="funding-empty"><Layers3/><strong>No funding sources configured</strong><p>Add a verified project funding source when planning begins.</p></div>:null}</div>
+  <section className="funding-stack"><header><div><p className="finder-eyebrow">Funding stack</p><h3>Known sources and remaining gap</h3></div><CircleDollarSign/></header><div className="funding-stack-kpis"><div><span>Project cost</span><strong>{money(totalCost)}</strong></div><div><span>Modeled sources</span><strong>{modeled.length?money(sourceTotal):"Not yet modeled"}</strong></div><div><span>Unfunded gap</span><strong>{gap==null?"Not available":money(gap)}</strong></div><div><span>Capital stack records</span><strong>{stackItems.length}</strong></div></div><p>Unfunded gap is shown only when a project cost and modeled funding-source estimates are available.</p></section></section>;
+}

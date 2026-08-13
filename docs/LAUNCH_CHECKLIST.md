@@ -60,3 +60,12 @@ Complete and record each item before commercial launch.
 - [ ] Run `npm run lint`, `npm test`, `npm run build`, and `npm audit --omit=dev`.
 - [ ] Run Lighthouse against the production deployment and record accessibility, performance, SEO, and best-practice findings.
 - [ ] Check application logs, contact delivery, Supabase storage, database backups, and an export procedure after launch.
+# Funding module deployment
+
+- [ ] Review `202608090001_project_funding_reap_workspace.sql` against the linked Supabase project.
+- [ ] Back up or document remote migration state before applying the new migration.
+- [ ] Apply the funding migration only after review. This sprint does not apply it remotely.
+- [ ] Confirm owner/admin, analyst, and viewer RLS behavior in the target environment.
+- [ ] Confirm private project-document links produce signed URLs only through existing authorized flows.
+- [ ] Re-verify USDA REAP program sources and assign a review date before treating template prompts as current requirements.
+- [ ] Assign confirmed USDA contacts. Do not publish or seed unconfirmed names.

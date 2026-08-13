@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const tabs = [
   ["Overview","overview"],["Interconnection","interconnection"],["Engineering + EPC","engineering"],
   ["Off-takers","offtakers"],["PPA","ppa"],["Permitting","permitting"],["Finance","finance"],
-  ["Incentives","incentives"],["Documents","documents"],["Tasks","tasks"],["Construction","construction"],["Operations","operations"],["Activity","activity"],
+  ["Funding","funding"],["Incentives","incentives"],["Documents","documents"],["Tasks","tasks"],["Construction","construction"],["Operations","operations"],["Activity","activity"],
 ] as const;
 
 export function ProjectSubnav({ projectId }: { projectId: string }) {

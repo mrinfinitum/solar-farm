@@ -18,7 +18,8 @@
     "test:marketing": "node --experimental-strip-types --test tests/marketing-readiness.test.mts",
     "test:project": "node --experimental-strip-types --test tests/project-command-center.test.mts",
     "test:finance": "node --experimental-strip-types --test tests/financial-readiness.test.mts",
-    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run test:marketing && npm run test:project && npm run test:finance && npm run verify:browser-secrets"
+    "test:funding": "node --experimental-strip-types --test tests/funding-reap.test.mts",
+    "test": "npm run test:security && npm run test:property && npm run test:enrichment && npm run test:marketing && npm run test:project && npm run test:finance && npm run test:funding && npm run verify:browser-secrets"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

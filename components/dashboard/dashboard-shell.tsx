@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
-  Bell, Building2, ChevronDown, ChevronLeft, ContactRound, FileText, FolderKanban, Inbox,
+  Bell, Building2, ChevronDown, ChevronLeft, ContactRound, FileText, FolderKanban, Inbox, Landmark,
   HandCoins, Import, LayoutDashboard, LogOut, Map, Menu, Plus, Search, Settings, Users, X,
 } from "lucide-react";
 import { ProjectMark } from "@/components/ui/project-mark";
@@ -16,6 +16,7 @@ import type { SessionProfile } from "@/lib/auth/session";
 const navigation = [
   ["Overview", "/dashboard", LayoutDashboard], ["Properties", "/dashboard/properties", Building2],
   ["Projects", "/dashboard/projects", FolderKanban], ["Off-takers", "/dashboard/offtakers", Users],
+  ["Funding", "/dashboard/funding", Landmark],
   ["Contacts", "/dashboard/contacts", ContactRound], ["Documents", "/dashboard/documents", FileText],
   ["Imports", "/dashboard/imports", Import], ["Map", "/dashboard/map", Map],
   ["Settings", "/dashboard/settings", Settings],

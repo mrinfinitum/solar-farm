@@ -7240,6 +7240,117 @@ html[data-theme="light"] .milestone-grid--featured .savings-card:last-child {
   color: #c0cdc4;
 }
 
+/* Dark-theme opportunity treatment. The editorial light palette above is the
+   light-mode variant, while these overrides retain the same composition and
+   restore the site's deep forest surfaces in dark mode. */
+html[data-theme="dark"] .opportunity-section {
+  border-bottom-color: rgba(155, 232, 188, .12);
+  background: #06160d;
+  color: #f3f7f1;
+}
+
+html[data-theme="dark"] .opportunity-section::before {
+  opacity: .3;
+  filter: saturate(.72) contrast(1.06) brightness(.62);
+}
+
+html[data-theme="dark"] .opportunity-section::after {
+  background:
+    radial-gradient(circle at 88% 14%, rgba(93, 169, 127, .17), transparent 28%),
+    radial-gradient(circle at 8% 84%, rgba(166, 222, 69, .13), transparent 31%),
+    linear-gradient(105deg, rgba(4, 19, 10, .98) 4%, rgba(6, 27, 15, .93) 52%, rgba(5, 21, 12, .89) 100%);
+}
+
+html[data-theme="dark"] .opportunity-section .section-heading .eyebrow {
+  color: #b8ea69;
+}
+
+html[data-theme="dark"] .opportunity-section .section-heading h2 {
+  color: #f3f7f1;
+  text-shadow: 0 3px 30px rgba(0, 0, 0, .22);
+}
+
+html[data-theme="dark"] .opportunity-section .section-description {
+  color: #a8b9ae;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2),
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) {
+  border-color: rgba(169, 223, 85, .16);
+  background:
+    radial-gradient(circle at 84% 12%, rgba(169, 223, 85, .055), transparent 27%),
+    linear-gradient(145deg, rgba(255, 255, 255, .045), transparent 52%),
+    rgba(5, 23, 13, .86);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .035), 0 24px 70px rgba(0, 0, 0, .2);
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card:first-child {
+  background:
+    linear-gradient(180deg, rgba(4, 18, 10, .09) 0%, rgba(4, 20, 10, .28) 44%, rgba(3, 17, 9, .97) 100%),
+    url("/brand/nsoul-solar-generation-v2.png") center / cover;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(3) {
+  background:
+    linear-gradient(180deg, rgba(4, 18, 10, .08) 0%, rgba(4, 20, 10, .26) 44%, rgba(3, 17, 9, .97) 100%),
+    url("/brand/nsoul-automated-factory-v2.png") center / cover;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card:hover,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2):hover,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4):hover {
+  border-color: rgba(184, 234, 105, .3);
+  background:
+    radial-gradient(circle at 84% 12%, rgba(169, 223, 85, .09), transparent 28%),
+    linear-gradient(145deg, rgba(255, 255, 255, .07), transparent 54%),
+    rgba(7, 30, 17, .94);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05), 0 31px 82px rgba(0, 0, 0, .28);
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card:first-child:hover {
+  background:
+    linear-gradient(180deg, rgba(4, 18, 10, .02) 0%, rgba(4, 20, 10, .2) 42%, rgba(3, 17, 9, .94) 100%),
+    url("/brand/nsoul-solar-generation-v2.png") center / cover;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(3):hover {
+  background:
+    linear-gradient(180deg, rgba(4, 18, 10, .02) 0%, rgba(4, 20, 10, .2) 42%, rgba(3, 17, 9, .94) 100%),
+    url("/brand/nsoul-automated-factory-v2.png") center / cover;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-icon,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2) .feature-icon,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) .feature-icon {
+  border-color: rgba(184, 234, 105, .2);
+  background: rgba(184, 234, 105, .07);
+  color: #b8ea69;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-index,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2) .feature-index,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) .feature-index {
+  color: #71877a;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-impact,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2) .feature-impact,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2) .feature-impact span:last-child,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) .feature-impact,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) .feature-impact span:last-child,
+html[data-theme="dark"] .opportunity-section .feature-card h3,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2) h3,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) h3 {
+  color: #f0f5f1;
+}
+
+html[data-theme="dark"] .opportunity-section .feature-card p,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(2) p,
+html[data-theme="dark"] .opportunity-section .feature-card:nth-child(4) p {
+  color: #9fb0a5;
+}
+
 @media (max-width: 1024px) {
   .opportunity-section .feature-card,
   .opportunity-section .feature-card:first-child,
