@@ -57,6 +57,7 @@ export interface ProjectCommandData extends ProjectPortfolioRecord {
   construction_progress_updates: Array<Record<string, unknown>>;
   operating_assets: Array<Record<string, unknown>>;
   project_incentives: Array<Record<string, unknown>>;
+  project_funding_sources: Array<Record<string, unknown>>;
   project_blockers: Array<Record<string, unknown>>;
   project_decisions: Array<Record<string, unknown>>;
   project_milestones: Array<Record<string, unknown>>;

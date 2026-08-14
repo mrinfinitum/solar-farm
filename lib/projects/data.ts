@@ -8,7 +8,7 @@ const moduleTables = [
   "project_design_versions", "production_models", "epc_proposals", "epc_proposal_comparisons",
   "offtaker_opportunities", "offtaker_outreach", "ppa_scenarios", "permit_requirements", "diligence_items",
   "project_budget_versions", "project_cost_estimates", "capital_stack_versions", "capital_stack_items",
-  "financial_model_versions", "project_incentives", "project_blockers", "project_decisions", "construction_progress_updates", "operating_assets",
+  "financial_model_versions", "project_incentives", "project_funding_sources", "project_blockers", "project_decisions", "construction_progress_updates", "operating_assets",
   "project_milestones", "tasks", "documents",
 ] as const;
 

@@ -14,6 +14,8 @@ const collectionApi=readFileSync(new URL("../app/api/projects/[id]/funding/[reso
 const recordApi=readFileSync(new URL("../app/api/projects/[id]/funding/[resource]/[recordId]/route.ts",import.meta.url),"utf8");
 const fundingData=readFileSync(new URL("../lib/funding/data.ts",import.meta.url),"utf8");
 const reapWorkspace=readFileSync(new URL("../components/funding/reap-workspace.tsx",import.meta.url),"utf8");
+const dashboardPage=readFileSync(new URL("../app/dashboard/page.tsx",import.meta.url),"utf8");
+const projectOverview=readFileSync(new URL("../components/projects/project-overview.tsx",import.meta.url),"utf8");
 const analytics=readFileSync(new URL("../lib/analytics.ts",import.meta.url),"utf8");
 const makeRequirement=(overrides:Record<string,unknown>={})=>({id:"1",funding_source_id:"s",category:"engineering",requirement_key:"layout",title:"Layout",description:null,status:"not-started" as const,required:true,blocking:false,confirmation_state:"needs-program-confirmation" as const,due_date:null,completed_at:null,verified_at:null,source_url:null,source_title:null,source_verified_date:null,linked_document_id:null,linked_task_id:null,notes:null,sort_order:1,...overrides});
 
@@ -123,6 +125,14 @@ test("private dashboard displays active registration without loading the UEI val
   assert.match(reapWorkspace,/renewal_date/);
   assert.doesNotMatch(fundingData,/from\("organization_federal_identifiers"\)/);
   assert.doesNotMatch(reapWorkspace,/identifier_value/);
+});
+test("Studio home and Project 001 overview surface REAP without overstating submission",()=>{
+  assert.match(dashboardPage,/USDA REAP workspace/);
+  assert.match(dashboardPage,/SAM\.gov active/);
+  assert.match(dashboardPage,/Not submitted/);
+  assert.match(projectOverview,/Funding \+ USDA REAP/);
+  assert.match(projectOverview,/REAP application not submitted/);
+  assert.doesNotMatch(dashboardPage,/identifier_value|uei_value|actual_uei/i);
 });
 test("Project 001 seed repair is idempotent and attaches the existing funding template",()=>{
   assert.match(projectSeedRepairMigration,/where not exists \([\s\S]*project_code='CS-001'/);

@@ -5,6 +5,22 @@ import type { FederalRegistrationStatus, FundingMilestone, FundingQuestion, Fund
 
 type Row = Record<string, unknown>;
 
+export async function getFundingSpotlight() {
+  const supabase = await createClient();
+  if (!supabase) return null;
+  const { data: source } = await supabase.from("project_funding_sources")
+    .select("id,project_id,program_name,status,submitted_at,projects(project_name,project_code)")
+    .eq("program_name", "USDA REAP").is("archived_at", null).order("created_at").limit(1).maybeSingle();
+  if (!source) return null;
+  const [requirements, registration] = await Promise.all([
+    supabase.from("funding_requirements").select("requirement_key,status,required").eq("funding_source_id", String(source.id)),
+    supabase.from("organization_federal_registrations")
+      .select("registration_status").eq("primary_project_id", String(source.project_id))
+      .eq("registration_system", "SAM.gov").eq("registration_type", "Financial Assistance").maybeSingle(),
+  ]);
+  return { source: source as Row, requirements: (requirements.data ?? []) as Row[], registration: (registration.data as Row | null) ?? null };
+}
+
 export async function getProjectFundingOverview(projectId: string) {
   const supabase = await createClient();
   if (!supabase) return { sources: [] as FundingSource[], latestStack: null as Row | null, stackItems: [] as Row[] };
