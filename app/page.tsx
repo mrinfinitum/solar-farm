@@ -13,6 +13,7 @@ import { ProjectModelSection } from "@/components/sections/project-model-section
 import { FaqSection } from "@/components/sections/faq-section";
 import { BuyerConfidenceSection } from "@/components/sections/buyer-confidence-section";
 import { isTermSheetAvailable } from "@/lib/term-sheet";
+import { SITE_URL } from "@/lib/site-config";
 
 export default function Home() {
   const termSheetAvailable = isTermSheetAvailable();
@@ -25,7 +26,7 @@ export default function Home() {
         name: "NSoul",
         legalName: "NSoul LLC",
         description: "Commercial solar developer and independent power producer serving the Oklahoma Region.",
-        url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.nsoul.co",
+        url: SITE_URL,
         areaServed: { "@type": "AdministrativeArea", name: "Oklahoma Region" },
         makesOffer: {
           "@type": "Offer",

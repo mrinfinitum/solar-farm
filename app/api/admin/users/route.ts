@@ -9,6 +9,7 @@ import {
   type UserRole,
 } from "@/lib/auth/roles";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { passwordResetRedirectUrl } from "@/lib/site-config";
 
 const roleSchema = z.enum(USER_ROLES);
 const inviteSchema = z.object({
@@ -36,10 +37,6 @@ function getAdminAfterAuthorization() {
   const admin = createAdminClient();
   if (!admin) return { error: NextResponse.json({ error: "Server administration is not configured." }, { status: 503 }) } as const;
   return { admin } as const;
-}
-
-function siteUrl(request: Request) {
-  return process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
 }
 
 async function recordActivity(
@@ -129,7 +126,7 @@ export async function POST(request: Request) {
 
   const { data: invitation, error: inviteError } = await admin.auth.admin.inviteUserByEmail(parsed.data.email, {
     data: { full_name: parsed.data.fullName },
-    redirectTo: `${siteUrl(request)}/auth/callback?next=/auth/reset-password`,
+    redirectTo: passwordResetRedirectUrl(),
   });
   if (inviteError || !invitation.user) {
     return NextResponse.json({ error: inviteError?.message || "Invitation could not be created." }, { status: 400 });
@@ -236,7 +233,7 @@ export async function PATCH(request: Request) {
     const { error } = await admin.auth.resend({
       type: "signup",
       email: profile.email,
-      options: { emailRedirectTo: `${siteUrl(request)}/auth/callback?next=/auth/reset-password` },
+      options: { emailRedirectTo: passwordResetRedirectUrl() },
     });
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
     activity = "invitation_resent";

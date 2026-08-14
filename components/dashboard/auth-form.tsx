@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, KeyRound, Loader2, Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { passwordResetRedirectUrl } from "@/lib/site-config";
 
 export function AuthForm({ next = "/dashboard", configured }: { next?: string; configured: boolean }) {
   const [mode, setMode] = useState<"login" | "forgot">("login"); const [message, setMessage] = useState(""); const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ export function AuthForm({ next = "/dashboard", configured }: { next?: string; c
     const supabase = createClient(); if (!supabase) { setMessage("Supabase is not configured. Add the required environment values to enable private access."); return; }
     setLoading(true); setMessage(""); const email = String(formData.get("email") || "");
     if (mode === "forgot") {
-      const redirectTo = `${window.location.origin}/auth/callback?next=/auth/reset-password`; const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo }); setMessage(error ? error.message : "If the account exists, a password-reset email has been sent."); setLoading(false); return;
+      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: passwordResetRedirectUrl() }); setMessage(error ? error.message : "If the account exists, a password-reset email has been sent."); setLoading(false); return;
     }
     const password = String(formData.get("password") || ""); const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) { setMessage("Unable to sign in. Check your email and password."); setLoading(false); return; }

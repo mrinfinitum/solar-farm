@@ -5,9 +5,9 @@ Complete and record each item before commercial launch.
 ## Domain and deployment
 
 - [ ] Connect the final production domain in Vercel and verify HTTPS.
-- [ ] Set `NEXT_PUBLIC_SITE_URL` to the canonical `https://` origin with no placeholder domain.
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to the canonical `https://nsoul.co` origin.
 - [ ] Confirm the production, preview, and development Vercel environment scopes.
-- [ ] Confirm Supabase Auth Site URL and callback allow-list entries match the production domain.
+- [ ] Set the Supabase Auth Site URL to `https://nsoul.co` and allow the exact recovery callback `https://nsoul.co/auth/callback?next=/auth/reset-password`.
 - [ ] Verify `/`, `/why-nsoul`, `/energy-assessment`, `/project-diligence`, `/login`, `/submit-property`, `/privacy`, `/terms`, `/sitemap.xml`, and `/robots.txt` return successfully.
 
 ## Environment variables

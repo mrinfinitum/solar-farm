@@ -7,6 +7,7 @@ import {
   canAssignRole,
   canManageMembership,
 } from "../lib/auth/roles.ts";
+import { passwordResetRedirectUrl, SITE_URL } from "../lib/site-config.ts";
 
 test("anonymous dashboard access is rejected", () => {
   assert.equal(canAccessDashboard(null), false);
@@ -39,4 +40,12 @@ test("suspended and deactivated users cannot enter the dashboard", () => {
   assert.equal(canAccessDashboard("suspended"), false);
   assert.equal(canAccessDashboard("deactivated"), false);
   assert.equal(canAccessDashboard("active"), true);
+});
+
+test("password recovery uses the canonical callback instead of the homepage", () => {
+  assert.equal(SITE_URL, "https://nsoul.co");
+  assert.equal(
+    passwordResetRedirectUrl(),
+    "https://nsoul.co/auth/callback?next=/auth/reset-password",
+  );
 });

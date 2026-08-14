@@ -55,7 +55,7 @@ test("public routes and canonical metadata exist", () => {
   for (const path of ["app/page.tsx", "app/our-vision/page.tsx", "app/privacy/page.tsx", "app/terms/page.tsx", "app/submit-property/page.tsx", "app/sitemap.ts", "app/robots.ts"]) {
     assert.equal(existsSync(new URL(`../${path}`, import.meta.url)), true, path);
   }
-  assert.match(read("lib/site-config.ts"), /https:\/\/www\.nsoul\.co/);
+  assert.match(read("lib/site-config.ts"), /https:\/\/nsoul\.co/);
   assert.doesNotMatch(read("app/layout.tsx"), /\.example/);
 });
 
