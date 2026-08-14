@@ -8,6 +8,7 @@ import {
   canManageMembership,
 } from "../lib/auth/roles.ts";
 import { passwordResetRedirectUrl, SITE_URL } from "../lib/site-config.ts";
+import { recoveryTokensFromHash } from "../lib/auth/recovery.ts";
 
 test("anonymous dashboard access is rejected", () => {
   assert.equal(canAccessDashboard(null), false);
@@ -48,4 +49,13 @@ test("password recovery uses the canonical callback instead of the homepage", ()
     passwordResetRedirectUrl(),
     "https://nsoul.co/auth/callback?next=/auth/reset-password",
   );
+});
+
+test("implicit recovery sessions are parsed without accepting unrelated fragments", () => {
+  assert.deepEqual(
+    recoveryTokensFromHash("#access_token=access&refresh_token=refresh&type=recovery"),
+    { accessToken: "access", refreshToken: "refresh", type: "recovery" },
+  );
+  assert.equal(recoveryTokensFromHash("#access_token=access&type=recovery"), null);
+  assert.equal(recoveryTokensFromHash("#access_token=access&refresh_token=refresh&type=magiclink"), null);
 });

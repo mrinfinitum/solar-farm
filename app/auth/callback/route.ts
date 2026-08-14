@@ -7,7 +7,15 @@ export async function GET(request: Request) {
   const requestedNext = url.searchParams.get("next");
   const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
 
-  if (!code) return NextResponse.redirect(new URL("/login?error=invalid_callback", url.origin));
+  // Admin-generated recovery and invitation links use an implicit session in
+  // the URL fragment. Fragments are intentionally unavailable to the server,
+  // so forward the browser to the recovery form where the session is consumed.
+  if (!code) {
+    if (next === "/auth/reset-password") {
+      return NextResponse.redirect(new URL(next, url.origin));
+    }
+    return NextResponse.redirect(new URL("/login?error=invalid_callback", url.origin));
+  }
 
   const supabase = await createClient();
   if (!supabase) return NextResponse.redirect(new URL("/login?error=configuration", url.origin));
